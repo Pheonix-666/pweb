@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0a0a0a;
+  --surface: #111113;
+  --elevated: #17171a;
+  --border: rgba(255, 255, 255, 0.08);
+  --text-primary: #f2f0eb;
+  --text-muted: #8a8a90;
+  --accent-tungsten: #e8a33d;
+  --rec-red: #e5484d;
+  --status-green: #30a46c;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  scroll-behavior: auto !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Lenis Recommended CSS */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Selection Highlight */
+::selection {
+  background: #e8a33d;
+  color: #0a0a0a;
+}
+
+/* Minimalist Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 1px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(232, 163, 61, 0.6);
+}
+
+/* Hairline utility classes */
+.border-hairline {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.border-hairline-t {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.border-hairline-b {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.border-hairline-l {
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.border-hairline-r {
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Typography clamped helpers */
+.heading-display-xl {
+  font-size: clamp(2.5rem, 6.5vw + 1rem, 6.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+
+.heading-display-lg {
+  font-size: clamp(2rem, 4.5vw + 1rem, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.heading-display-md {
+  font-size: clamp(1.5rem, 3vw + 0.5rem, 2.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.text-fluid-body {
+  font-size: clamp(0.95rem, 0.5vw + 0.8rem, 1.15rem);
+  line-height: 1.65;
+}
+
+/* Timecode Mono Box */
+.timecode-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.6rem;
+  background: rgba(17, 17, 19, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* REC dot */
+.rec-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--rec-red);
+  box-shadow: 0 0 10px rgba(229, 72, 77, 0.8);
+  animation: recBlink 1.5s infinite;
+}
+
+/* Green available dot */
+.status-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--status-green);
+  box-shadow: 0 0 8px rgba(48, 164, 108, 0.8);
+  animation: statusGlow 2s infinite;
+}
