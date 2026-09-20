@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/"],
     },
-    sitemap: "https://rahulverma.studio/sitemap.xml",
+    sitemap: "https://rahulsingh.studio/sitemap.xml",
   };
 }

@@ -30,11 +30,11 @@ const CAREER_TIMELINE = [
 ];
 
 const SOCIAL_LINKS = [
-  { platform: "Instagram", handle: "@rahulverma.cinema", href: "https://instagram.com" },
-  { platform: "Vimeo", handle: "vimeo.com/rahulverma", href: "https://vimeo.com" },
+  { platform: "Instagram", handle: "@rahulsingh.cinema", href: "https://instagram.com" },
+  { platform: "Vimeo", handle: "vimeo.com/rahulsingh", href: "https://vimeo.com" },
   { platform: "YouTube", handle: "Rahul Singh Cinema", href: "https://youtube.com" },
-  { platform: "Behance", handle: "behance.net/rahulverma", href: "https://behance.net" },
-  { platform: "LinkedIn", handle: "linkedin.com/in/rahulverma", href: "https://linkedin.com" },
+  { platform: "Behance", handle: "behance.net/rahulsingh", href: "https://behance.net" },
+  { platform: "LinkedIn", handle: "linkedin.com/in/rahulsingh", href: "https://linkedin.com" },
 ];
 
 export default function AboutSection() {

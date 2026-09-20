@@ -202,7 +202,7 @@ export default function HeroSection() {
           transition={{ duration: 0.85, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="font-serif heading-display-xl font-normal text-primary tracking-tight text-balance"
         >
-          Rahul <span className="italic text-tungsten font-light">Verma</span>
+          Rahul <span className="italic text-tungsten font-light">Singh</span>
         </motion.h1>
 
         {/* Subline */}

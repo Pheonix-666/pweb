@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
 
     if (resendApiKey) {
       const resend = new Resend(resendApiKey);
-      const recipientEmail = process.env.CONTACT_EMAIL || "contact@rahulverma.studio";
+      const recipientEmail = process.env.CONTACT_EMAIL || "contact@rahulsingh.studio";
 
       await resend.emails.send({
         from: "Studio Inquiries <onboarding@resend.dev>",

@@ -32,7 +32,7 @@ Create a `.env.local` file in the project root:
 RESEND_API_KEY=re_your_resend_api_key_here
 
 # Recipient email for production inquiries
-CONTACT_EMAIL=contact@rahulverma.studio
+CONTACT_EMAIL=contact@rahulsingh.studio
 ```
 *(Note: If `RESEND_API_KEY` is not provided, the contact API runs in mock mode and logs formatted inquiries directly to the console).*
 
