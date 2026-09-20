@@ -133,7 +133,7 @@ export default function ContactSection() {
                 />
                 <text>
                   <textPath href="#circlePath">
-                    • STUDIO RAHUL VERMA • INITIATE COMMISSION 
+                    • STUDIO Rahul Singh • INITIATE COMMISSION 
                   </textPath>
                 </text>
               </svg>

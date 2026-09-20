@@ -262,7 +262,7 @@ export default function HeroSection() {
               <div className="flex items-center gap-3 font-mono text-xs text-primary">
                 <span className="w-2 h-2 rounded-full bg-rec animate-pulse-rec" />
                 <span className="uppercase font-semibold tracking-widest">
-                  RAHUL VERMA STUDIO — 4K SHOWREEL MASTER
+                  Rahul Singh STUDIO — 4K SHOWREEL MASTER
                 </span>
                 <span className="text-muted hidden sm:inline">[AUDIO CONFORMED · 24FPS]</span>
               </div>
@@ -313,7 +313,7 @@ export default function HeroSection() {
             {/* Modal Bottom Metadata */}
             <div className="flex items-center justify-between font-mono text-[11px] text-muted border-t border-hairline pt-4">
               <span>COLOR: ACEScc 1.3 / MASTER PRORES 4444 XQ</span>
-              <span className="text-tungsten">DIRECTOR OF PHOTOGRAPHY & EDIT: RAHUL VERMA</span>
+              <span className="text-tungsten">DIRECTOR OF PHOTOGRAPHY & EDIT: Rahul Singh</span>
             </div>
           </motion.div>
         )}

@@ -78,7 +78,7 @@ export default function Preloader() {
               <span>EI: 800</span>
             </div>
             <div className="tracking-widest">
-              RAHUL VERMA <span className="text-tungsten">STUDIO</span>
+              Rahul Singh <span className="text-tungsten">STUDIO</span>
             </div>
           </div>
 

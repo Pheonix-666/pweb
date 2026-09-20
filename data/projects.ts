@@ -83,7 +83,7 @@ export const projects: Project[] = [
     ],
     credits: [
       { role: "Director", name: "Marc Dupond" },
-      { role: "Cinematographer", name: "Rahul Verma" },
+      { role: "Cinematographer", name: "Rahul Singh" },
       { role: "Gaffer", name: "Søren Lind" },
       { role: "Sound Design", name: "Echoic Audio" },
     ],
@@ -120,7 +120,7 @@ export const projects: Project[] = [
       "Phase One Capture One 23 Pro Studio",
     ],
     credits: [
-      { role: "Photographer", name: "Rahul Verma" },
+      { role: "Photographer", name: "Rahul Singh" },
       { role: "Stylist", name: "Elena Rostova" },
       { role: "Hair & Makeup", name: "Kaito Tanaka" },
       { role: "Set Design", name: "Studio Obscura" },
@@ -169,7 +169,7 @@ export const projects: Project[] = [
       "Sony BVM-HX310 4K Master Monitor",
     ],
     credits: [
-      { role: "Editor", name: "Rahul Verma" },
+      { role: "Editor", name: "Rahul Singh" },
       { role: "Director", name: "Zack Vance" },
       { role: "VFX Supervisor", name: "Artemis FX" },
       { role: "Colorist", name: "Damian Gray" },
@@ -213,10 +213,10 @@ export const projects: Project[] = [
       "DJI Ronin 2 3-Axis Gimbal System",
     ],
     credits: [
-      { role: "Lead Cinematographer", name: "Rahul Verma" },
+      { role: "Lead Cinematographer", name: "Rahul Singh" },
       { role: "2nd Camera Operator", name: "Matteo Bianchi" },
       { role: "Film Lab", name: "Cinelab London" },
-      { role: "Colorist", name: "Rahul Verma" },
+      { role: "Colorist", name: "Rahul Singh" },
     ],
   },
   {
@@ -256,7 +256,7 @@ export const projects: Project[] = [
     ],
     credits: [
       { role: "Director", name: "Lucas Vance" },
-      { role: "Pursuit Crane Tech", name: "Rahul Verma" },
+      { role: "Pursuit Crane Tech", name: "Rahul Singh" },
       { role: "Precision Driver", name: "Stefan Keller" },
     ],
   },
@@ -290,7 +290,7 @@ export const projects: Project[] = [
       "Dedolight DP400 Imager Projection",
     ],
     credits: [
-      { role: "Photographer & Lighting", name: "Rahul Verma" },
+      { role: "Photographer & Lighting", name: "Rahul Singh" },
       { role: "Prop Stylist", name: "Camille Laurent" },
       { role: "Master Retoucher", name: "Studio Lumen" },
     ],
@@ -331,9 +331,9 @@ export const projects: Project[] = [
       "Sennheiser MKH 416 & Ambient Hydrophones",
     ],
     credits: [
-      { role: "Director & Cinematography", name: "Rahul Verma" },
+      { role: "Director & Cinematography", name: "Rahul Singh" },
       { role: "Original Score", name: "Ólafur Arnalds Ensemble" },
-      { role: "Sound Mixer", name: "Rahul Verma" },
+      { role: "Sound Mixer", name: "Rahul Singh" },
     ],
   },
   {
@@ -365,7 +365,7 @@ export const projects: Project[] = [
       "Gitzo Systematic Carbon Fiber Tripod with Arca Swiss D4 Geared Head",
     ],
     credits: [
-      { role: "Photographer", name: "Rahul Verma" },
+      { role: "Photographer", name: "Rahul Singh" },
       { role: "Architect", name: "Francis Kéré" },
     ],
   },
@@ -410,7 +410,7 @@ export const projects: Project[] = [
       "Genelec 8040B Studio Monitors",
     ],
     credits: [
-      { role: "Editor", name: "Rahul Verma" },
+      { role: "Editor", name: "Rahul Singh" },
       { role: "Agency", name: "Ogilvy & Mather" },
       { role: "Sound Design", name: "740 Sound" },
     ],

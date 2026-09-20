@@ -152,7 +152,7 @@ export default function EditorialScrollGallery() {
             <div className="flex items-center gap-6 text-muted text-[11px]">
               <span>5 CURATED CHAPTERS</span>
               <span className="text-white/20">|</span>
-              <span>DIRECTOR: RAHUL VERMA</span>
+              <span>DIRECTOR: Rahul Singh</span>
             </div>
           </div>
 

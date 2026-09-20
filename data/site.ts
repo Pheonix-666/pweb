@@ -82,9 +82,9 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: "Rahul Verma",
+  name: "Rahul Singh",
   title: "Cinematographer, Photographer & Editor",
-  studioName: "STUDIO RAHUL VERMA",
+  studioName: "STUDIO Rahul Singh",
   tagline: "Visual narratives carved in light, motion and precision rhythm.",
   heroHeadline: "Crafting atmospheric cinema, editorial imagery & visceral edits.",
   heroDescription:
@@ -393,7 +393,7 @@ export const siteConfig: SiteConfig = {
     },
     {
       platform: "YouTube",
-      label: "Rahul Verma Cinema",
+      label: "Rahul Singh Cinema",
       href: "https://youtube.com",
       handle: "@rahulvermafilm",
     },

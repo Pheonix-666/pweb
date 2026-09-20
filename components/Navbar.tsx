@@ -80,7 +80,7 @@ export default function Navbar() {
               <Film className="w-3.5 h-3.5 text-tungsten" />
             </span>
             <span className="font-semibold tracking-wider font-sans uppercase text-xs md:text-sm">
-              RAHUL VERMA
+              Rahul Singh
             </span>
             <span className="text-[10px] font-mono tracking-widest text-muted hidden sm:inline-block border-l border-hairline pl-2 ml-0.5">
               STUDIO

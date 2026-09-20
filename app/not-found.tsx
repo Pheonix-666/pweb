@@ -9,7 +9,7 @@ export default function NotFound() {
       <div className="flex items-center justify-between text-xs text-muted border-b border-hairline pb-4">
         <div className="flex items-center gap-2">
           <Film className="w-4 h-4 text-tungsten" />
-          <span className="text-primary font-bold">RAHUL VERMA STUDIO</span>
+          <span className="text-primary font-bold">Rahul Singh STUDIO</span>
         </div>
         <div className="text-rec">ERROR: 404_MEDIA_NOT_FOUND</div>
       </div>

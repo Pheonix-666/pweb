@@ -1,6 +1,6 @@
-# STUDIO RAHUL VERMA — Cinematic Portfolio & Creative Agency
+# STUDIO Rahul Singh — Cinematic Portfolio & Creative Agency
 
-An ultra-luxury, dark-themed portfolio website for **Rahul Verma** (Cinematographer, Photographer & Film Editor), engineered with Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion, and Lenis smooth scrolling.
+An ultra-luxury, dark-themed portfolio website for **Rahul Singh** (Cinematographer, Photographer & Film Editor), engineered with Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion, and Lenis smooth scrolling.
 
 ---
 
@@ -94,7 +94,7 @@ To add a new project, add an entry to the `projects` array:
   ],
   credits: [
     { role: "Director", name: "Director Name" },
-    { role: "Cinematographer", name: "Rahul Verma" },
+    { role: "Cinematographer", name: "Rahul Singh" },
   ],
   featured: true,
 }

@@ -7,7 +7,7 @@ import { siteConfig } from "@/data/site";
 export const metadata: Metadata = {
   title: `Selected Works & Archives — ${siteConfig.name}`,
   description:
-    "Explore the complete directorial, cinematographic, editorial, and fashion photography archive of Rahul Verma Studio.",
+    "Explore the complete directorial, cinematographic, editorial, and fashion photography archive of Rahul Singh Studio.",
 };
 
 export default function WorkPage() {

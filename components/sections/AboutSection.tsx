@@ -32,7 +32,7 @@ const CAREER_TIMELINE = [
 const SOCIAL_LINKS = [
   { platform: "Instagram", handle: "@rahulverma.cinema", href: "https://instagram.com" },
   { platform: "Vimeo", handle: "vimeo.com/rahulverma", href: "https://vimeo.com" },
-  { platform: "YouTube", handle: "Rahul Verma Cinema", href: "https://youtube.com" },
+  { platform: "YouTube", handle: "Rahul Singh Cinema", href: "https://youtube.com" },
   { platform: "Behance", handle: "behance.net/rahulverma", href: "https://behance.net" },
   { platform: "LinkedIn", handle: "linkedin.com/in/rahulverma", href: "https://linkedin.com" },
 ];
@@ -92,7 +92,7 @@ export default function AboutSection() {
             <motion.div style={{ y: portraitY }} className="relative w-full h-[115%] -top-[7%]">
               <Image
                 src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1400&auto=format&fit=crop"
-                alt="Rahul Verma - Director, Cinematographer & Editor"
+                alt="Rahul Singh - Director, Cinematographer & Editor"
                 fill
                 priority
                 className="object-cover grayscale contrast-125 brightness-95 group-hover:scale-105 transition-transform duration-700"
