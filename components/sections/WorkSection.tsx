@@ -220,23 +220,24 @@ function WorkSectionContent() {
       : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="work" className="py-24 md:py-36 border-b border-hairline relative bg-background select-none">
-      <div className="max-w-[1440px] mx-auto px-5 md:px-10">
+    <section id="work" className="py-24 md:py-36 border-b border-white/10 relative bg-[#08080A] select-none">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12">
         {/* Section Header with Live Project Count */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-10 border-b border-hairline">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-10 border-b border-white/10">
           <div>
-            <div className="font-mono text-xs text-tungsten tracking-widest uppercase mb-3 flex items-center gap-2">
-              <span className="w-6 h-[1px] bg-tungsten inline-block" />
-              ARCHIVE MATRIX
-              <span className="text-muted ml-2">[{filteredProjects.length.toString().padStart(2, "0")} PROJECTS]</span>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="w-8 h-[1px] bg-[#B8860B]" />
+              <span className="font-outfit text-[10px] md:text-xs uppercase tracking-[0.4em] text-[#B8860B] font-bold">
+                Archive Matrix // [{filteredProjects.length.toString().padStart(2, "0")} Curated Works]
+              </span>
             </div>
-            <h2 className="font-serif heading-display-lg text-primary">
-              Selected <span className="italic text-tungsten font-light">Work.</span>
+            <h2 className="font-syncopate text-4xl sm:text-5xl md:text-7xl font-bold uppercase tracking-tight text-white leading-none">
+              Selected <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-[#B8860B]">Work.</span>
             </h2>
           </div>
 
-          {/* Filter Bar with Animated Underline */}
-          <div className="flex flex-wrap items-center gap-2 md:gap-3 bg-surface p-1.5 border border-hairline">
+          {/* Filter Bar with Rounded Luxury Glass Pills */}
+          <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-full bg-[#121214]/80 border border-white/10 backdrop-blur-xl">
             {categories.map((cat) => {
               const isActive = activeCategory === cat.id;
 
@@ -245,23 +246,23 @@ function WorkSectionContent() {
                   key={cat.id}
                   onClick={() => handleCategoryChange(cat.id)}
                   data-cursor="hover"
-                  className={`relative px-4 py-2 font-mono text-xs uppercase tracking-wider transition-colors duration-200 ${
-                    isActive ? "text-primary font-medium" : "text-muted hover:text-primary"
+                  className={`relative px-5 py-2 rounded-full font-outfit text-xs uppercase tracking-wider transition-all duration-300 font-semibold ${
+                    isActive ? "text-[#0A0A0C]" : "text-white/60 hover:text-white"
                   }`}
                 >
-                  <span className="relative z-10 flex items-center gap-1.5">
+                  <span className="relative z-10 flex items-center gap-2">
                     <span>{cat.label}</span>
-                    <span className="text-[10px] text-tungsten opacity-70">
+                    <span className={`text-[10px] ${isActive ? "text-[#0A0A0C]/70" : "text-[#B8860B]"}`}>
                       [{cat.count.toString().padStart(2, "0")}]
                     </span>
                   </span>
 
-                  {/* Animated Active Indicator */}
+                  {/* Animated Active Pill Indicator */}
                   {isActive && (
                     <motion.div
-                      layoutId="activeFilterUnderline"
-                      className="absolute inset-0 bg-elevated border border-hairline z-0"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      layoutId="activeFilterWork"
+                      className="absolute inset-0 bg-[#B8860B] rounded-full shadow-[0_0_16px_rgba(184,134,11,0.4)]"
+                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
                     />
                   )}
                 </button>

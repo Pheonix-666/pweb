@@ -1,6 +1,6 @@
 
 import type { Metadata, Viewport } from "next";
-import { instrumentSerif, interTight, jetbrainsMono } from "./fonts";
+import { instrumentSerif, interTight, jetbrainsMono, syncopate, outfit } from "./fonts";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import GrainOverlay from "@/components/GrainOverlay";
@@ -88,7 +88,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrumentSerif.variable} ${interTight.variable} ${jetbrainsMono.variable} dark`}
+      className={`${instrumentSerif.variable} ${interTight.variable} ${jetbrainsMono.variable} ${syncopate.variable} ${outfit.variable} dark`}
     >
       <head>
         <script
@@ -96,7 +96,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-background text-primary font-sans selection:bg-tungsten selection:text-background min-h-screen relative overflow-x-hidden antialiased">
+      <body className="bg-background text-primary font-sans selection:bg-tungsten selection:text-background min-h-screen relative overflow-x-clip antialiased">
         <SmoothScrollProvider>
           <Preloader />
           <GrainOverlay />

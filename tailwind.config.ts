@@ -41,6 +41,8 @@ const config: Config = {
         serif: ["var(--font-display)", "Instrument Serif", "Georgia", "serif"],
         sans: ["var(--font-sans)", "Inter Tight", "-apple-system", "sans-serif"],
         mono: ["var(--font-mono)", "JetBrains Mono", "monospace"],
+        syncopate: ["var(--font-syncopate)", "Syncopate", "sans-serif"],
+        outfit: ["var(--font-outfit)", "Outfit", "sans-serif"],
       },
       letterSpacing: {
         tighter: "-0.04em",

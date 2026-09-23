@@ -62,82 +62,69 @@ export default function Navbar() {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "bg-[#0A0A0A]/85 backdrop-blur-md border-b border-hairline py-3.5 shadow-2xl"
-            : "bg-transparent py-5 md:py-7 border-b border-transparent"
-        }`}
-      >
-        <div className="max-w-[1440px] mx-auto px-5 md:px-10 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-4 md:py-6 px-4 md:px-8 pointer-events-none">
+        <div className="max-w-[1440px] w-full mx-auto flex items-center justify-between pointer-events-auto">
           {/* Left: Logo Wordmark */}
           <Link
             href="/"
-            className="group flex items-center gap-2.5 text-primary text-sm md:text-base font-medium tracking-tight"
+            className="group flex items-center gap-3 text-primary text-sm md:text-base font-medium tracking-tight bg-[#0A0A0C]/80 backdrop-blur-xl border border-white/10 px-4 py-2 rounded-full hover:border-[#B8860B]/60 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
             data-cursor="hover"
           >
-            <span className="flex items-center justify-center w-6 h-6 border border-hairline bg-surface group-hover:border-tungsten transition-colors">
-              <Film className="w-3.5 h-3.5 text-tungsten" />
+            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-tr from-[#B8860B] to-[#F3B353] text-[#0A0A0C] font-bold text-xs shadow-[0_0_12px_rgba(184,134,11,0.5)]">
+              R
             </span>
-            <span className="font-semibold tracking-wider font-sans uppercase text-xs md:text-sm">
+            <span className="font-syncopate uppercase text-[11px] md:text-xs font-bold tracking-[0.2em] text-white">
               Rahul Singh
             </span>
-            <span className="text-[10px] font-mono tracking-widest text-muted hidden sm:inline-block border-l border-hairline pl-2 ml-0.5">
-              STUDIO
+            <span className="text-[9px] font-outfit uppercase tracking-[0.3em] text-[#B8860B] hidden sm:inline-block border-l border-white/10 pl-2 font-semibold">
+              Studio
             </span>
           </Link>
 
-          {/* Centre: Nav links (Desktop) */}
-          <nav className="hidden md:flex items-center gap-8 border border-hairline bg-surface/80 px-6 py-2 rounded-none backdrop-blur-sm">
+          {/* Centre: Nav links (Desktop floating glass pill) */}
+          <nav className="hidden md:flex items-center gap-1 border border-white/10 bg-[#0A0A0C]/80 p-1.5 rounded-full backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.6)]">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={(e) => scrollToSection(e, link.href)}
-                className="text-xs font-mono uppercase tracking-widest text-muted hover:text-primary transition-colors flex items-center gap-1.5 py-1 relative group"
+                className="text-[10px] font-outfit uppercase tracking-[0.3em] text-white/70 hover:text-white px-5 py-2 rounded-full hover:bg-white/5 transition-all duration-300 flex items-center gap-2 group font-semibold"
                 data-cursor="hover"
               >
-                <span className="text-[9px] text-tungsten opacity-60 group-hover:opacity-100 transition-opacity">
+                <span className="text-[8px] font-syncopate text-[#B8860B] opacity-70 group-hover:opacity-100 transition-opacity">
                   {link.labelNumber}
                 </span>
                 <span>{link.name}</span>
-                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-tungsten transition-all duration-200 group-hover:w-full" />
               </a>
             ))}
           </nav>
 
           {/* Right: Booking Status & CTA */}
-          <div className="hidden lg:flex items-center gap-5">
+          <div className="flex items-center gap-3">
             {/* Pulsing Green Available Badge */}
-            <div className="flex items-center gap-2 font-mono text-[11px] text-muted tracking-wider bg-surface/50 border border-hairline px-3 py-1.5">
-              <span className="status-indicator" />
-              <span className="text-primary/90">Available for bookings</span>
+            <div className="hidden lg:flex items-center gap-2 px-3.5 py-2 rounded-full border border-white/10 bg-[#0A0A0C]/80 backdrop-blur-xl font-outfit text-[10px] uppercase tracking-[0.25em] text-white/80 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+              <span className="w-2 h-2 rounded-full bg-[#30A46C] animate-pulse shadow-[0_0_8px_#30A46C]" />
+              <span className="text-[#30A46C] font-bold">Open for Commissions</span>
             </div>
 
-            {/* Book A Shoot Button */}
+            {/* Inquire Button */}
             <a
               href="#contact"
               onClick={(e) => scrollToSection(e, "#contact")}
-              className="group relative inline-flex items-center gap-2 bg-primary hover:bg-tungsten text-background text-xs font-mono font-medium uppercase tracking-wider px-4 py-2.5 transition-colors duration-200"
+              className="relative group overflow-hidden px-5 py-2 rounded-full border border-[#B8860B]/50 bg-gradient-to-r from-[#B8860B]/20 to-transparent backdrop-blur-xl font-outfit text-[10px] uppercase tracking-[0.3em] text-[#F5F5F5] font-bold hover:border-[#B8860B] transition-all duration-300 shadow-[0_0_20px_rgba(184,134,11,0.2)]"
               data-cursor="hover"
             >
-              <span>Book a Shoot</span>
-              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <span className="relative z-10 flex items-center gap-2">
+                <span>Inquire</span>
+                <ArrowUpRight className="w-3 h-3 text-[#B8860B] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </span>
+              <div className="absolute inset-0 bg-[#B8860B] transition-transform duration-500 ease-out -translate-y-full group-hover:translate-y-0" />
             </a>
-          </div>
 
-          {/* Mobile Menu Trigger */}
-          <div className="flex items-center gap-3 md:hidden">
-            <a
-              href="#contact"
-              onClick={(e) => scrollToSection(e, "#contact")}
-              className="text-[11px] font-mono tracking-wider bg-primary text-background px-3 py-1.5 font-medium"
-            >
-              Book
-            </a>
+            {/* Mobile Menu Trigger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 border border-hairline bg-surface text-primary hover:border-tungsten transition-colors"
+              className="md:hidden flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-[#0A0A0C]/90 text-white p-2 backdrop-blur-xl"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

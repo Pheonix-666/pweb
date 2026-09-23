@@ -43,113 +43,103 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-surface border-t border-hairline py-20 text-primary select-none">
-      <div className="max-w-[1440px] mx-auto px-5 md:px-10 space-y-16">
-        {/* Main Footer Top Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-14 border-b border-hairline items-start">
-          {/* Left Column: Giant Studio Wordmark */}
-          <div className="lg:col-span-6 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <span className="p-1.5 border border-hairline bg-elevated">
-                <Film className="w-4 h-4 text-tungsten" />
-              </span>
-              <span className="font-serif text-3xl md:text-4xl tracking-tight text-primary">
-                {siteConfig.studioName}
-              </span>
+    <footer className="bg-[#050507] border-t border-white/10 pt-24 pb-16 text-white select-none relative overflow-hidden">
+      {/* Ambient background glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-[#B8860B]/[0.03] rounded-full blur-[140px] pointer-events-none" />
+
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative z-10 space-y-20">
+        {/* Giant Monolithic Studio Wordmark */}
+        <div className="border-b border-white/10 pb-16">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="w-8 h-[1px] bg-[#B8860B]" />
+                <span className="font-outfit text-[10px] md:text-xs uppercase tracking-[0.5em] text-[#B8860B] font-bold">
+                  The Atelier // Cinematic Visual Studio
+                </span>
+              </div>
+              <h2 className="font-syncopate text-5xl sm:text-7xl md:text-8xl lg:text-[7vw] font-bold uppercase tracking-tighter text-white leading-none">
+                Rahul <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-[#B8860B]">Singh</span>
+              </h2>
             </div>
-            <p className="font-mono text-xs text-muted max-w-md leading-relaxed">
-              {siteConfig.tagline} An independent creative visual atelier specializing in large-format cinematography, medium-format editorial portraiture, and surgical rhythm editing.
+
+            <button
+              onClick={scrollToTop}
+              data-cursor="hover"
+              className="w-fit inline-flex items-center gap-3 px-6 py-3.5 rounded-full border border-white/10 bg-white/5 hover:border-[#B8860B] hover:bg-[#B8860B]/10 transition-all duration-300 font-outfit text-xs uppercase tracking-[0.3em] text-white font-semibold backdrop-blur-md"
+            >
+              <span>Return to Top</span>
+              <ArrowUp className="w-4 h-4 text-[#B8860B]" />
+            </button>
+          </div>
+        </div>
+
+        {/* Directory Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-white/10">
+          <div className="md:col-span-4 space-y-6">
+            <p className="font-outfit text-sm text-white/60 leading-relaxed max-w-sm font-light">
+              Curating silent stages, architectural precision, and visceral moving pictures for luxury brands and visionary directors worldwide.
             </p>
 
-            {/* Live Clock Strip */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-elevated border border-hairline font-mono text-xs text-muted">
-              <Clock className="w-3.5 h-3.5 text-tungsten animate-pulse" />
-              <span>MUMBAI STUDIO TIME:</span>
-              <span className="text-primary font-bold tabular-nums">
-                {localTime ? `${localTime} IST` : "CALIBRATING..."}
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#121214] border border-white/10 font-outfit text-[11px] text-white/70">
+              <Clock className="w-3.5 h-3.5 text-[#B8860B] animate-pulse" />
+              <span className="uppercase tracking-wider">MUMBAI / IST:</span>
+              <span className="text-white font-bold font-mono">
+                {localTime ? `${localTime}` : "LIVE"}
               </span>
             </div>
           </div>
 
-          {/* Quick Directory Links */}
-          <div className="lg:col-span-3 space-y-3">
-            <div className="font-mono text-xs text-tungsten tracking-widest uppercase">
-              {"// DIRECTORY"}
+          <div className="md:col-span-3 md:col-start-6 space-y-4">
+            <h4 className="font-syncopate text-[#B8860B] uppercase tracking-wider text-xs font-bold">
+              Directory
+            </h4>
+            <div className="flex flex-col gap-2.5 font-outfit text-xs uppercase tracking-widest text-white/60">
+              <a href="#work" className="hover:text-[#B8860B] transition-colors w-fit">
+                01. Selected Works
+              </a>
+              <a href="#disciplines" className="hover:text-[#B8860B] transition-colors w-fit">
+                02. Disciplines & Craft
+              </a>
+              <a href="#collection" className="hover:text-[#B8860B] transition-colors w-fit">
+                03. Philosophy & Stills
+              </a>
+              <a href="#contact" className="hover:text-[#B8860B] transition-colors w-fit">
+                04. Initiate Inquiries
+              </a>
             </div>
-            <ul className="space-y-2 font-mono text-xs">
-              <li>
-                <a href="#work" className="text-muted hover:text-primary transition-colors">
-                  [ 01 ] Selected Work
-                </a>
-              </li>
-              <li>
-                <a href="#craft" className="text-muted hover:text-primary transition-colors">
-                  [ 02 ] Edit Timeline & Craft
-                </a>
-              </li>
-              <li>
-                <a href="#proof" className="text-muted hover:text-primary transition-colors">
-                  [ 03 ] Proof, Arsenal & Rates
-                </a>
-              </li>
-              <li>
-                <a href="#about" className="text-muted hover:text-primary transition-colors">
-                  [ 04 ] Studio Manifesto
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="text-muted hover:text-primary transition-colors">
-                  [ 05 ] Initiate Commission
-                </a>
-              </li>
-            </ul>
           </div>
 
-          {/* Socials & Back to Top */}
-          <div className="lg:col-span-3 space-y-4">
-            <div className="font-mono text-xs text-tungsten tracking-widest uppercase">
-              {"// ARCHIVAL FEEDS"}
-            </div>
-            <div className="flex flex-wrap gap-2 font-mono text-xs">
+          <div className="md:col-span-3 md:col-start-10 space-y-4">
+            <h4 className="font-syncopate text-[#B8860B] uppercase tracking-wider text-xs font-bold">
+              Socials & Feeds
+            </h4>
+            <div className="flex flex-col gap-2.5 font-outfit text-xs uppercase tracking-widest text-white/60">
               {siteConfig.socials.map((s) => (
                 <a
                   key={s.platform}
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-2.5 py-1 bg-elevated border border-hairline hover:border-tungsten text-muted hover:text-primary transition-colors"
+                  className="hover:text-[#B8860B] transition-colors w-fit"
                 >
                   {s.platform}
                 </a>
               ))}
             </div>
-
-            <div className="pt-2">
-              <button
-                onClick={scrollToTop}
-                data-cursor="hover"
-                className="w-full p-3 border border-hairline bg-elevated hover:border-tungsten transition-colors text-primary flex items-center justify-center gap-2 font-mono text-xs uppercase tracking-widest"
-                aria-label="Back to top"
-              >
-                <span>RETURN TO TOP</span>
-                <ArrowUp className="w-3.5 h-3.5 text-tungsten" />
-              </button>
-            </div>
           </div>
         </div>
 
-        {/* Bottom Legal & Telemetry Metadata */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-xs text-muted">
+        {/* Bottom Bar: Copyright & Specs */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 font-outfit text-[11px] text-white/40 uppercase tracking-widest">
           <div>
-            © {new Date().getFullYear()} {siteConfig.studioName}. ALL RIGHTS RESERVED.
+            © {new Date().getFullYear()} RAHUL SINGH STUDIO. ALL RIGHTS RESERVED.
           </div>
 
           <div className="flex items-center gap-4">
-            <span>TC: <span className="text-tungsten tabular-nums">{formatTimecode(frames)}</span></span>
+            <span>Coordinates: 34.0522° N, 118.2437° W</span>
             <span>·</span>
-            <span>24.00 FPS</span>
-            <span>·</span>
-            <span>ACES 1.3 P3-D65</span>
+            <span className="text-[#B8860B]">ACES 1.3 REC.709</span>
           </div>
         </div>
       </div>

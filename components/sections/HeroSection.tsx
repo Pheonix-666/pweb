@@ -187,22 +187,22 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="inline-flex items-center gap-2.5 px-4 py-1.5 border border-hairline bg-surface/70 backdrop-blur-md font-mono text-[11px] uppercase tracking-[0.25em] text-muted"
+          className="inline-flex items-center gap-3 px-5 py-2 border border-white/10 bg-[#0A0A0C]/70 backdrop-blur-xl rounded-full font-outfit text-[10px] md:text-xs uppercase tracking-[0.4em] text-[#B8860B] font-bold shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
         >
-          <Sparkles className="w-3 h-3 text-tungsten" />
-          <span>CINEMATIC VISUAL STUDIO</span>
-          <span className="text-tungsten">{"///"}</span>
-          <span className="text-primary font-medium">EST. 2016</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#B8860B] animate-pulse" />
+          <span>Cinematic Visual Studio</span>
+          <span className="text-white/20">|</span>
+          <span className="text-white/80 font-medium">Est. 2016 — Mumbai / London</span>
         </motion.div>
 
-        {/* Giant Name with Italic Amber Word */}
+        {/* Giant Name with Italic Gold Word */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.85, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="font-serif heading-display-xl font-normal text-primary tracking-tight text-balance"
+          className="font-syncopate text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold uppercase tracking-tighter text-white leading-[0.85] text-balance"
         >
-          Rahul <span className="italic text-tungsten font-light">Singh</span>
+          Rahul <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#F5F5F5] to-[#B8860B]">Singh</span>
         </motion.h1>
 
         {/* Subline */}
@@ -210,9 +210,9 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, delay: 0.35 }}
-          className="text-fluid-body text-primary/80 font-light max-w-2xl text-balance leading-relaxed"
+          className="font-outfit text-sm sm:text-base md:text-lg text-white/70 font-light max-w-2xl text-balance leading-relaxed tracking-wide"
         >
-          Photographer. Cinematographer. Editor. Stories shot and cut under one roof.
+          Curating silent narratives, tactile medium-format stills, and large-format cinematic direction under one roof.
         </motion.p>
 
         {/* Action Buttons */}
@@ -226,9 +226,9 @@ export default function HeroSection() {
           <button
             onClick={() => setShowreelOpen(true)}
             data-cursor="play"
-            className="group relative inline-flex items-center gap-3 px-7 py-3.5 bg-primary hover:bg-tungsten text-background font-mono text-xs uppercase tracking-widest font-semibold transition-all duration-300 shadow-2xl"
+            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#B8860B] hover:bg-[#D4AF37] text-[#0A0A0C] font-outfit text-xs uppercase tracking-[0.3em] font-bold transition-all duration-300 shadow-[0_0_30px_rgba(184,134,11,0.4)] rounded-full overflow-hidden"
           >
-            <span className="p-1 bg-background text-primary group-hover:bg-background group-hover:text-tungsten transition-colors">
+            <span className="p-1.5 bg-[#0A0A0C] text-[#B8860B] rounded-full group-hover:scale-110 transition-transform">
               <Play className="w-3 h-3 fill-current" />
             </span>
             <span>Watch Showreel</span>
@@ -239,9 +239,9 @@ export default function HeroSection() {
             href="#work"
             onClick={scrollToWork}
             data-cursor="hover"
-            className="inline-flex items-center gap-2.5 px-6 py-3.5 border border-hairline bg-surface/80 hover:border-tungsten text-primary hover:text-tungsten font-mono text-xs uppercase tracking-widest backdrop-blur-sm transition-all duration-300"
+            className="inline-flex items-center gap-2.5 px-8 py-4 border border-white/20 bg-white/5 hover:border-[#B8860B] text-white hover:text-[#B8860B] font-outfit text-xs uppercase tracking-[0.3em] font-bold backdrop-blur-xl transition-all duration-300 rounded-full"
           >
-            <span>View Work</span>
+            <span>Explore Work</span>
             <ArrowDown className="w-3.5 h-3.5" />
           </a>
         </motion.div>

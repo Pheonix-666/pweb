@@ -1,4 +1,4 @@
-import { Instrument_Serif, Inter_Tight, JetBrains_Mono } from "next/font/google";
+import { Instrument_Serif, Inter_Tight, JetBrains_Mono, Syncopate, Outfit } from "next/font/google";
 
 export const instrumentSerif = Instrument_Serif({
   weight: ["400"],
@@ -21,3 +21,18 @@ export const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
   display: "swap",
 });
+
+export const syncopate = Syncopate({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-syncopate",
+  display: "swap",
+});
+
+export const outfit = Outfit({
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
+

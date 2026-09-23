@@ -3,320 +3,302 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { Sparkles, ArrowRight, Eye, Film, Camera } from "lucide-react";
-import { formatTimecode } from "@/lib/utils";
-
-interface StoryFrame {
-  id: string;
-  number: string;
-  chapter: string;
-  title: string;
-  subtitle: string;
-  quote: string;
-  description: string;
-  image: string;
-  secondaryImage?: string;
-  aspect: string;
-  specs: string;
-  location: string;
-}
-
-const STORY_FRAMES: StoryFrame[] = [
-  {
-    id: "01",
-    number: "01",
-    chapter: "CHAPTER I // ARCHITECTURAL FORM",
-    title: "Monolith & Shadow",
-    subtitle: "Raw Concrete Geometry",
-    quote: "“Architecture is the learned game, correct and magnificent, of forms assembled in the light.”",
-    description:
-      "Documenting the shifting solar angles across off-grid brutalist concrete pavilions with perspective-corrected tilt-shift glass.",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop",
-    secondaryImage: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1000&auto=format&fit=crop",
-    aspect: "aspect-[4/5]",
-    specs: "Sony A7R V · TS-E 17mm f/4L · 61MP TIFF",
-    location: "Burkina Faso Pavilion",
-  },
-  {
-    id: "02",
-    number: "02",
-    chapter: "CHAPTER II // HAUTE EDITORIAL",
-    title: "Tactile Silence",
-    subtitle: "High Fashion Monochromatic Draping",
-    quote: "“The weight of an image lives in the darkness it refuses to reveal.”",
-    description:
-      "A study of stark silhouettes against volcanic slate rock, captured with 100-megapixel digital medium format and parabolic studio reflectors.",
-    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1600&auto=format&fit=crop",
-    secondaryImage: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop",
-    aspect: "aspect-[4/5]",
-    specs: "Hasselblad H6D-100c · HC 100mm f/2.2 · Broncolor Para 222",
-    location: "Milan Fashion Week",
-  },
-  {
-    id: "03",
-    number: "03",
-    chapter: "CHAPTER III // HIGH-SPEED MOTION",
-    title: "Alpine Velocity",
-    subtitle: "The Prototype Electric GT Launch",
-    quote: "“Speed is nothing without intentional framing; the camera must breathe with the machine.”",
-    description:
-      "Deploying a chase pursuit vehicle with stabilized roof crane at 140 km/h across Swiss mountain passes at sunrise.",
-    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1600&auto=format&fit=crop",
-    secondaryImage: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=1000&auto=format&fit=crop",
-    aspect: "aspect-[16/9]",
-    specs: "RED V-Raptor 8K VV · Angénieux Optimo 12X · MotoCrane",
-    location: "Furka Pass, Switzerland",
-  },
-  {
-    id: "04",
-    number: "04",
-    chapter: "CHAPTER IV // CELLULOID ROMANCE",
-    title: "Twilight on the Water",
-    subtitle: "16mm Celluloid Destination Feature",
-    quote: "“Celluloid grain breathes life into memory in a way digital perfection never can.”",
-    description:
-      "Intimate dawn boat arrivals and candlelit banquet vows on Lake Como documented on Kodak 500T 16mm celluloid film.",
-    image: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1600&auto=format&fit=crop",
-    secondaryImage: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000&auto=format&fit=crop",
-    aspect: "aspect-[16/10]",
-    specs: "Arriflex 16SR3 · Kodak Vision3 500T · Atlas Orion 2X",
-    location: "Villa Balbiano, Lake Como",
-  },
-  {
-    id: "05",
-    number: "05",
-    chapter: "CHAPTER V // HOROLOGY PRECISION",
-    title: "The Micro Heartbeat",
-    subtitle: "Titanium Chronograph Macro Optics",
-    quote: "“Microscopic mechanics transformed into monumental cinematic sculpture.”",
-    description:
-      "Motorized robotic passes using 2X periprobe macro lenses over hand-beveled tourbillon bridges and escapements.",
-    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1600&auto=format&fit=crop",
-    secondaryImage: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop",
-    aspect: "aspect-[16/9]",
-    specs: "ARRI Alexa Mini LF · Laowa 24mm T14 Probe · Motion Control",
-    location: "Geneva Watch Atelier",
-  },
-];
 
 export default function EditorialScrollGallery() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Scroll progress for the tall pinned container
+  // Scroll progress for the pinned horizontal scroll track
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 70,
+    stiffness: 90,
     damping: 25,
     restDelta: 0.001,
   });
 
-  // Translate horizontal tracks from 0% to -80%
+  // Transform for main horizontal track
   const x = useTransform(smoothProgress, [0, 1], ["0%", "-78%"]);
 
-  // Progress line width
-  const progressWidth = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
+  // Subtle counter parallax for the two floating gallery rows
+  const row1Parallax = useTransform(smoothProgress, [0, 1], ["-90px", "90px"]);
+  const row2Parallax = useTransform(smoothProgress, [0, 1], ["90px", "-90px"]);
 
   return (
-    <section
-      id="visual-story"
-      ref={containerRef}
-      className="relative bg-background border-b border-hairline select-none"
-    >
-      {/* Tall Scroll Track on Desktop (Pinned 400vh container) */}
-      <div className="hidden lg:block relative h-[420vh]">
-        {/* Sticky 100vh Full Viewport Stage */}
-        <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#0A0A0C] flex flex-col justify-between p-8 xl:p-12">
-          {/* Subtle Background Watermark Typography */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.025] overflow-hidden select-none">
-            <span className="font-serif text-[38vw] text-primary whitespace-nowrap leading-none">
-              STORY
+    <div className="relative bg-[#08080A] text-[#F5F5F5] select-none">
+      {/* Subtle ambient lighting glows */}
+      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#B8860B]/[0.03] rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/3 right-1/4 w-[700px] h-[700px] bg-[#B8860B]/[0.02] rounded-full blur-[160px] pointer-events-none" />
+
+      {/* Pinned Horizontal Scroll Section */}
+      <section
+        id="collection"
+        ref={containerRef}
+        className="relative h-[400vh] bg-[#08080A]"
+      >
+        {/* Sticky 100vh Viewport Stage */}
+        <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#08080A] flex items-center border-t border-b border-white/[0.06]">
+          {/* Subtle Background Watermark */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.025] select-none">
+            <span className="font-syncopate text-[60vw] text-white whitespace-nowrap leading-none font-bold tracking-tighter">
+              COLLECTION
             </span>
           </div>
 
-          {/* Top HUD Header Row */}
-          <div className="relative z-20 flex items-center justify-between border-b border-hairline pb-4 font-mono text-xs">
-            <div className="flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-tungsten animate-pulse" />
-              <span className="text-tungsten font-semibold tracking-widest uppercase">
-                EDITORIAL NARRATIVE // HORIZONTAL REEL
-              </span>
-              <span className="text-muted hidden xl:inline">
-                [SCROLL VERTICALLY TO NAVIGATE CHRONOLOGY]
-              </span>
-            </div>
-
-            <div className="flex items-center gap-6 text-muted text-[11px]">
-              <span>5 CURATED CHAPTERS</span>
-              <span className="text-white/20">|</span>
-              <span>DIRECTOR: Rahul Singh</span>
-            </div>
-          </div>
-
-          {/* Main Horizontal Moving Track Stage */}
-          <div className="relative z-10 flex-grow flex items-center overflow-hidden my-auto py-6">
-            <motion.div style={{ x }} className="flex items-center gap-16 xl:gap-24 pl-6 pr-48 w-max">
-              {/* Intro Title Card */}
-              <div className="w-[360px] xl:w-[420px] flex-shrink-0 space-y-6 pr-6">
-                <div className="font-mono text-xs text-tungsten tracking-widest uppercase flex items-center gap-2">
-                  <span className="w-6 h-[1px] bg-tungsten inline-block" />
-                  VISUAL ESSAY
-                </div>
-
-                <h2 className="font-serif text-4xl xl:text-6xl text-primary font-normal leading-[1.05]">
-                  Stories Carved in <span className="italic text-tungsten font-light">Shadow.</span>
-                </h2>
-
-                <p className="font-sans text-xs xl:text-sm text-muted font-light leading-relaxed">
-                  A scroll-driven journey through light, geometry, speed, and tactile medium format stills. Each chapter represents a distinct milestone in our visual philosophy.
-                </p>
-
-                <div className="inline-flex items-center gap-2 font-mono text-xs text-tungsten tracking-widest pt-4">
-                  <span>ADVANCE STORYLINE</span>
-                  <ArrowRight className="w-4 h-4 animate-pulse" />
-                </div>
+          {/* Horizontal Translating Track */}
+          <motion.div
+            style={{ x }}
+            className="flex h-full items-center w-max pl-8 sm:pl-16 md:pl-48 pr-0 gap-[20vw] md:gap-[20vw] relative z-10"
+          >
+            {/* 1. PHILOSOPHY 01 INTRO */}
+            <div className="w-[85vw] md:w-[40vw] flex flex-col justify-center shrink-0">
+              <div className="flex items-center gap-4 mb-8 md:mb-10">
+                <span className="w-10 h-[1px] bg-[#B8860B]" />
+                <span className="font-outfit text-[10px] md:text-xs tracking-[0.6em] uppercase text-[#B8860B] font-bold">
+                  Philosophy 01
+                </span>
               </div>
 
-              {/* Story Frames Sequence */}
-              {STORY_FRAMES.map((frame) => (
-                <div
-                  key={frame.id}
-                  className="w-[720px] xl:w-[860px] flex-shrink-0 border border-hairline bg-surface p-6 xl:p-8 flex flex-col justify-between space-y-6 group hover:border-tungsten/60 transition-colors duration-500 shadow-2xl"
-                >
-                  {/* Frame Top Metadata */}
-                  <div className="flex items-center justify-between border-b border-hairline pb-4 font-mono text-xs">
-                    <div className="flex items-center gap-3">
-                      <span className="text-tungsten font-bold">{frame.number}</span>
-                      <span className="text-white/20">|</span>
-                      <span className="text-muted tracking-widest">{frame.chapter}</span>
-                    </div>
-                    <span className="text-primary/70 text-[11px]">{frame.location}</span>
+              <h2 className="font-syncopate text-4xl sm:text-5xl md:text-8xl lg:text-9xl text-white mb-8 md:mb-12 leading-[0.85] md:leading-[0.8] tracking-tighter uppercase font-bold">
+                The Art of
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#F5F5F5] to-[#B8860B]">
+                  Restraint.
+                </span>
+              </h2>
+
+              <p className="font-outfit text-base md:text-xl text-white/50 max-w-sm md:max-w-md leading-relaxed pl-10 md:pl-12 relative border-l border-[#B8860B]/20">
+                <span className="absolute -left-3 -top-2 text-[#B8860B] font-syncopate text-3xl md:text-4xl leading-none">
+                  “
+                </span>
+                True luxury isn&apos;t about excess. It&apos;s about the perfect
+                balance of space, light, and silence.
+              </p>
+            </div>
+
+            {/* 2. PARALLAX FLOATING GALLERY CARDS */}
+            <div className="w-fit h-screen flex flex-col justify-center gap-12 md:gap-24 shrink-0 py-12 md:py-16 pr-[15vw] md:pr-[20vw]">
+              {/* Parallax Row 1 (Top Row) */}
+              <motion.div
+                style={{ x: row1Parallax }}
+                className="parallax-row flex gap-8 md:gap-32 items-end h-[28vh] md:h-[35vh] -translate-x-16 md:-translate-x-32"
+              >
+                {/* Gallery Card 1 */}
+                <div className="relative w-[50vw] md:w-[18vw] h-[85%] overflow-hidden rounded-sm bg-[#121214] border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.8)] shrink-0 translate-y-8 md:translate-y-12 group">
+                  <Image
+                    src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop"
+                    alt="Gallery 1"
+                    fill
+                    sizes="(max-width: 768px) 50vw, 18vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                </div>
+
+                {/* Gallery Card 2 */}
+                <div className="relative w-[85vw] md:w-[55vw] h-full overflow-hidden rounded-sm bg-[#121214] border border-white/10 shadow-[0_35px_80px_rgba(0,0,0,0.9)] shrink-0 group">
+                  <Image
+                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop"
+                    alt="Gallery 2"
+                    fill
+                    sizes="(max-width: 768px) 85vw, 55vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                </div>
+
+                {/* Gallery Card 3 */}
+                <div className="relative w-[65vw] md:w-[30vw] h-[90%] overflow-hidden rounded-sm bg-[#121214] border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.8)] shrink-0 -translate-y-8 md:-translate-y-12 group">
+                  <Image
+                    src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=800&auto=format&fit=crop"
+                    alt="Gallery 3"
+                    fill
+                    sizes="(max-width: 768px) 65vw, 30vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                </div>
+              </motion.div>
+
+              {/* Parallax Row 2 (Bottom Row) */}
+              <motion.div
+                style={{ x: row2Parallax }}
+                className="parallax-row flex gap-8 md:gap-32 items-center h-[32vh] md:h-[50vh] translate-x-16 md:translate-x-32"
+              >
+                {/* Gallery Card 4 */}
+                <div className="relative w-[75vw] md:w-[35vw] h-full overflow-hidden rounded-sm bg-[#121214] border border-white/10 shadow-[0_35px_80px_rgba(0,0,0,0.9)] shrink-0 -translate-y-10 md:-translate-y-16 group">
+                  <Image
+                    src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?q=80&w=1200&auto=format&fit=crop"
+                    alt="Gallery 4"
+                    fill
+                    sizes="(max-width: 768px) 75vw, 35vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                </div>
+
+                {/* Gallery Card 5 */}
+                <div className="relative w-[90vw] md:w-[60vw] h-[85%] overflow-hidden rounded-sm bg-[#121214] border border-white/10 shadow-[0_35px_80px_rgba(0,0,0,0.9)] shrink-0 group">
+                  <Image
+                    src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1200&auto=format&fit=crop"
+                    alt="Gallery 5"
+                    fill
+                    sizes="(max-width: 768px) 90vw, 60vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                </div>
+
+                {/* Card 6: Dark Essence of Light Text Plaque */}
+                <div className="relative w-[60vw] md:w-[25vw] h-[70%] overflow-hidden rounded-sm bg-[#101013] border border-[#B8860B]/30 shadow-[0_25px_50px_rgba(0,0,0,0.85)] flex items-center justify-center p-8 md:p-12 shrink-0 translate-y-12 md:translate-y-20 relative group hover:border-[#B8860B]/60 transition-colors duration-500">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#B8860B]/10 via-transparent to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
+                  <h3 className="relative z-10 font-syncopate text-lg sm:text-xl md:text-3xl text-white text-center uppercase tracking-widest leading-none font-bold">
+                    Essence
+                    <br />
+                    <span className="text-[#B8860B]">of Light</span>
+                  </h3>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* 3. PROCESS 02 (VISION TO REALITY) */}
+            <div className="w-[85vw] md:w-[65vw] h-screen flex items-center shrink-0">
+              <div className="relative w-full h-[60vh] sm:h-[65vh] md:h-[75vh] flex flex-col md:flex-row gap-8 md:gap-16 items-center">
+                {/* Process Image */}
+                <div className="relative w-full md:w-1/2 h-[45%] md:h-full overflow-hidden rounded-sm border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.8)] bg-neutral-900 group">
+                  <Image
+                    src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1200&auto=format&fit=crop"
+                    alt="Architectural Process"
+                    fill
+                    sizes="(max-width: 768px) 85vw, 50vw"
+                    className="object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#08080A] via-transparent to-transparent pointer-events-none" />
+                </div>
+
+                {/* Process Text */}
+                <div className="w-full md:w-1/2 flex flex-col gap-6 md:gap-10">
+                  <div className="flex items-center gap-4">
+                    <span className="w-10 h-[1px] bg-[#B8860B]" />
+                    <span className="font-outfit text-[10px] md:text-xs tracking-[0.6em] uppercase text-[#B8860B] font-bold">
+                      Process 02
+                    </span>
                   </div>
 
-                  {/* Visual Media Composition (Primary Still + Secondary Inset) */}
-                  <div className="relative w-full h-[320px] xl:h-[380px] bg-black overflow-hidden border border-hairline">
-                    <Image
-                      src={frame.image}
-                      alt={frame.title}
-                      fill
-                      sizes="(max-width: 1440px) 70vw, 860px"
-                      className="object-cover filter grayscale-[15%] contrast-115 group-hover:scale-105 transition-transform duration-700"
-                    />
+                  <h2 className="font-syncopate text-3xl sm:text-4xl md:text-7xl text-white leading-none uppercase font-bold tracking-tight">
+                    Vision to
+                    <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-[#B8860B]">
+                      Reality.
+                    </span>
+                  </h2>
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent pointer-events-none" />
+                  <p className="font-outfit text-sm sm:text-base md:text-xl text-white/60 leading-relaxed max-w-md">
+                    Every project begins with a single line. We navigate the
+                    complexities of form and function to distill your
+                    aspirations into a cohesive spatial narrative.
+                  </p>
 
-                    {/* Secondary Detail Inset Image */}
-                    {frame.secondaryImage && (
-                      <div className="absolute bottom-4 right-4 w-32 xl:w-44 aspect-[4/3] border border-hairline-light bg-black shadow-2xl overflow-hidden hidden sm:block">
-                        <Image
-                          src={frame.secondaryImage}
-                          alt={`${frame.title} Detail`}
-                          fill
-                          className="object-cover filter contrast-125"
-                        />
-                        <div className="absolute top-1 left-1 px-1.5 py-0.5 bg-black/80 font-mono text-[8px] text-tungsten uppercase tracking-widest">
-                          DETAIL
-                        </div>
+                  <div className="flex gap-12 md:gap-16 mt-2 md:mt-4">
+                    <div>
+                      <div className="font-syncopate text-2xl sm:text-3xl md:text-5xl text-white mb-1 md:mb-2 font-bold">
+                        120+
                       </div>
-                    )}
-                  </div>
-
-                  {/* Frame Narrative & Spec Footer */}
-                  <div className="space-y-4 pt-2">
-                    <div className="flex flex-col xl:flex-row xl:items-baseline justify-between gap-2">
-                      <h3 className="font-serif text-3xl xl:text-4xl text-primary font-normal">
-                        {frame.title}{" "}
-                        <span className="italic text-tungsten font-light text-2xl xl:text-3xl">
-                          — {frame.subtitle}
-                        </span>
-                      </h3>
+                      <div className="font-outfit text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-[#B8860B] font-bold">
+                        Sketches
+                      </div>
                     </div>
-
-                    <p className="font-serif text-sm xl:text-base text-primary/80 italic font-light leading-relaxed">
-                      {frame.quote}
-                    </p>
-
-                    <p className="font-sans text-xs text-muted leading-relaxed font-light">
-                      {frame.description}
-                    </p>
-
-                    <div className="pt-3 border-t border-hairline flex items-center justify-between font-mono text-[10px] text-muted">
-                      <span>SPECS: <span className="text-primary">{frame.specs}</span></span>
-                      <span className="text-tungsten">FRAME ARCHIVE [2024–2025]</span>
+                    <div>
+                      <div className="font-syncopate text-2xl sm:text-3xl md:text-5xl text-white mb-1 md:mb-2 font-bold">
+                        45
+                      </div>
+                      <div className="font-outfit text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-[#B8860B] font-bold">
+                        Artisans
+                      </div>
                     </div>
                   </div>
                 </div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Bottom Running Timeline Progress Line */}
-          <div className="relative z-20 pt-4 border-t border-hairline flex items-center justify-between font-mono text-xs text-muted">
-            <div className="flex items-center gap-4">
-              <span>PROGRESSION:</span>
-              <div className="w-48 xl:w-72 h-[2px] bg-white/10 relative overflow-hidden">
-                <motion.div
-                  style={{ width: progressWidth }}
-                  className="h-full bg-tungsten"
-                />
               </div>
             </div>
 
-            <div className="flex items-center gap-3 text-[11px]">
-              <span>HORIZONTAL DRIFT RATE: 1.0X</span>
-              <span>·</span>
-              <span className="text-tungsten">ACES 1.3 REC.709</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile / Tablet Fallback Presentation (Vertical Editorial Flow) */}
-      <div className="block lg:hidden px-5 py-20 space-y-16">
-        <div className="space-y-3 border-b border-hairline pb-8">
-          <div className="font-mono text-xs text-tungsten tracking-widest uppercase">
-            {"//"} VISUAL ESSAY & STORY
-          </div>
-          <h2 className="font-serif heading-display-lg text-primary">
-            Stories Carved in <span className="italic text-tungsten font-light">Shadow.</span>
-          </h2>
-          <p className="text-sm text-muted font-light leading-relaxed">
-            A continuous editorial narrative through architectural monoliths, high-speed alpine pursuits, and intimate celluloid cinema.
-          </p>
-        </div>
-
-        <div className="space-y-16">
-          {STORY_FRAMES.map((frame) => (
-            <article key={frame.id} className="space-y-6 border border-hairline bg-surface p-6">
-              <div className="flex items-center justify-between border-b border-hairline pb-3 font-mono text-xs">
-                <span className="text-tungsten font-semibold">CHAPTER {frame.number}</span>
-                <span className="text-muted text-[10px]">{frame.location}</span>
-              </div>
-
-              <div className="relative aspect-[16/10] w-full border border-hairline overflow-hidden bg-black">
+            {/* 4. THE OUTCOME (SILENT LUXURY FULL-VIEW MASTERPIECE) */}
+            <div className="w-[95vw] md:w-[100vw] h-screen flex items-center justify-center shrink-0 pl-6 sm:pl-12 md:pl-32 pr-6 md:pr-16">
+              <div className="relative w-full h-[70vh] sm:h-[75vh] md:h-[85vh] overflow-hidden rounded-sm group border border-white/10 shadow-[0_50px_150px_rgba(0,0,0,0.9)] bg-neutral-900">
                 <Image
-                  src={frame.image}
-                  alt={frame.title}
+                  src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2000&auto=format&fit=crop"
+                  alt="Luxury Masterpiece"
                   fill
-                  className="object-cover"
+                  sizes="100vw"
+                  className="object-cover transition-transform duration-[5000ms] ease-out group-hover:scale-110"
                 />
-              </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#08080A] via-[#08080A]/40 to-transparent pointer-events-none" />
 
-              <div className="space-y-3">
-                <h3 className="font-serif text-2xl text-primary">{frame.title}</h3>
-                <p className="font-serif text-sm text-tungsten italic">{frame.quote}</p>
-                <p className="text-xs text-muted leading-relaxed font-light">{frame.description}</p>
-                <div className="font-mono text-[10px] text-muted pt-2 border-t border-hairline">
-                  {frame.specs}
+                <div className="absolute bottom-10 sm:bottom-16 md:bottom-32 left-8 sm:left-12 md:left-32 max-w-3xl z-10">
+                  <div className="flex items-center gap-4 mb-6 md:mb-8">
+                    <span className="w-10 md:w-12 h-[1px] bg-[#B8860B]" />
+                    <span className="font-outfit text-[10px] md:text-xs tracking-[0.6em] uppercase text-[#F5F5F5] font-bold">
+                      The Outcome
+                    </span>
+                  </div>
+
+                  <h2 className="font-syncopate text-5xl sm:text-6xl md:text-[9vw] text-[#F5F5F5] leading-[0.85] md:leading-[0.8] mb-8 md:mb-12 uppercase font-bold tracking-tighter">
+                    SILENT
+                    <br />
+                    <span className="text-[#B8860B]">LUXURY.</span>
+                  </h2>
+
+                  <a
+                    href="#work"
+                    className="inline-block group/btn relative px-8 sm:px-12 py-4 sm:py-6 overflow-hidden border border-white/20 bg-black/40 backdrop-blur-md cursor-pointer"
+                  >
+                    <div className="absolute inset-0 bg-[#B8860B] transition-transform duration-700 ease-out -translate-x-full group-hover/btn:translate-x-0" />
+                    <span className="relative z-10 text-white font-outfit uppercase tracking-[0.4em] text-[10px] md:text-xs font-bold transition-colors duration-500">
+                      Explore the Portfolio
+                    </span>
+                  </a>
                 </div>
               </div>
-            </article>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 5. INFINITE LUXURY MARQUEE TICKER BANNER */}
+      <div className="relative w-full overflow-hidden py-5 select-none bg-[#050507] border-b border-white/[0.06]">
+        <div className="flex whitespace-nowrap animate-[marquee-left_30s_linear_infinite] w-max">
+          {[
+            "Architectural Precision",
+            "Quiet Luxury",
+            "Bespoke Interiors",
+            "Silent Opulence",
+            "Material Curation",
+            "Spatial Narratives",
+            "Architectural Precision",
+            "Quiet Luxury",
+            "Bespoke Interiors",
+            "Silent Opulence",
+            "Material Curation",
+            "Spatial Narratives",
+            "Architectural Precision",
+            "Quiet Luxury",
+            "Bespoke Interiors",
+            "Silent Opulence",
+            "Material Curation",
+            "Spatial Narratives",
+          ].map((text, idx) => (
+            <React.Fragment key={idx}>
+              <span className="inline-flex items-center gap-6 mx-6 font-outfit text-[11px] md:text-xs uppercase tracking-[0.35em] text-[#F5F5F5]/80">
+                {text}
+              </span>
+              <span className="inline-flex items-center text-[#B8860B] text-xs">
+                ✦
+              </span>
+            </React.Fragment>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
