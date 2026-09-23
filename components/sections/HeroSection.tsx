@@ -2,14 +2,53 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
-import { Play, ArrowDown, X, Volume2, VolumeX, Battery, Sparkles, Film, ArrowUpRight } from "lucide-react";
+import { Play, ArrowDown, X, Volume2, VolumeX, Battery, Film, Eye, Sparkles, Sliders } from "lucide-react";
 import { formatTimecode } from "@/lib/utils";
+
+type AspectRatioMode = "2.39" | "16:9" | "4:3" | "9:16";
+
+interface AspectOption {
+  id: AspectRatioMode;
+  label: string;
+  name: string;
+  matteStyle: { top: string; bottom: string; left: string; right: string };
+}
+
+const ASPECT_MODES: AspectOption[] = [
+  {
+    id: "2.39",
+    label: "2.39:1",
+    name: "Anamorphic Scope",
+    matteStyle: { top: "12%", bottom: "12%", left: "0%", right: "0%" },
+  },
+  {
+    id: "16:9",
+    label: "16:9",
+    name: "UHD Master",
+    matteStyle: { top: "0%", bottom: "0%", left: "0%", right: "0%" },
+  },
+  {
+    id: "4:3",
+    label: "4:3",
+    name: "Academy 35mm",
+    matteStyle: { top: "0%", bottom: "0%", left: "16%", right: "16%" },
+  },
+  {
+    id: "9:16",
+    label: "9:16",
+    name: "Social Reel",
+    matteStyle: { top: "0%", bottom: "0%", left: "32%", right: "32%" },
+  },
+];
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [showreelOpen, setShowreelOpen] = useState(false);
   const [elapsedFrames, setElapsedFrames] = useState(0);
   const [modalMuted, setModalMuted] = useState(false);
+  const [aspectMode, setAspectMode] = useState<AspectRatioMode>("2.39");
+  const [focalLength, setFocalLength] = useState<string>("35mm");
+  const [tStop, setTStop] = useState<string>("T1.5");
   const modalVideoRef = useRef<HTMLVideoElement>(null);
 
   // Scroll animations for background video scale down and fade
@@ -82,6 +121,8 @@ export default function HeroSection() {
     }
   };
 
+  const currentMatte = ASPECT_MODES.find((m) => m.id === aspectMode)?.matteStyle || ASPECT_MODES[0].matteStyle;
+
   return (
     <section
       ref={containerRef}
@@ -99,7 +140,7 @@ export default function HeroSection() {
           playsInline
           preload="auto"
           poster="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1920&auto=format&fit=crop"
-          className="w-full h-full object-cover filter brightness-[0.7] contrast-[1.15] grayscale-[20%]"
+          className="w-full h-full object-cover filter brightness-[0.68] contrast-[1.18] grayscale-[15%]"
         >
           <source
             src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
@@ -108,76 +149,123 @@ export default function HeroSection() {
         </video>
 
         {/* Cinematic Vignette and Dark Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-background/70" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(10,10,10,0.85)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/25 to-background/70" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(8,8,10,0.85)_100%)]" />
       </motion.div>
 
-      {/* 2. Camera Viewfinder HUD Overlay with Subtle Mouse Parallax */}
+      {/* 2. Interactive Letterbox Aspect Ratio Mattes */}
+      <div className="absolute inset-0 pointer-events-none z-10 transition-all duration-700 ease-out">
+        {/* Top Matte */}
+        <div
+          className="absolute top-0 left-0 right-0 bg-black/90 transition-all duration-700 ease-out border-b border-white/[0.05]"
+          style={{ height: currentMatte.top }}
+        />
+        {/* Bottom Matte */}
+        <div
+          className="absolute bottom-0 left-0 right-0 bg-black/90 transition-all duration-700 ease-out border-t border-white/[0.05]"
+          style={{ height: currentMatte.bottom }}
+        />
+        {/* Left Matte */}
+        <div
+          className="absolute top-0 bottom-0 left-0 bg-black/90 transition-all duration-700 ease-out border-r border-white/[0.05]"
+          style={{ width: currentMatte.left }}
+        />
+        {/* Right Matte */}
+        <div
+          className="absolute top-0 bottom-0 right-0 bg-black/90 transition-all duration-700 ease-out border-l border-white/[0.05]"
+          style={{ width: currentMatte.right }}
+        />
+      </div>
+
+      {/* 3. Camera Viewfinder HUD Overlay with Subtle Mouse Parallax */}
       <motion.div
         style={{ x: hudX, y: hudY }}
         className="pointer-events-none absolute inset-6 md:inset-12 z-20 flex flex-col justify-between"
       >
         {/* Four Viewfinder Corner Brackets */}
-        <div className="absolute top-0 left-0 w-6 h-6 border-t-[1.5px] border-l-[1.5px] border-white/40" />
-        <div className="absolute top-0 right-0 w-6 h-6 border-t-[1.5px] border-r-[1.5px] border-white/40" />
-        <div className="absolute bottom-0 left-0 w-6 h-6 border-b-[1.5px] border-l-[1.5px] border-white/40" />
-        <div className="absolute bottom-0 right-0 w-6 h-6 border-b-[1.5px] border-r-[1.5px] border-white/40" />
+        <div className="absolute top-0 left-0 w-6 h-6 border-t-[1.5px] border-l-[1.5px] border-white/50" />
+        <div className="absolute top-0 right-0 w-6 h-6 border-t-[1.5px] border-r-[1.5px] border-white/50" />
+        <div className="absolute bottom-0 left-0 w-6 h-6 border-b-[1.5px] border-l-[1.5px] border-white/50" />
+        <div className="absolute bottom-0 right-0 w-6 h-6 border-b-[1.5px] border-r-[1.5px] border-white/50" />
 
         {/* Top HUD Row: REC + Running Timecode & Camera Specs */}
-        <div className="flex items-center justify-between font-mono text-[10px] md:text-xs text-white/70 tracking-widest uppercase pt-2 px-3">
+        <div className="flex items-center justify-between font-mono text-[10px] md:text-xs text-white/80 tracking-widest uppercase pt-2 px-3">
           {/* Top-Left: REC Blinking Dot + Timecode */}
           <div className="flex items-center gap-2.5">
             <span className="w-2.5 h-2.5 rounded-full bg-rec animate-pulse-rec shadow-[0_0_8px_rgba(229,72,77,0.9)]" />
             <span className="text-primary font-semibold">REC</span>
             <span className="text-white/40">|</span>
-            <span className="text-tungsten tabular-nums font-mono">{formatTimecode(elapsedFrames)}</span>
+            <span className="text-[#B8860B] tabular-nums font-mono font-bold">{formatTimecode(elapsedFrames)}</span>
           </div>
 
-          {/* Top-Right: Mono Optical Specs */}
-          <div className="hidden sm:flex items-center gap-2 md:gap-3 text-white/60">
-            <span>4K</span>
+          {/* Top-Right: Mono Optical Specs (Interactive Controls) */}
+          <div className="hidden sm:flex items-center gap-2 md:gap-3 text-white/70 pointer-events-auto">
+            <span>ARRI LF 4.5K</span>
             <span>·</span>
             <span>24FPS</span>
             <span>·</span>
             <span>180°</span>
             <span>·</span>
-            <span>ISO 800</span>
+            <button
+              onClick={() => setFocalLength((prev) => prev === "35mm" ? "50mm" : prev === "50mm" ? "85mm" : "35mm")}
+              className="px-2 py-0.5 border border-white/20 bg-black/40 hover:border-[#B8860B] text-[#B8860B] rounded transition-colors"
+            >
+              {focalLength} ANA
+            </button>
             <span>·</span>
-            <span className="text-tungsten">f/2.8</span>
+            <button
+              onClick={() => setTStop((prev) => prev === "T1.5" ? "T2.8" : prev === "T2.8" ? "T5.6" : "T1.5")}
+              className="px-2 py-0.5 border border-white/20 bg-black/40 hover:border-[#B8860B] text-[#B8860B] rounded transition-colors"
+            >
+              {tStop}
+            </button>
           </div>
         </div>
 
         {/* Centre Viewfinder Crosshair */}
         <motion.div
           style={{ x: crosshairX, y: crosshairY }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 flex items-center justify-center opacity-30"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 flex items-center justify-center opacity-40"
         >
-          <div className="w-8 h-[1px] bg-white/60 absolute" />
-          <div className="h-8 w-[1px] bg-white/60 absolute" />
-          <div className="w-16 h-16 border border-white/20 rounded-full" />
+          <div className="w-10 h-[1px] bg-white/70 absolute" />
+          <div className="h-10 w-[1px] bg-white/70 absolute" />
+          <div className="w-20 h-20 border border-white/25 rounded-full" />
         </motion.div>
 
-        {/* Bottom HUD Row: Scroll Indicator & Battery / Reel info */}
-        <div className="flex items-end justify-between font-mono text-[10px] md:text-xs text-white/70 tracking-widest uppercase pb-2 px-3">
-          {/* Bottom-Left: Scroll indicator */}
-          <div className="flex items-center gap-3">
-            <div className="w-[1px] h-8 bg-gradient-to-b from-tungsten to-transparent animate-pulse" />
-            <span className="text-white/60">Scroll</span>
+        {/* Bottom HUD Row: Aspect Ratio Selector & Battery / Reel info */}
+        <div className="flex items-end justify-between font-mono text-[10px] md:text-xs text-white/80 tracking-widest uppercase pb-2 px-3">
+          {/* Bottom-Left: Interactive Framing Switcher */}
+          <div className="flex items-center gap-2 pointer-events-auto">
+            <span className="text-white/50 mr-1 hidden sm:inline">FRAME:</span>
+            {ASPECT_MODES.map((mode) => (
+              <button
+                key={mode.id}
+                onClick={() => setAspectMode(mode.id)}
+                className={`px-2.5 py-1 rounded transition-all duration-300 font-bold ${
+                  aspectMode === mode.id
+                    ? "bg-[#B8860B] text-black shadow-[0_0_12px_rgba(184,134,11,0.5)]"
+                    : "bg-black/60 border border-white/10 text-white/70 hover:text-white hover:border-white/30"
+                }`}
+                title={`Switch to ${mode.name}`}
+              >
+                {mode.label}
+              </button>
+            ))}
           </div>
 
           {/* Bottom-Right: Battery Icon & Reel metadata */}
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5 text-white/60">
+            <div className="flex items-center gap-1.5 text-white/70">
               <Battery className="w-4 h-4 text-status-green" />
               <span>98%</span>
             </div>
             <span>·</span>
-            <span className="text-tungsten font-medium">Reel 2026</span>
+            <span className="text-[#B8860B] font-medium">REEL 2026 // MASTER</span>
           </div>
         </div>
       </motion.div>
 
-      {/* 3. Hero Central Content */}
+      {/* 4. Hero Central Content */}
       <motion.div
         style={{ opacity: contentOpacity, y: contentY }}
         className="relative z-30 max-w-5xl mx-auto px-6 text-center flex flex-col items-center justify-center space-y-6 md:space-y-8"
@@ -187,12 +275,12 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="inline-flex items-center gap-3 px-5 py-2 border border-white/10 bg-[#0A0A0C]/70 backdrop-blur-xl rounded-full font-outfit text-[10px] md:text-xs uppercase tracking-[0.4em] text-[#B8860B] font-bold shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
+          className="inline-flex items-center gap-3 px-5 py-2 border border-white/10 bg-[#0A0A0C]/80 backdrop-blur-xl rounded-full font-outfit text-[10px] md:text-xs uppercase tracking-[0.4em] text-[#B8860B] font-bold shadow-[0_4px_24px_rgba(0,0,0,0.6)]"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#B8860B] animate-pulse" />
-          <span>Cinematic Visual Studio</span>
+          <span>Cinematographer & Colorist</span>
           <span className="text-white/20">|</span>
-          <span className="text-white/80 font-medium">Est. 2016 — Mumbai / London</span>
+          <span className="text-white/80 font-medium">Mumbai · London · Worldwide</span>
         </motion.div>
 
         {/* Giant Name with Italic Gold Word */}
@@ -210,9 +298,9 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, delay: 0.35 }}
-          className="font-outfit text-sm sm:text-base md:text-lg text-white/70 font-light max-w-2xl text-balance leading-relaxed tracking-wide"
+          className="font-outfit text-sm sm:text-base md:text-lg text-white/75 font-light max-w-2xl text-balance leading-relaxed tracking-wide"
         >
-          Curating silent narratives, tactile medium-format stills, and large-format cinematic direction under one roof.
+          Sculpting cinematic chiaroscuro, large-format anamorphic narratives, and tactile medium-format stills for global brands and visionary directors.
         </motion.p>
 
         {/* Action Buttons */}
@@ -226,12 +314,12 @@ export default function HeroSection() {
           <button
             onClick={() => setShowreelOpen(true)}
             data-cursor="play"
-            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#B8860B] hover:bg-[#D4AF37] text-[#0A0A0C] font-outfit text-xs uppercase tracking-[0.3em] font-bold transition-all duration-300 shadow-[0_0_30px_rgba(184,134,11,0.4)] rounded-full overflow-hidden"
+            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#B8860B] hover:bg-[#D4AF37] text-[#0A0A0C] font-outfit text-xs uppercase tracking-[0.3em] font-bold transition-all duration-300 shadow-[0_0_30px_rgba(184,134,11,0.45)] rounded-full overflow-hidden"
           >
             <span className="p-1.5 bg-[#0A0A0C] text-[#B8860B] rounded-full group-hover:scale-110 transition-transform">
               <Play className="w-3 h-3 fill-current" />
             </span>
-            <span>Watch Showreel</span>
+            <span>Watch 4K Showreel</span>
           </button>
 
           {/* View Work CTA */}
@@ -241,13 +329,13 @@ export default function HeroSection() {
             data-cursor="hover"
             className="inline-flex items-center gap-2.5 px-8 py-4 border border-white/20 bg-white/5 hover:border-[#B8860B] text-white hover:text-[#B8860B] font-outfit text-xs uppercase tracking-[0.3em] font-bold backdrop-blur-xl transition-all duration-300 rounded-full"
           >
-            <span>Explore Work</span>
+            <span>Explore Archive</span>
             <ArrowDown className="w-3.5 h-3.5" />
           </a>
         </motion.div>
       </motion.div>
 
-      {/* 4. Fullscreen Showreel Modal Player with Audio & Focus Trap */}
+      {/* 5. Fullscreen Showreel Modal Player with Audio & Broadcast Scopes */}
       <AnimatePresence>
         {showreelOpen && (
           <motion.div
@@ -260,11 +348,11 @@ export default function HeroSection() {
             {/* Modal Header Bar */}
             <div className="flex items-center justify-between border-b border-hairline pb-4">
               <div className="flex items-center gap-3 font-mono text-xs text-primary">
-                <span className="w-2 h-2 rounded-full bg-rec animate-pulse-rec" />
+                <span className="w-2.5 h-2.5 rounded-full bg-rec animate-pulse-rec" />
                 <span className="uppercase font-semibold tracking-widest">
-                  Rahul Singh STUDIO — 4K SHOWREEL MASTER
+                  Rahul Singh STUDIO — 4K DIRECTOR MASTER REEL
                 </span>
-                <span className="text-muted hidden sm:inline">[AUDIO CONFORMED · 24FPS]</span>
+                <span className="text-muted hidden sm:inline">[ACES 1.3 · 2.39:1 SCOPE · 24FPS]</span>
               </div>
 
               <div className="flex items-center gap-4">
@@ -313,7 +401,7 @@ export default function HeroSection() {
             {/* Modal Bottom Metadata */}
             <div className="flex items-center justify-between font-mono text-[11px] text-muted border-t border-hairline pt-4">
               <span>COLOR: ACEScc 1.3 / MASTER PRORES 4444 XQ</span>
-              <span className="text-tungsten">DIRECTOR OF PHOTOGRAPHY & EDIT: Rahul Singh</span>
+              <span className="text-tungsten">DIRECTOR OF PHOTOGRAPHY & LEAD COLORIST: Rahul Singh</span>
             </div>
           </motion.div>
         )}
