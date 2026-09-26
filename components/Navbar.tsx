@@ -3,22 +3,18 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowUpRight, Film, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { siteConfig } from "@/data/site";
-import AmbientSoundPlayer from "@/components/sound/AmbientSoundPlayer";
 
 interface NavLinkItem {
   name: string;
   href: string;
-  labelNumber: string;
 }
 
 const NAV_LINKS: NavLinkItem[] = [
-  { name: "Reels", href: "#work", labelNumber: "01" },
-  { name: "Disciplines", href: "#disciplines", labelNumber: "02" },
-  { name: "Look Lab", href: "#color-lab", labelNumber: "03" },
-  { name: "Manifesto", href: "#about", labelNumber: "04" },
-  { name: "Inquire", href: "#contact", labelNumber: "05" },
+  { name: "Work", href: "#work" },
+  { name: "About", href: "#about" },
+  { name: "Recognition", href: "#proof" },
 ];
 
 export default function Navbar() {
@@ -64,136 +60,104 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-3 md:py-5 px-4 md:px-8 pointer-events-none">
-        <div className="max-w-[1440px] w-full mx-auto flex items-center justify-between pointer-events-auto">
-          {/* Left: Logo Wordmark & Monogram */}
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-4 md:py-6 px-6 sm:px-10 md:px-14 lg:px-20 ${
+          isScrolled
+            ? "bg-[#070708]/80 backdrop-blur-md border-b border-white/[0.06]"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="max-w-[1440px] w-full mx-auto flex items-center justify-between">
+          {/* Left: Serif Logo Wordmark */}
           <Link
             href="/"
-            className="group flex items-center gap-3 text-primary text-sm md:text-base font-medium tracking-tight bg-[#0A0A0C]/85 backdrop-blur-xl border border-white/10 px-4 py-2 rounded-full hover:border-[#B8860B]/60 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
-            data-cursor="hover"
+            className="font-serif text-xl sm:text-2xl text-white tracking-normal hover:text-[#C89B53] transition-colors"
           >
-            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-tr from-[#B8860B] to-[#F3B353] text-[#0A0A0C] font-bold text-xs shadow-[0_0_12px_rgba(184,134,11,0.5)]">
-              R
-            </span>
-            <span className="font-syncopate uppercase text-[11px] md:text-xs font-bold tracking-[0.2em] text-white">
-              Rahul Singh
-            </span>
-            <span className="text-[9px] font-outfit uppercase tracking-[0.3em] text-[#B8860B] hidden sm:inline-block border-l border-white/10 pl-2 font-semibold">
-              Cinema Studio
-            </span>
+            {siteConfig.name}
           </Link>
 
-          {/* Centre: Nav links (Desktop floating glass pill) */}
-          <nav className="hidden md:flex items-center gap-1 border border-white/10 bg-[#0A0A0C]/85 p-1.5 rounded-full backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.7)]">
+          {/* Centre: Nav links matching reference */}
+          <nav className="hidden md:flex items-center gap-8 lg:gap-10">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={(e) => scrollToSection(e, link.href)}
-                className="text-[10px] font-outfit uppercase tracking-[0.3em] text-white/70 hover:text-white px-4 py-2 rounded-full hover:bg-white/5 transition-all duration-300 flex items-center gap-1.5 group font-semibold"
-                data-cursor="hover"
+                className="text-xs lg:text-[13px] font-sans text-white/70 hover:text-white transition-colors tracking-wide"
               >
-                <span className="text-[8px] font-syncopate text-[#B8860B] opacity-70 group-hover:opacity-100 transition-opacity">
-                  {link.labelNumber}
-                </span>
-                <span>{link.name}</span>
+                {link.name}
               </a>
             ))}
           </nav>
 
-          {/* Right: Soundscape Player, Availability & CTA */}
-          <div className="flex items-center gap-2.5 sm:gap-3">
-            {/* Ambient Soundscape Player */}
-            <AmbientSoundPlayer />
-
-            {/* Pulsing Green Available Badge */}
-            <div className="hidden xl:flex items-center gap-2 px-3.5 py-2 rounded-full border border-white/10 bg-[#0A0A0C]/85 backdrop-blur-xl font-outfit text-[10px] uppercase tracking-[0.25em] text-white/80 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
-              <span className="w-2 h-2 rounded-full bg-[#30A46C] animate-pulse shadow-[0_0_8px_#30A46C]" />
-              <span className="text-[#30A46C] font-bold">Open for Q3/Q4</span>
-            </div>
-
-            {/* Inquire Button */}
+          {/* Right: Minimal Inquire Button */}
+          <div className="flex items-center gap-4">
             <a
               href="#contact"
               onClick={(e) => scrollToSection(e, "#contact")}
-              className="relative group overflow-hidden px-5 py-2 rounded-full border border-[#B8860B]/50 bg-gradient-to-r from-[#B8860B]/20 to-transparent backdrop-blur-xl font-outfit text-[10px] uppercase tracking-[0.3em] text-[#F5F5F5] font-bold hover:border-[#B8860B] transition-all duration-300 shadow-[0_0_20px_rgba(184,134,11,0.25)]"
-              data-cursor="hover"
+              className="hidden sm:inline-flex items-center justify-center px-5 py-1.5 rounded-[4px] border border-white/30 hover:border-white text-white text-xs lg:text-[13px] font-sans font-normal tracking-wide transition-all duration-300"
             >
-              <span className="relative z-10 flex items-center gap-2">
-                <span>Inquire</span>
-                <ArrowUpRight className="w-3 h-3 text-[#B8860B] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </span>
-              <div className="absolute inset-0 bg-[#B8860B] transition-transform duration-500 ease-out -translate-y-full group-hover:translate-y-0" />
+              Inquire
             </a>
 
-            {/* Mobile Menu Trigger */}
+            {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-[#0A0A0C]/90 text-white p-2 backdrop-blur-xl"
+              className="md:hidden flex items-center justify-center w-9 h-9 rounded-[4px] border border-white/20 text-white hover:border-white transition-colors"
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Fullscreen Menu Overlay */}
+      {/* Mobile Fullscreen Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-background/98 backdrop-blur-2xl flex flex-col justify-between p-6 pt-28 md:hidden"
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-40 bg-[#070708]/98 backdrop-blur-2xl flex flex-col justify-between p-8 pt-28 md:hidden"
           >
-            {/* Navigation links with staggered animation */}
             <div className="flex flex-col space-y-6 my-auto">
-              <div className="font-mono text-xs tracking-widest text-[#B8860B] uppercase mb-2">
-                {"// PRODUCTION DIRECTORY"}
-              </div>
               {NAV_LINKS.map((link, idx) => (
                 <motion.div
                   key={link.name}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -15 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.05 * idx, duration: 0.3 }}
+                  transition={{ delay: 0.05 * idx, duration: 0.25 }}
                 >
                   <a
                     href={link.href}
                     onClick={(e) => scrollToSection(e, link.href)}
-                    className="flex items-baseline justify-between py-2 border-b border-hairline text-2xl font-serif tracking-tight text-primary hover:text-tungsten transition-colors"
+                    className="text-2xl font-serif text-white hover:text-[#C89B53] transition-colors"
                   >
-                    <span>{link.name}</span>
-                    <span className="font-mono text-xs text-muted tracking-widest">
-                      [ {link.labelNumber} ]
-                    </span>
+                    {link.name}
                   </a>
                 </motion.div>
               ))}
+              <motion.div
+                initial={{ opacity: 0, x: -15 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2, duration: 0.25 }}
+                className="pt-4"
+              >
+                <a
+                  href="#contact"
+                  onClick={(e) => scrollToSection(e, "#contact")}
+                  className="inline-block px-6 py-2.5 rounded-[4px] border border-white/30 text-white text-sm font-sans tracking-wide"
+                >
+                  Inquire
+                </a>
+              </motion.div>
             </div>
 
-            {/* Bottom metadata & actions */}
-            <div className="space-y-4 pt-6 border-t border-hairline">
-              <div className="flex items-center gap-2 font-mono text-xs text-muted">
-                <span className="status-indicator" />
-                <span>{siteConfig.availability.label}</span>
-              </div>
-
-              <a
-                href="#contact"
-                onClick={(e) => scrollToSection(e, "#contact")}
-                className="w-full flex items-center justify-center gap-2 bg-[#B8860B] text-black text-sm font-mono uppercase tracking-wider py-3.5 font-bold"
-              >
-                <span>Initiate Commission</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
-
-              <div className="flex items-center justify-between text-[11px] font-mono text-muted pt-2">
-                <span>{siteConfig.location}</span>
-                <span>{siteConfig.contact.email}</span>
-              </div>
+            <div className="text-xs font-sans text-white/50 border-t border-white/10 pt-4 flex justify-between">
+              <span>{siteConfig.location}</span>
+              <span>{siteConfig.contact.email}</span>
             </div>
           </motion.div>
         )}
