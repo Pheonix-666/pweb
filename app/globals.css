@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: #0a0a0a;
-  --surface: #111113;
-  --elevated: #17171a;
+  --background: #070708;
+  --surface: #101013;
+  --elevated: #151519;
   --border: rgba(255, 255, 255, 0.08);
   --text-primary: #f2f0eb;
   --text-muted: #8a8a90;
-  --accent-tungsten: #e8a33d;
+  --accent-tungsten: #c89b53;
   --rec-red: #e5484d;
   --status-green: #30a46c;
 }
@@ -28,6 +28,7 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  touch-action: pan-y;
 }
 
 /* Lenis Recommended CSS */
@@ -54,8 +55,8 @@ html.lenis body {
 
 /* Selection Highlight */
 ::selection {
-  background: #e8a33d;
-  color: #0a0a0a;
+  background: #c89b53;
+  color: #070708;
 }
 
 /* Minimalist Scrollbar */
@@ -65,7 +66,7 @@ html.lenis body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #070708;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -74,7 +75,7 @@ html.lenis body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(232, 163, 61, 0.6);
+  background: rgba(200, 155, 83, 0.6);
 }
 
 /* Hairline utility classes */
@@ -96,6 +97,62 @@ html.lenis body {
 
 .border-hairline-r {
   border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Liquid Glass & Glassmorphism Design System */
+.liquid-glass {
+  background: rgba(14, 14, 18, 0.45);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 16px 40px -8px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.liquid-glass-card {
+  background: rgba(14, 14, 18, 0.55);
+  backdrop-filter: blur(20px) saturate(145%);
+  -webkit-backdrop-filter: blur(20px) saturate(145%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 20px 48px -10px rgba(0, 0, 0, 0.7),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.4);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass-card:hover {
+  border-color: rgba(200, 155, 83, 0.35);
+  box-shadow: 
+    0 24px 60px -10px rgba(0, 0, 0, 0.8),
+    0 0 24px 0 rgba(200, 155, 83, 0.12),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.liquid-glass-nav {
+  background: rgba(7, 7, 8, 0.72);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 
+    0 10px 30px -10px rgba(0, 0, 0, 0.7),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.04);
+}
+
+.liquid-glass-input {
+  background: rgba(20, 20, 26, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.liquid-glass-input:focus {
+  border-color: rgba(200, 155, 83, 0.7);
+  box-shadow: 
+    0 0 16px rgba(200, 155, 83, 0.15),
+    inset 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 /* Typography clamped helpers */
@@ -128,8 +185,11 @@ html.lenis body {
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   padding: 0.25rem 0.6rem;
-  background: rgba(17, 17, 19, 0.85);
+  background: rgba(17, 17, 21, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
   color: var(--text-primary);
   display: inline-flex;
   align-items: center;
@@ -154,4 +214,29 @@ html.lenis body {
   background-color: var(--status-green);
   box-shadow: 0 0 8px rgba(48, 164, 108, 0.8);
   animation: statusGlow 2s infinite;
+}
+
+/* ─── PERFORMANCE & CRISPNESS OPTIMIZATIONS ──────────────────────────── */
+
+/* Keep images and text crisp during GPU translations and scrolling */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* GPU composite layer promotion for animated elements */
+.will-change-transform {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Reduce motion for users who prefer it — completely removes all scroll animations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

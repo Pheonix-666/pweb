@@ -23,7 +23,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 40) {
+      if (window.scrollY > 30) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -61,22 +61,26 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-4 md:py-6 px-6 sm:px-10 md:px-14 lg:px-20 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-3.5 sm:py-5 px-5 sm:px-8 md:px-14 lg:px-20 ${
           isScrolled
-            ? "bg-[#070708]/80 backdrop-blur-md border-b border-white/[0.06]"
+            ? "liquid-glass-nav"
             : "bg-transparent"
         }`}
       >
         <div className="max-w-[1440px] w-full mx-auto flex items-center justify-between">
-          {/* Left: Serif Logo Wordmark */}
+          {/* Left: Starloop Octagonal Logo Wordmark */}
           <Link
             href="/"
-            className="font-serif text-xl sm:text-2xl text-white tracking-normal hover:text-[#C89B53] transition-colors"
+            className="flex items-center gap-2.5 font-orbitron font-bold text-base sm:text-lg text-white tracking-wider uppercase hover:text-[#C89B53] transition-colors"
           >
-            {siteConfig.name}
+            {/* Octagonal Logo Badge */}
+            <svg width="18" height="18" viewBox="0 0 24 24" className="fill-[#C89B53] flex-shrink-0">
+              <polygon points="7,2 17,2 22,7 22,17 17,22 7,22 2,17 2,7" />
+            </svg>
+            <span>STARLOOP</span>
           </Link>
 
-          {/* Centre: Nav links matching reference */}
+          {/* Centre: Nav links */}
           <nav className="hidden md:flex items-center gap-8 lg:gap-10">
             {NAV_LINKS.map((link) => (
               <a
@@ -91,11 +95,11 @@ export default function Navbar() {
           </nav>
 
           {/* Right: Minimal Inquire Button */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             <a
               href="#contact"
               onClick={(e) => scrollToSection(e, "#contact")}
-              className="hidden sm:inline-flex items-center justify-center px-5 py-1.5 rounded-[4px] border border-white/30 hover:border-white text-white text-xs lg:text-[13px] font-sans font-normal tracking-wide transition-all duration-300"
+              className="hidden sm:inline-flex items-center justify-center px-5 py-1.5 rounded-[4px] border border-white/25 hover:border-[#C89B53] text-white text-xs lg:text-[13px] font-orbitron uppercase font-medium tracking-wider transition-all duration-300 bg-white/[0.03] hover:bg-white/[0.08] backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]"
             >
               Inquire
             </a>
@@ -103,7 +107,7 @@ export default function Navbar() {
             {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden flex items-center justify-center w-9 h-9 rounded-[4px] border border-white/20 text-white hover:border-white transition-colors"
+              className="md:hidden flex items-center justify-center w-9 h-9 rounded-[4px] border border-white/20 text-white hover:border-white transition-colors bg-white/[0.03] backdrop-blur-md"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -120,7 +124,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 bg-[#070708]/98 backdrop-blur-2xl flex flex-col justify-between p-8 pt-28 md:hidden"
+            className="fixed inset-0 z-40 bg-[#070708]/95 backdrop-blur-2xl flex flex-col justify-between p-8 pt-28 md:hidden"
           >
             <div className="flex flex-col space-y-6 my-auto">
               {NAV_LINKS.map((link, idx) => (
@@ -133,7 +137,7 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     onClick={(e) => scrollToSection(e, link.href)}
-                    className="text-2xl font-serif text-white hover:text-[#C89B53] transition-colors"
+                    className="text-2xl font-orbitron uppercase text-white hover:text-[#C89B53] transition-colors"
                   >
                     {link.name}
                   </a>
@@ -148,7 +152,7 @@ export default function Navbar() {
                 <a
                   href="#contact"
                   onClick={(e) => scrollToSection(e, "#contact")}
-                  className="inline-block px-6 py-2.5 rounded-[4px] border border-white/30 text-white text-sm font-sans tracking-wide"
+                  className="inline-block px-6 py-2.5 rounded-[4px] border border-white/30 text-white text-xs font-orbitron uppercase tracking-wider bg-white/[0.04] backdrop-blur-md"
                 >
                   Inquire
                 </a>

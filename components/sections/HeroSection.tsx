@@ -1,182 +1,413 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isVideoReady, setIsVideoReady] = useState(false);
 
-  // Measure scroll progress through the hero container
+  // Scroll tracking across the pinned 320vh hero stage
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // Content transitions on scroll: fades out and moves gently upward
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
-  const contentY = useTransform(scrollYProgress, [0, 0.35], [0, -35]);
-  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
-  const videoBrightness = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.05, 0.9]);
-  const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  // ---------------------------------------------------------------
+  // All transforms use scrollYProgress directly — no spring.
+  // Springs on scroll progress cause vibration/oscillation.
+  // ---------------------------------------------------------------
 
-  // Frame-by-frame scroll-driven video playback
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+  // SCREEN 1 (Left-Center): fly forward and exit left
+  const screen1Scale = useTransform(scrollYProgress, [0, 0.15, 0.38, 0.55], [0.88, 1.04, 1.7, 2.3]);
+  const screen1Opacity = useTransform(scrollYProgress, [0, 0.12, 0.32, 0.48], [0.9, 1, 0.6, 0]);
+  const screen1X = useTransform(scrollYProgress, [0, 0.15, 0.45], [0, -18, -130]);
+  const screen1Y = useTransform(scrollYProgress, [0, 0.15, 0.45], [0, -8, -70]);
 
-    let animationFrameId: number;
-    let targetTime = 0;
-    let currentTime = 0;
+  // SCREEN 2 (Right): emerge from deep background
+  const screen2Scale = useTransform(scrollYProgress, [0.15, 0.38, 0.58, 0.8, 0.92], [0.2, 0.62, 1.06, 1.75, 2.4]);
+  const screen2Opacity = useTransform(scrollYProgress, [0.15, 0.32, 0.55, 0.72, 0.88], [0, 0.65, 1, 0.7, 0]);
+  const screen2X = useTransform(scrollYProgress, [0.15, 0.38, 0.58, 0.86], [150, 75, 0, 85]);
+  const screen2Y = useTransform(scrollYProgress, [0.15, 0.38, 0.58, 0.86], [70, 35, 0, -55]);
 
-    const handleLoadedMetadata = () => {
-      setIsVideoReady(true);
-      video.pause();
-    };
+  // SCREEN 3 (Left/Bottom): surges to front
+  const screen3Scale = useTransform(scrollYProgress, [0.45, 0.65, 0.85, 1], [0.2, 0.62, 1.1, 1.4]);
+  const screen3Opacity = useTransform(scrollYProgress, [0.45, 0.62, 0.82, 1], [0, 0.7, 1, 1]);
+  const screen3X = useTransform(scrollYProgress, [0.45, 0.65, 0.85, 1], [-145, -72, 0, 18]);
+  const screen3Y = useTransform(scrollYProgress, [0.45, 0.65, 0.85, 1], [130, 65, 0, -18]);
 
-    video.addEventListener("loadedmetadata", handleLoadedMetadata);
+  // Micro tiles — raw scroll, no physics
+  const tile1Opacity = useTransform(scrollYProgress, [0, 0.28, 0.6, 0.8], [0.3, 0.85, 0.4, 0]);
+  const tile1X = useTransform(scrollYProgress, [0, 1], [40, -110]);
+  const tile1Y = useTransform(scrollYProgress, [0, 1], [20, 75]);
+  const tile1Scale = useTransform(scrollYProgress, [0, 0.4, 0.8], [0.55, 1.05, 1.8]);
 
-    if (video.readyState >= 1) {
-      setIsVideoReady(true);
-      video.pause();
-    }
+  const tile2Opacity = useTransform(scrollYProgress, [0.2, 0.45, 0.75, 0.95], [0, 0.8, 0.55, 0]);
+  const tile2X = useTransform(scrollYProgress, [0, 1], [-28, 100]);
+  const tile2Y = useTransform(scrollYProgress, [0, 1], [38, -75]);
+  const tile2Scale = useTransform(scrollYProgress, [0.2, 0.6, 0.95], [0.32, 0.95, 1.6]);
 
-    // Unsubscribe helper for framer-motion scroll progress
-    const unsubscribeScroll = scrollYProgress.on("change", (progress) => {
-      if (video.duration && !isNaN(video.duration)) {
-        targetTime = progress * video.duration;
-      }
-    });
+  const tile3Opacity = useTransform(scrollYProgress, [0.35, 0.6, 0.9, 1], [0, 0.75, 0.65, 0.25]);
+  const tile3Y = useTransform(scrollYProgress, [0, 1], [95, -85]);
+  const tile3Scale = useTransform(scrollYProgress, [0.35, 0.75, 1], [0.28, 0.88, 1.35]);
 
-    // Smooth lerp loop for fluid seeking without stutter
-    const renderLoop = () => {
-      if (video.duration && !isNaN(video.duration)) {
-        // Linear interpolation for butter-smooth frame scrubbing
-        const diff = targetTime - currentTime;
-        if (Math.abs(diff) > 0.001) {
-          currentTime += diff * 0.18;
-          if (isFinite(currentTime) && currentTime >= 0 && currentTime <= video.duration) {
-            video.currentTime = currentTime;
-          }
-        }
-      }
-      animationFrameId = requestAnimationFrame(renderLoop);
-    };
+  // Background typography — raw scroll
+  const typoScale = useTransform(scrollYProgress, [0, 1], [0.96, 1.16]);
+  const typoOpacity = useTransform(scrollYProgress, [0, 0.8, 1], [0.9, 0.65, 0.45]);
+  const typoY = useTransform(scrollYProgress, [0, 1], [0, -28]);
 
-    renderLoop();
-
-    return () => {
-      video.removeEventListener("loadedmetadata", handleLoadedMetadata);
-      unsubscribeScroll();
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, [scrollYProgress]);
+  // Phase label fades — safe to leave on raw scroll too
+  const phaseTextOpacity1 = useTransform(scrollYProgress, [0, 0.28, 0.42], [1, 1, 0]);
+  const phaseTextOpacity2 = useTransform(scrollYProgress, [0.35, 0.52, 0.72], [0, 1, 0]);
+  const phaseTextOpacity3 = useTransform(scrollYProgress, [0.68, 0.84, 1], [0, 1, 1]);
 
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[220vh] bg-[#070708] select-none"
+      className="relative w-full h-[320vh] md:h-[360vh] bg-[#000000] text-[#FFFFFF] select-none"
     >
-      {/* Sticky Full-Viewport Viewfinder Stage */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between">
-        {/* 1. Cinematic Background Video (Driven directly by scroll position) */}
-        <motion.div
-          style={{ scale: videoScale }}
-          className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
-        >
-          {/* High-res Atmospheric Doorway Poster Fallback */}
-          <div
-            className={`absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000 ${
-              isVideoReady ? "opacity-30" : "opacity-100"
-            }`}
-            style={{
-              backgroundImage: `url('/images/hero-doorway.jpg')`,
-              backgroundPosition: "center right",
-            }}
-          />
+      {/* Pinned 100svh Viewport Stage with 3D Perspective */}
+      <div className="sticky top-0 h-[100svh] w-full overflow-hidden bg-[#000000] flex flex-col justify-between [perspective:1400px]">
+        {/* 1. TOP HEADER & TELEMETRY NAV */}
+        <div className="relative z-50 w-full max-w-[1560px] mx-auto px-5 sm:px-8 md:px-12 pt-6 sm:pt-8 flex items-center justify-between pointer-events-auto">
+          {/* Top Left: Logo mark */}
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center bg-white/[0.04] backdrop-blur-md">
+              <svg width="14" height="14" viewBox="0 0 24 24" className="fill-white">
+                <polygon points="7,2 17,2 22,7 22,17 17,22 7,22 2,17 2,7" />
+              </svg>
+            </div>
+          </div>
 
-          <video
-            ref={videoRef}
-            playsInline
-            muted
-            preload="auto"
-            disablePictureInPicture
-            poster="/images/hero-doorway.jpg"
-            className="w-full h-full object-cover object-[70%_center] md:object-center filter brightness-[0.78] contrast-[1.12]"
-          >
-            <source
-              src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-              type="video/mp4"
-            />
-          </video>
+          {/* Top Center: Pill Toggle (CREATE / EXPLORE) */}
+          <div className="flex items-center bg-[#141416]/90 border border-white/15 p-1 rounded-full backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.8)]">
+            <button className="px-5 sm:px-6 py-1.5 rounded-full bg-white text-black font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-transform active:scale-95">
+              CREATE
+            </button>
+            <button className="px-5 sm:px-6 py-1.5 rounded-full text-white/70 hover:text-white font-mono text-[10px] sm:text-xs uppercase tracking-wider transition-colors">
+              EXPLORE
+            </button>
+          </div>
 
-          {/* Master Cinematic Shading & Contrast Overlays */}
-          {/* Left-to-right shadow gradient ensuring razor-sharp typography readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#070708]/95 via-[#070708]/60 md:via-[#070708]/40 to-transparent w-full md:w-3/4" />
-          
-          {/* Bottom-to-top shadow gradient anchoring lower-left layout */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#070708] via-[#070708]/40 to-transparent" />
-          
-          {/* Top subtle vignette for navigation visibility */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#070708]/70 via-transparent to-transparent h-32" />
-          
-          {/* Deep perimeter vignette */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(7,7,8,0.75)_100%)]" />
-        </motion.div>
-
-        {/* 2. Top Spacer (Leaves room for transparent navbar) */}
-        <div className="relative z-10 w-full h-24" />
-
-        {/* 3. Hero Editorial Content (Positioned in Bottom-Left, strictly replicating reference) */}
-        <div className="relative z-20 w-full max-w-[1440px] mx-auto px-6 sm:px-10 md:px-14 lg:px-20 pb-12 sm:pb-14 md:pb-16 lg:pb-20">
-          <motion.div
-            style={{ opacity: contentOpacity, y: contentY }}
-            className="max-w-2xl text-left"
-          >
-            {/* Category / Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-[11px] sm:text-xs font-sans uppercase tracking-[0.25em] font-medium text-[#C89B53] mb-3 sm:mb-4"
-            >
-              DIRECTOR OF PHOTOGRAPHY
-            </motion.p>
-
-            {/* Large High-Contrast Serif Name */}
-            <motion.h1
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-[7.25rem] font-normal text-[#F5F2EB] tracking-tight leading-[0.92] mb-5 sm:mb-6"
-            >
-              Rahul Singh
-            </motion.h1>
-
-            {/* Poetic Narrative Tagline */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="font-sans text-sm sm:text-base md:text-[1.0625rem] text-[#D0CFCB]/85 font-light leading-relaxed max-w-lg md:max-w-xl text-balance"
-            >
-              Light is the first line of a scene. I shoot for the quiet moment
-              a frame holds its breath: practical sources, long lenses,
-              and the patience to wait for it to arrive.
-            </motion.p>
-          </motion.div>
+          {/* Top Right: Telemetry label */}
+          <div className="font-mono text-[9px] sm:text-[11px] tracking-[0.2em] uppercase text-white/60">
+            SMART CINEMA SUITE
+          </div>
         </div>
 
-        {/* 4. Subtle Bottom Scroll-Driven Frame Cue */}
-        <motion.div
-          style={{ opacity: scrollIndicatorOpacity }}
-          className="absolute bottom-6 right-6 sm:right-10 md:right-14 lg:right-20 z-20 hidden sm:flex items-center gap-3 font-mono text-[10px] tracking-[0.25em] uppercase text-white/40 pointer-events-none"
-        >
-          <span>Scroll to advance scene</span>
-          <span className="w-6 h-[1px] bg-white/20" />
-        </motion.div>
+        {/* 2. CENTER 3D CANVAS: GIANT OCTAGONAL TYPOGRAPHY & FLY-THROUGH SCREENS */}
+        <div className="relative flex-1 w-full max-w-[1560px] mx-auto px-4 sm:px-8 md:px-12 flex items-center justify-center [transform-style:preserve-3d]">
+          {/* (A) GIANT GEOMETRIC OCTAGONAL OUTLINE BACKGROUND GRAPHIC */}
+          <motion.div
+            style={{ scale: typoScale, opacity: typoOpacity, y: typoY }}
+            className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden"
+          >
+            <div className="relative flex items-center gap-2 sm:gap-6 md:gap-12">
+              {/* Octagon Glyph 1 (O / Starloop Octagon) */}
+              <svg
+                viewBox="0 0 260 260"
+                className="w-[28vw] sm:w-[24vw] md:w-[22vw] max-w-[340px] text-white fill-none stroke-white stroke-[20] sm:stroke-[26]"
+              >
+                {/* Outer Chamfered Octagon */}
+                <polygon points="76,12 184,12 248,76 248,184 184,248 76,248 12,184 12,76" />
+                {/* Inner Cutout */}
+                <polygon
+                  points="90,52 170,52 208,90 208,170 170,208 90,208 52,170 52,90"
+                  className="fill-[#000000] stroke-none"
+                />
+              </svg>
+
+              {/* Copyright circle badge */}
+              <div className="absolute left-[24vw] sm:left-[21vw] bottom-[18%] z-10 w-6 h-6 sm:w-8 sm:h-8 rounded-full border border-white/80 flex items-center justify-center font-mono text-[10px] sm:text-xs text-white">
+                ©
+              </div>
+
+              {/* Octagon Glyph 2 (U / V ribbon) */}
+              <svg
+                viewBox="0 0 260 260"
+                className="w-[28vw] sm:w-[24vw] md:w-[22vw] max-w-[340px] text-white fill-none stroke-white stroke-[20] sm:stroke-[26]"
+              >
+                <path
+                  d="M24,20 L24,180 L84,240 L176,240 L236,180 L236,20"
+                  strokeLinecap="square"
+                  strokeLinejoin="miter"
+                />
+              </svg>
+
+              {/* Octagon Glyph 3 (A / Arch Ribbon) */}
+              <svg
+                viewBox="0 0 260 260"
+                className="w-[28vw] sm:w-[24vw] md:w-[22vw] max-w-[340px] text-white fill-none stroke-white stroke-[20] sm:stroke-[26]"
+              >
+                <path
+                  d="M24,240 L24,100 L94,24 L166,24 L236,100 L236,240"
+                  strokeLinecap="square"
+                  strokeLinejoin="miter"
+                />
+              </svg>
+            </div>
+          </motion.div>
+
+          {/* (B) 3D FLYING WORK SCREENS (Emerging from Background, Growing in Opacity & Zooming Towards Camera) */}
+          <div className="relative w-full h-[65vh] sm:h-[72vh] md:h-[78vh] flex items-center justify-center [transform-style:preserve-3d]">
+            {/* SCREEN 1: Left-Center Work Screen (Image 1 in reference) */}
+            <motion.div
+              style={{
+                scale: screen1Scale,
+                x: screen1X,
+                y: screen1Y,
+                opacity: screen1Opacity,
+              }}
+              className="absolute left-[4%] sm:left-[10%] md:left-[14%] top-[10%] sm:top-[14%] w-[58vw] sm:w-[38vw] md:w-[26vw] max-w-[390px] aspect-[4/5] rounded-[1.8rem] sm:rounded-[2.4rem] md:rounded-[3rem] overflow-hidden bg-[#111114] border border-white/25 shadow-[0_30px_90px_rgba(0,0,0,0.95)] z-20 will-change-transform"
+            >
+              <div className="relative w-full h-full">
+                <Image
+                  src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=70&w=700&auto=format&fit=crop"
+                  alt="Sculptural Luxury Product Still"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 58vw, 26vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/15 pointer-events-none" />
+                <div className="absolute bottom-4 left-5 right-5 flex items-center justify-between font-mono text-[9px] sm:text-[10px] tracking-widest text-white/80">
+                  <span>DISCIPLINE // 01</span>
+                  <span className="text-[#C89B53]">100MP STILL</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* SCREEN 2: Right Work Screen (Emerges from deep background & flies forward - Image 2 in reference) */}
+            <motion.div
+              style={{
+                scale: screen2Scale,
+                x: screen2X,
+                y: screen2Y,
+                opacity: screen2Opacity,
+              }}
+              className="absolute right-[4%] sm:right-[8%] md:right-[12%] top-[14%] sm:top-[18%] w-[62vw] sm:w-[42vw] md:w-[30vw] max-w-[440px] aspect-[4/5] rounded-[1.8rem] sm:rounded-[2.4rem] md:rounded-[3rem] overflow-hidden bg-[#111114] border border-white/30 shadow-[0_40px_120px_rgba(0,0,0,0.98)] z-30 will-change-transform"
+            >
+              <div className="relative w-full h-full">
+                <Image
+                  src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=70&w=800&auto=format&fit=crop"
+                  alt="Haute Horlogerie Submerged Watch"
+                  fill
+                  sizes="(max-width: 768px) 62vw, 30vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/20 pointer-events-none" />
+
+                {/* Top overlay badge in card */}
+                <div className="absolute top-4 left-5 right-5 flex items-center justify-between">
+                  <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-white/90">
+                    Brand & Commercial
+                  </span>
+                  <a
+                    href="#contact"
+                    className="px-3 py-1 rounded-full bg-white text-black font-mono text-[8px] sm:text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-[0_0_15px_rgba(255,255,255,0.4)]"
+                  >
+                    <span>COMMISSION</span>
+                    <ArrowUpRight className="w-2.5 h-2.5" />
+                  </a>
+                </div>
+
+                {/* Bottom Card Caption */}
+                <div className="absolute bottom-5 left-5 right-5">
+                  <div className="font-orbitron text-xs sm:text-sm text-white font-bold mb-1">
+                    VAUCANSON // HOROLOGY
+                  </div>
+                  <div className="font-mono text-[9px] text-[#C89B53] tracking-widest">
+                    ARRI 4.5K OPEN GATE
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* SCREEN 3: Center-Left Screen (Emerges from deep background & surges to front - Image 3 in reference) */}
+            <motion.div
+              style={{
+                scale: screen3Scale,
+                x: screen3X,
+                y: screen3Y,
+                opacity: screen3Opacity,
+              }}
+              className="absolute left-[14%] sm:left-[20%] md:left-[24%] bottom-[4%] sm:bottom-[8%] w-[60vw] sm:w-[40vw] md:w-[28vw] max-w-[420px] aspect-[4/5] rounded-[1.8rem] sm:rounded-[2.4rem] md:rounded-[3rem] overflow-hidden bg-[#111114] border border-white/35 shadow-[0_50px_140px_rgba(0,0,0,1)] z-40 will-change-transform"
+            >
+              <div className="relative w-full h-full">
+                <Image
+                  src="https://images.unsplash.com/photo-1541643600914-78b084683601?q=70&w=800&auto=format&fit=crop"
+                  alt="Noir Cosmetic Lighting on Stone"
+                  fill
+                  sizes="(max-width: 768px) 60vw, 28vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
+
+                <div className="absolute bottom-5 left-5 right-5">
+                  <div className="font-orbitron text-xs sm:text-sm text-white font-bold mb-1">
+                    MAISON NOIR // ESSENCE
+                  </div>
+                  <div className="font-mono text-[9px] text-[#C89B53] tracking-widest">
+                    HASSELBLAD 100MP MEDIUM FORMAT
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* SECONDARY 3D FLOATING TILES (Emerging and flying forward through space) */}
+            {/* Tile 1: Amber Bottle */}
+            <motion.div
+              style={{ scale: tile1Scale, opacity: tile1Opacity, x: tile1X, y: tile1Y }}
+              className="absolute left-[36%] sm:left-[42%] top-[6%] sm:top-[10%] w-[20vw] sm:w-[14vw] md:w-[9vw] max-w-[130px] aspect-[4/5] rounded-xl sm:rounded-2xl overflow-hidden bg-[#151518] border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-10 pointer-events-none"
+            >
+              <Image
+                src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=600&auto=format&fit=crop"
+                alt="Amber Flacon Still"
+                fill
+                sizes="130px"
+                className="object-cover"
+              />
+            </motion.div>
+
+            {/* Tile 2: Hypercar Still */}
+            <motion.div
+              style={{ scale: tile2Scale, opacity: tile2Opacity, x: tile2X, y: tile2Y }}
+              className="absolute right-[20%] sm:right-[24%] top-[10%] sm:top-[14%] w-[22vw] sm:w-[16vw] md:w-[10vw] max-w-[150px] aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-[#151518] border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-10 pointer-events-none"
+            >
+              <Image
+                src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=600&auto=format&fit=crop"
+                alt="Hypercar Pursuit Still"
+                fill
+                sizes="150px"
+                className="object-cover"
+              />
+            </motion.div>
+
+            {/* Tile 3: Anamorphic Flare */}
+            <motion.div
+              style={{ scale: tile3Scale, opacity: tile3Opacity, y: tile3Y }}
+              className="absolute left-[22%] sm:left-[28%] bottom-[10%] sm:bottom-[14%] w-[22vw] sm:w-[15vw] md:w-[9vw] max-w-[140px] aspect-square rounded-xl sm:rounded-2xl overflow-hidden bg-[#151518] border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-10 pointer-events-none"
+            >
+              <Image
+                src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600&auto=format&fit=crop"
+                alt="Neon Anamorphic Flare"
+                fill
+                sizes="140px"
+                className="object-cover"
+              />
+            </motion.div>
+          </div>
+
+          {/* (C) EDITORIAL LABELS */}
+          {/* Left Text */}
+          <div className="absolute left-5 sm:left-8 md:left-12 top-[28%] z-20 pointer-events-none hidden md:block max-w-[130px]">
+            <div className="font-mono text-[10px] text-white/50 uppercase leading-snug">
+              Instant
+              <br />
+              Image
+              <br />
+              Creation
+            </div>
+          </div>
+
+          {/* Center-Top Text */}
+          <div className="absolute left-[46%] top-[24%] z-20 pointer-events-none hidden lg:block max-w-[120px]">
+            <div className="font-mono text-[10px] text-white/50 uppercase leading-snug">
+              Bring
+              <br />
+              product
+              <br />
+              concepts
+            </div>
+          </div>
+
+          {/* Right Text & CTA */}
+          <div className="absolute right-5 sm:right-8 md:right-12 top-[24%] z-30 flex flex-col items-start gap-3 pointer-events-auto">
+            <div className="font-mono text-[10px] sm:text-[11px] text-white/60 uppercase leading-tight">
+              Brand &
+              <br />
+              Marketing
+              <br />
+              Studio
+            </div>
+            <a
+              href="#contact"
+              className="px-4 sm:px-5 py-2 rounded-full bg-white text-black font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5 hover:bg-neutral-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+            >
+              <span>GET STARTED WITH STARLOOP</span>
+              <ArrowUpRight className="w-3 h-3" />
+            </a>
+          </div>
+        </div>
+
+        {/* 3. BOTTOM FOOTER BAR */}
+        <div className="relative z-50 w-full max-w-[1560px] mx-auto px-5 sm:px-8 md:px-12 pb-6 sm:pb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-5 pointer-events-auto">
+          {/* Bottom Left: Tag Pills */}
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="px-3 py-1 rounded-full border border-white/20 bg-white/[0.04] backdrop-blur-md flex items-center gap-1.5 font-mono text-[9px] sm:text-[10px] text-white uppercase tracking-wider">
+              <span className="w-2 h-2 rounded-full bg-[#C89B53]" />
+              <span>CREATIVITY</span>
+            </div>
+            <div className="px-3 py-1 rounded-full border border-white/15 bg-black/40 backdrop-blur-md font-mono text-[8px] sm:text-[9px] text-white/70 uppercase tracking-wider">
+              Large-Format Precision
+            </div>
+            <div className="px-3 py-1 rounded-full border border-white/15 bg-black/40 backdrop-blur-md font-mono text-[8px] sm:text-[9px] text-white/70 uppercase tracking-wider hidden sm:inline-block">
+              ACES 1.3
+            </div>
+            <div className="px-3 py-1 rounded-full border border-white/15 bg-black/40 backdrop-blur-md font-mono text-[8px] sm:text-[9px] text-white/70 uppercase tracking-wider hidden md:inline-block">
+              Endless Customization
+            </div>
+          </div>
+
+          {/* Bottom Right: Dynamic Scrolled Headline & Version Meta */}
+          <div className="text-left sm:text-right max-w-sm sm:max-w-md">
+            <div className="relative h-12 sm:h-14 overflow-hidden mb-1">
+              <motion.h2
+                style={{ opacity: phaseTextOpacity1 }}
+                className="absolute inset-0 font-sans text-sm sm:text-lg md:text-xl font-normal text-white leading-snug"
+              >
+                Instantly Elevate
+                <br />
+                <span className="font-semibold text-[#FFFFFF]">
+                  Stunning Cinematic Visuals
+                </span>
+              </motion.h2>
+
+              <motion.h2
+                style={{ opacity: phaseTextOpacity2 }}
+                className="absolute inset-0 font-sans text-sm sm:text-lg md:text-xl font-normal text-white leading-snug"
+              >
+                Sculpted Atmosphere
+                <br />
+                <span className="font-semibold text-[#C89B53]">
+                  Precision Camera & Optics
+                </span>
+              </motion.h2>
+
+              <motion.h2
+                style={{ opacity: phaseTextOpacity3 }}
+                className="absolute inset-0 font-sans text-sm sm:text-lg md:text-xl font-normal text-white leading-snug"
+              >
+                Visceral Final Masters
+                <br />
+                <span className="font-semibold text-[#FFFFFF]">
+                  For Global Screen Standards
+                </span>
+              </motion.h2>
+            </div>
+
+            <div className="flex items-center sm:justify-end gap-3 font-mono text-[8px] sm:text-[9px] text-white/40 uppercase tracking-widest">
+              <span>/</span>
+              <span>STARLOOP</span>
+              <span>The Future of Visual Craft</span>
+              <span className="text-white/20">|</span>
+              <span className="text-white/60">Scroll to explore</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
+

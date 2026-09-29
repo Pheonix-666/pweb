@@ -7,19 +7,22 @@ export default function Preloader() {
   const [loading, setLoading] = useState(true);
   const [frames, setFrames] = useState(0);
 
-  // Target: 2 seconds @ 24fps = 48 frames (00:00:02:00)
-  const TOTAL_FRAMES = 48;
+  // 1 second total: 24 frames @ ~42ms each = ~1008ms
+  const TOTAL_FRAMES = 24;
+  const INTERVAL_MS = 42;
 
   useEffect(() => {
-    // Check if user has already seen preloader in this browser session
-    const hasLoaded = sessionStorage.getItem("rahul_studio_preloader_seen");
+    // Only show once per session
+    const hasLoaded = sessionStorage.getItem("starloop_preloader_seen");
     if (hasLoaded === "true") {
       setLoading(false);
       return;
     }
 
+    // Lock scroll while preloader is visible
+    document.documentElement.style.overflow = "hidden";
+
     let currentFrame = 0;
-    const intervalTime = 38; // ~1.8 seconds total count time
 
     const timer = setInterval(() => {
       currentFrame += 1;
@@ -27,29 +30,31 @@ export default function Preloader() {
 
       if (currentFrame >= TOTAL_FRAMES) {
         clearInterval(timer);
+        // Short pause at 100% before sliding away
         setTimeout(() => {
           setLoading(false);
-          sessionStorage.setItem("rahul_studio_preloader_seen", "true");
-        }, 350);
+          document.documentElement.style.overflow = "";
+          sessionStorage.setItem("starloop_preloader_seen", "true");
+        }, 200);
       }
-    }, intervalTime);
+    }, INTERVAL_MS);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      document.documentElement.style.overflow = "";
+    };
   }, []);
 
-  // Format frame count to SMPTE timecode: 00:00:SS:FF
-  const formatTimecode = (totalFrames: number) => {
-    const fps = 24;
-    const seconds = Math.floor(totalFrames / fps);
-    const remainingFrames = totalFrames % fps;
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-
-    const pad = (n: number) => n.toString().padStart(2, "0");
-    return `00:${pad(minutes)}:${pad(remainingSeconds)}:${pad(remainingFrames)}`;
-  };
-
   const progressPercentage = Math.min(100, Math.round((frames / TOTAL_FRAMES) * 100));
+
+  // SMPTE timecode: 00:00:SS:FF
+  const formatTimecode = (f: number) => {
+    const fps = 24;
+    const seconds = Math.floor(f / fps);
+    const ff = f % fps;
+    const pad = (n: number) => n.toString().padStart(2, "0");
+    return `00:00:${pad(seconds)}:${pad(ff)}`;
+  };
 
   return (
     <AnimatePresence mode="wait">
@@ -60,61 +65,55 @@ export default function Preloader() {
           exit={{
             y: "-100%",
             transition: {
-              duration: 0.85,
+              duration: 0.7,
               ease: [0.76, 0, 0.24, 1],
             },
           }}
-          className="fixed inset-0 z-[99999] flex flex-col justify-between bg-[#0A0A0A] p-6 md:p-12 text-[#F2F0EB] select-none"
+          className="fixed inset-0 z-[99999] flex flex-col justify-between bg-[#070708] p-6 md:p-12 text-[#F2F0EB] select-none"
         >
-          {/* Top metadata row */}
-          <div className="flex items-center justify-between font-mono text-xs text-muted">
-            <div className="flex items-center gap-3">
-              <span className="inline-block w-2 h-2 rounded-full bg-rec animate-pulse-rec" />
-              <span className="tracking-widest uppercase">REC [PRORES RAW 8K]</span>
+          {/* Top row */}
+          <div className="flex items-center justify-between font-mono text-[10px] sm:text-xs text-white/40">
+            <div className="flex items-center gap-2.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E5484D] animate-pulse" />
+              <span className="tracking-[0.25em] uppercase">REC · PRORES RAW</span>
             </div>
-            <div className="hidden sm:flex items-center gap-6">
-              <span>FPS: 24.00</span>
-              <span>SHUTTER: 1/48</span>
-              <span>EI: 800</span>
+            <div className="hidden sm:flex items-center gap-6 tracking-widest">
+              <span>FPS 24.00</span>
+              <span>ISO 800</span>
             </div>
-            <div className="tracking-widest">
-              Rahul Singh <span className="text-tungsten">STUDIO</span>
+            <div className="tracking-[0.2em] uppercase">
+              Starloop <span className="text-[#C89B53]">Studio</span>
             </div>
           </div>
 
-          {/* Central Timecode & Progress */}
-          <div className="flex flex-col items-center justify-center my-auto">
-            <div className="font-mono text-xs tracking-widest text-muted uppercase mb-3">
-              INITIALIZING TIMELINE
+          {/* Center */}
+          <div className="flex flex-col items-center justify-center gap-6 my-auto">
+            <div className="font-mono text-[10px] sm:text-xs tracking-[0.35em] text-white/30 uppercase">
+              Initializing Timeline
             </div>
 
-            {/* Big Cinematic Timecode Display */}
-            <div className="font-mono text-4xl sm:text-6xl md:text-8xl tracking-wider text-primary font-light tabular-nums">
+            {/* Timecode */}
+            <div className="font-mono text-4xl sm:text-6xl md:text-8xl tracking-widest text-white font-light tabular-nums">
               {formatTimecode(frames)}
             </div>
 
-            {/* Progress line indicator */}
-            <div className="w-48 sm:w-72 h-[1px] bg-white/10 mt-8 relative overflow-hidden">
+            {/* Progress bar */}
+            <div className="w-40 sm:w-64 md:w-80 h-[1px] bg-white/10 relative overflow-hidden">
               <motion.div
-                className="h-full bg-tungsten"
+                className="absolute inset-y-0 left-0 bg-[#C89B53]"
                 style={{ width: `${progressPercentage}%` }}
-                transition={{ ease: "linear" }}
               />
             </div>
 
-            <div className="font-mono text-[10px] tracking-widest text-muted mt-3">
+            <div className="font-mono text-[9px] sm:text-[10px] tracking-[0.3em] text-white/30">
               {progressPercentage}% CONFORMED
             </div>
           </div>
 
-          {/* Bottom metadata row */}
-          <div className="flex items-center justify-between font-mono text-xs text-muted border-t border-hairline pt-4">
-            <div className="text-[11px] tracking-widest">
-              COLOR PIPELINE: <span className="text-primary">ACEScc (v1.3)</span>
-            </div>
-            <div className="text-[11px] tracking-widest text-right">
-              REEL: <span className="text-primary">A001_C001</span>
-            </div>
+          {/* Bottom row */}
+          <div className="flex items-center justify-between font-mono text-[9px] sm:text-[10px] text-white/25 border-t border-white/[0.06] pt-4 tracking-widest">
+            <span>COLOR PIPELINE: <span className="text-white/50">ACEScc v1.3</span></span>
+            <span>REEL: <span className="text-white/50">A001_C001</span></span>
           </div>
         </motion.div>
       )}

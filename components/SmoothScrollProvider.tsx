@@ -18,14 +18,15 @@ export default function SmoothScrollProvider({
 
     if (prefersReducedMotion) return;
 
+    // 30% slower scroll speed with buttery smooth inertia easing
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 1.35,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 0.9,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 0.63, // 30% slower than 0.9
+      touchMultiplier: 0.85,
       infinite: false,
     });
 

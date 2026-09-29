@@ -3,10 +3,10 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Camera, Film, Scissors, Check, Sparkles } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 interface DisciplineData {
-  id: "photography" | "film" | "edit";
+  id: "adfilms" | "documentary" | "bts";
   number: string;
   title: string;
   subtitle: string;
@@ -19,66 +19,64 @@ interface DisciplineData {
 
 const DISCIPLINES: DisciplineData[] = [
   {
-    id: "photography",
+    id: "adfilms",
     number: "01",
-    title: "Photography",
-    subtitle: "Tactile Medium Format & Stills",
+    title: "Ad Films",
+    subtitle: "Brand & Commercial Production",
     description:
-      "Capturing evocative, timeless imagery for luxury brands, architecture, and high-fashion editorials with sculptural lighting and medium-format depth.",
+      "High-impact commercial films built for brands that demand attention. From concept to final delivery we craft story-driven ad films that connect emotionally, drive recall, and perform across every platform.",
     included: [
-      "Brand & Fashion Campaigns",
-      "Architectural Monographs",
-      "Still Life & Luxury Products",
-      "Editorial & Celebrity Portraits",
-      "Fine-Art Medium Format Prints",
+      "TVC & Digital Ad Films",
+      "Product & Brand Campaign Films",
+      "Corporate & Institutional Films",
+      "Social Media Reels & Shorts",
+      "Testimonial & Narrative Spots",
     ],
-    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=65&w=900&auto=format&fit=crop",
+    video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     accent: "#E8A33D",
   },
   {
-    id: "film",
+    id: "documentary",
     number: "02",
-    title: "Cinematography",
-    subtitle: "Large Format & Anamorphic Direction",
+    title: "Documentary",
+    subtitle: "Long-Form & Short-Form Non-Fiction",
     description:
-      "Sculpting moving frames with cinematic chiaroscuro, precision camera movement, 16mm celluloid grain, and bespoke anamorphic optics.",
+      "Real stories told with cinematic precision. We develop, shoot, and edit documentaries that humanise subjects, expose untold perspectives, and leave lasting impressions on audiences.",
     included: [
-      "Commercial & Brand Anthems",
-      "Narrative Shorts & Feature Films",
-      "Luxury Destination Weddings",
-      "Documentaries & Expeditions",
-      "Vehicle Chase & Crane Cinematography",
+      "Short-Form & Feature Documentaries",
+      "Brand & Social Impact Docs",
+      "Event & Festival Coverage",
+      "Talking Head & Interview Series",
+      "Travel & Expedition Films",
     ],
-    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1600&auto=format&fit=crop",
-    video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+    image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=65&w=900&auto=format&fit=crop",
+    video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
     accent: "#E5484D",
   },
   {
-    id: "edit",
+    id: "bts",
     number: "03",
-    title: "Editing & Colour",
-    subtitle: "Visceral Rhythm & ACES Grading",
+    title: "Behind the Scenes",
+    subtitle: "Horizontal & Vertical Formats",
     description:
-      "Transforming raw multi-cam rushes into tightly wound, emotionally captivating visual narratives with surgical rhythm and ACES master color grading.",
+      "The making-of content audiences crave. We capture raw, authentic behind-the-scenes footage in both horizontal (cinematic) and vertical (social-first) formats — giving your audience a window into the process.",
     included: [
-      "Offline Narrative & Commercial Editing",
-      "High-Octane Music Video Cuts",
-      "DaVinci Resolve ACES Color Timing",
-      "Bespoke Sound Design & Foley Sync",
-      "Multi-Aspect Social Adaptations",
+      "Horizontal BTS — Widescreen Cinematic",
+      "Vertical BTS — Reels, Shorts & Stories",
+      "On-Set Day-in-the-Life Coverage",
+      "Crew & Cast Feature Pieces",
+      "Multi-Platform Simultaneous Delivery",
     ],
-    image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1600&auto=format&fit=crop",
-    video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+    image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=65&w=900&auto=format&fit=crop",
     accent: "#30A46C",
   },
 ];
 
 export default function DisciplinesSection() {
-  // Desktop active hovered panel (defaults to middle Cinematography)
-  const [activeId, setActiveId] = useState<string>("film");
+  const [activeId, setActiveId] = useState<string>("adfilms");
 
   const handleSelectWork = (categoryId: string) => {
-    // Dispatch custom event to notify WorkSection
     if (typeof window !== "undefined") {
       window.dispatchEvent(
         new CustomEvent("filter-work", { detail: { category: categoryId } })
@@ -94,17 +92,17 @@ export default function DisciplinesSection() {
   return (
     <section id="disciplines" className="relative w-full border-b border-hairline bg-background select-none overflow-hidden">
       {/* Section Header Top Bar */}
-      <div className="max-w-[1440px] mx-auto px-5 md:px-10 py-10 md:py-14 border-b border-hairline flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 md:px-10 py-8 sm:py-10 md:py-14 border-b border-hairline flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6">
         <div>
           <div className="font-mono text-xs text-tungsten tracking-widest uppercase mb-2 flex items-center gap-2">
             <span className="w-6 h-[1px] bg-tungsten inline-block" />
             CORE CAPABILITIES
           </div>
           <h2 className="font-serif heading-display-lg text-primary">
-            Three Disciplines. <span className="italic text-tungsten font-light">One Studio.</span>
+            Three Services. <span className="italic text-tungsten font-light">One Studio.</span>
           </h2>
         </div>
-        <p className="font-mono text-xs text-muted max-w-md tracking-wider">
+        <p className="font-mono text-[11px] sm:text-xs text-muted max-w-md tracking-wider">
           HOVER OR TAP A DISCIPLINE TO UNVEIL THE METHODOLOGY, HARDWARE & DELIVERABLES.
         </p>
       </div>
@@ -118,23 +116,21 @@ export default function DisciplinesSection() {
             <motion.div
               key={discipline.id}
               layout
+              onClick={() => setActiveId(discipline.id)}
               onMouseEnter={() => setActiveId(discipline.id)}
-              onFocus={() => setActiveId(discipline.id)}
-              tabIndex={0}
-              className={`relative h-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] border-r border-hairline last:border-r-0 cursor-pointer overflow-hidden flex flex-col justify-between p-8 xl:p-12 ${
-                isActive ? "flex-[3] bg-elevated" : "flex-[1] bg-surface hover:bg-elevated/70"
+              className={`relative h-full transition-all duration-700 ease-out cursor-pointer overflow-hidden border-r border-hairline last:border-r-0 ${
+                isActive ? "flex-[3]" : "flex-[1] opacity-75 hover:opacity-100"
               }`}
             >
-              {/* Background Media (Image or Video) */}
-              <div className="absolute inset-0 z-0">
-                {discipline.video && isActive ? (
+              {/* Background Media */}
+              <div className="absolute inset-0 w-full h-full">
+                {isActive && discipline.video ? (
                   <video
                     autoPlay
                     muted
                     loop
                     playsInline
-                    className="w-full h-full object-cover filter brightness-[0.4] contrast-125 transition-opacity duration-700"
-                    poster={discipline.image}
+                    className="w-full h-full object-cover filter brightness-[0.6] contrast-[1.1]"
                   >
                     <source src={discipline.video} type="video/mp4" />
                   </video>
@@ -143,59 +139,64 @@ export default function DisciplinesSection() {
                     src={discipline.image}
                     alt={discipline.title}
                     fill
-                    className={`object-cover filter contrast-125 transition-all duration-700 ${
-                      isActive
-                        ? "brightness-[0.35] scale-105"
-                        : "brightness-[0.2] grayscale scale-100 opacity-60"
-                    }`}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover filter brightness-[0.5] contrast-[1.1] transition-transform duration-700 hover:scale-105"
                   />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
               </div>
 
-              {/* Top Panel Meta */}
-              <div className="relative z-10 flex items-center justify-between border-b border-hairline pb-6">
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-sm tracking-widest text-tungsten font-semibold">
+              {/* Panel Content Container */}
+              <div className="relative z-10 h-full p-8 xl:p-12 flex flex-col justify-between">
+                {/* Top Discipline Tag */}
+                <div className="flex items-center justify-between font-mono text-xs text-muted">
+                  <span className="text-tungsten font-semibold text-sm">
                     {discipline.number}
                   </span>
-                  <span className="text-white/20">|</span>
-                  <span className="font-mono text-xs uppercase tracking-widest text-muted">
+                  <span className="uppercase tracking-widest hidden xl:inline">
                     {discipline.subtitle}
                   </span>
                 </div>
 
-                <div className="p-2 border border-hairline bg-surface/80 text-primary">
-                  {discipline.id === "photography" ? (
-                    <Camera className="w-4 h-4 text-tungsten" />
-                  ) : discipline.id === "film" ? (
-                    <Film className="w-4 h-4 text-rec" />
-                  ) : (
-                    <Scissors className="w-4 h-4 text-primary" />
-                  )}
-                </div>
-              </div>
-
-              {/* Panel Content (Morphs between Compact Title & Full Expanded Details) */}
-              <div className="relative z-10 mt-auto pt-6 space-y-6">
-                <h3 className="font-serif text-4xl xl:text-5xl text-primary font-normal tracking-tight">
-                  {discipline.title}
-                </h3>
-
-                {/* Expanded Details */}
+                {/* Bottom Main Details */}
                 <AnimatePresence mode="wait">
                   {isActive ? (
                     <motion.div
-                      key="details"
-                      initial={{ opacity: 0, y: 15 }}
+                      key="active"
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.4 }}
-                      className="space-y-6"
+                      className="space-y-6 max-w-xl"
                     >
-                      <p className="text-sm text-primary/80 font-light leading-relaxed max-w-xl">
+                      <div>
+                        <h3 className="font-serif text-4xl xl:text-5xl text-primary mb-2">
+                          {discipline.title}
+                        </h3>
+                        <p className="font-mono text-xs text-tungsten tracking-wide">
+                          {discipline.subtitle}
+                        </p>
+                      </div>
+
+                      <p className="font-sans text-sm xl:text-base text-primary/80 font-light leading-relaxed">
                         {discipline.description}
                       </p>
+
+                      {/* BTS: Special Format Badges for Horizontal & Vertical */}
+                      {discipline.id === "bts" && (
+                        <div className="flex gap-3 pt-1">
+                          <div className="flex-1 border border-[#30A46C]/40 bg-[#30A46C]/[0.06] p-3 rounded-sm">
+                            <div className="font-mono text-[9px] uppercase tracking-widest text-[#30A46C] mb-1.5">Format 01</div>
+                            <div className="font-serif text-base text-primary">Horizontal</div>
+                            <div className="font-mono text-[10px] text-muted mt-1">16:9 · Cinematic · 4K</div>
+                          </div>
+                          <div className="flex-1 border border-[#30A46C]/40 bg-[#30A46C]/[0.06] p-3 rounded-sm">
+                            <div className="font-mono text-[9px] uppercase tracking-widest text-[#30A46C] mb-1.5">Format 02</div>
+                            <div className="font-serif text-base text-primary">Vertical</div>
+                            <div className="font-mono text-[10px] text-muted mt-1">9:16 · Reels · Stories</div>
+                          </div>
+                        </div>
+                      )}
 
                       {/* Included List */}
                       <div className="space-y-2.5 pt-4 border-t border-hairline">
@@ -227,6 +228,7 @@ export default function DisciplinesSection() {
                         <span>See {discipline.title} Work</span>
                         <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       </button>
+
                     </motion.div>
                   ) : (
                     <motion.div
@@ -246,7 +248,7 @@ export default function DisciplinesSection() {
         })}
       </div>
 
-      {/* Mobile View: Stacked Cards Accordion */}
+      {/* Mobile & Tablet View: Stacked Cards Accordion */}
       <div className="lg:hidden flex flex-col divide-y divide-hairline">
         {DISCIPLINES.map((discipline) => {
           const isExpanded = activeId === discipline.id;
@@ -255,26 +257,27 @@ export default function DisciplinesSection() {
             <div
               key={discipline.id}
               onClick={() => setActiveId(isExpanded ? "" : discipline.id)}
-              className="relative overflow-hidden bg-surface p-6 sm:p-8 space-y-6"
+              className="relative overflow-hidden bg-surface p-5 sm:p-8 space-y-4 sm:space-y-6 cursor-pointer"
             >
               <div className="relative z-10 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <span className="font-mono text-sm text-tungsten font-semibold">
                     {discipline.number}
                   </span>
-                  <h3 className="font-serif text-3xl text-primary">{discipline.title}</h3>
+                  <h3 className="font-serif text-2xl sm:text-3xl text-primary">{discipline.title}</h3>
                 </div>
-                <div className="font-mono text-xs text-tungsten">
+                <div className="font-mono text-xs text-tungsten font-bold">
                   {isExpanded ? "[ − ]" : "[ + ]"}
                 </div>
               </div>
 
               {/* Media preview */}
-              <div className="relative aspect-[16/9] w-full border border-hairline overflow-hidden">
+              <div className="relative aspect-[16/9] w-full border border-hairline overflow-hidden rounded-sm">
                 <Image
                   src={discipline.image}
                   alt={discipline.title}
                   fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover brightness-75"
                 />
               </div>
@@ -284,11 +287,27 @@ export default function DisciplinesSection() {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="space-y-5 pt-2"
+                  className="space-y-4 pt-2"
                 >
-                  <p className="text-xs text-primary/80 leading-relaxed font-light">
+                  <p className="text-xs sm:text-sm text-primary/80 leading-relaxed font-light">
                     {discipline.description}
                   </p>
+
+                  {/* BTS: Format Badges for mobile */}
+                  {discipline.id === "bts" && (
+                    <div className="flex gap-2">
+                      <div className="flex-1 border border-[#30A46C]/40 bg-[#30A46C]/[0.06] p-2.5 rounded-sm">
+                        <div className="font-mono text-[8px] uppercase tracking-widest text-[#30A46C]">Format 01</div>
+                        <div className="font-sans text-sm text-primary font-medium mt-0.5">Horizontal</div>
+                        <div className="font-mono text-[9px] text-muted">16:9 · Cinematic</div>
+                      </div>
+                      <div className="flex-1 border border-[#30A46C]/40 bg-[#30A46C]/[0.06] p-2.5 rounded-sm">
+                        <div className="font-mono text-[8px] uppercase tracking-widest text-[#30A46C]">Format 02</div>
+                        <div className="font-sans text-sm text-primary font-medium mt-0.5">Vertical</div>
+                        <div className="font-mono text-[9px] text-muted">9:16 · Reels</div>
+                      </div>
+                    </div>
+                  )}
 
                   <div className="space-y-2 pt-3 border-t border-hairline">
                     <div className="font-mono text-[10px] uppercase tracking-widest text-tungsten">
@@ -297,7 +316,7 @@ export default function DisciplinesSection() {
                     <ul className="space-y-1.5">
                       {discipline.included.map((item, i) => (
                         <li key={i} className="text-xs text-muted flex items-center gap-2">
-                          <span className="w-1 h-1 rounded-full bg-tungsten" />
+                          <span className="w-1 h-1 rounded-full bg-tungsten flex-shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}

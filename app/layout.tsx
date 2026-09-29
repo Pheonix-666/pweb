@@ -1,33 +1,41 @@
-
 import type { Metadata, Viewport } from "next";
-import { instrumentSerif, interTight, jetbrainsMono, syncopate, outfit } from "./fonts";
+import {
+  orbitron,
+  chakraPetch,
+  instrumentSerif,
+  interTight,
+  jetbrainsMono,
+  syncopate,
+  outfit,
+  unbounded,
+  syne
+} from "./fonts";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
-import GrainOverlay from "@/components/GrainOverlay";
 import Cursor from "@/components/Cursor";
-import Preloader from "@/components/Preloader";
 import Navbar from "@/components/Navbar";
+import Preloader from "@/components/Preloader";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} — ${siteConfig.title}`,
   description: siteConfig.heroHeadline + " " + siteConfig.heroDescription,
   keywords: [
-    "Cinematographer",
-    "Director of Photography",
-    "Film Editor",
-    "DaVinci Resolve Colorist",
+    "Starloop Entertainment",
+    "Entertainment Production",
+    "Cinema Studio",
     "Commercial Film Production",
-    "Mumbai Cinematographer",
-    "Luxury Fashion Editorial",
+    "Director of Photography",
+    "Film Finishing",
+    "Music Videos",
   ],
-  authors: [{ name: siteConfig.name, url: "https://rahulsingh.studio" }],
+  authors: [{ name: siteConfig.name, url: "https://starloop.entertainment" }],
   creator: siteConfig.name,
   publisher: siteConfig.studioName,
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://rahulsingh.studio",
+    url: "https://starloop.entertainment",
     title: `${siteConfig.name} — ${siteConfig.title}`,
     description: siteConfig.heroHeadline,
     siteName: siteConfig.studioName,
@@ -36,7 +44,7 @@ export const metadata: Metadata = {
         url: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop",
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} Visual Studio Showreel`,
+        alt: `${siteConfig.name} Showreel`,
       },
     ],
   },
@@ -44,7 +52,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${siteConfig.name} — ${siteConfig.title}`,
     description: siteConfig.heroHeadline,
-    creator: "@rahulsingh",
+    creator: "@starloop",
   },
   robots: {
     index: true,
@@ -53,7 +61,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0A0A0A",
+  themeColor: "#070708",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -69,7 +77,7 @@ export default function RootLayout({
     "@type": "LocalBusiness",
     name: siteConfig.studioName,
     alternateName: siteConfig.name,
-    url: "https://rahulsingh.studio",
+    url: "https://starloop.entertainment",
     logo: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop",
     image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop",
     description: siteConfig.heroDescription,
@@ -88,7 +96,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrumentSerif.variable} ${interTight.variable} ${jetbrainsMono.variable} ${syncopate.variable} ${outfit.variable} dark`}
+      className={`${orbitron.variable} ${chakraPetch.variable} ${unbounded.variable} ${syne.variable} ${instrumentSerif.variable} ${interTight.variable} ${jetbrainsMono.variable} ${syncopate.variable} ${outfit.variable} dark`}
     >
       <head>
         <script
@@ -99,7 +107,6 @@ export default function RootLayout({
       <body className="bg-background text-primary font-sans selection:bg-tungsten selection:text-background min-h-screen relative overflow-x-clip antialiased">
         <SmoothScrollProvider>
           <Preloader />
-          <GrainOverlay />
           <Cursor />
           <Navbar />
           <main className="relative z-10">{children}</main>

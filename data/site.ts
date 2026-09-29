@@ -82,13 +82,13 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: "Rahul Singh",
-  title: "Cinematographer, Photographer & Editor",
-  studioName: "STUDIO Rahul Singh",
+  name: "Starloop Entertainment",
+  title: "Film, Cinema & Media Production Studio",
+  studioName: "STARLOOP ENTERTAINMENT",
   tagline: "Visual narratives carved in light, motion and precision rhythm.",
   heroHeadline: "Crafting atmospheric cinema, editorial imagery & visceral edits.",
   heroDescription:
-    "An independent creative visual studio partnering with luxury brands, directors, and forward-thinking artists globally. From raw conceptual framing to master color conformed delivery.",
+    "An independent creative entertainment and production studio partnering with luxury brands, visionary directors, and artists globally. From raw conceptual framing to master delivery.",
   location: "Mumbai & Worldwide",
   availability: {
     status: "available",
@@ -248,7 +248,7 @@ export const siteConfig: SiteConfig = {
     {
       id: "1",
       quote:
-        "Rahul’s eye for lighting and camera movement elevated our watch campaign into pure cinema. The precision and mood in every single frame are unmatched.",
+        "Starloop’s eye for lighting and camera movement elevated our watch campaign into pure cinema. The precision and mood in every single frame are unmatched.",
       author: "Henri Laurent",
       role: "Global Creative Director",
       company: "Atelier Vaucanson",
@@ -258,7 +258,7 @@ export const siteConfig: SiteConfig = {
     {
       id: "2",
       quote:
-        "Working with Rahul felt effortless. He brought a deep architectural understanding of light and stillness to our collection that exceeded all editorial expectations.",
+        "Working with Starloop felt effortless. The team brought a deep architectural understanding of light and stillness to our collection that exceeded all editorial expectations.",
       author: "Elena Rostova",
       role: "Editor-in-Chief",
       company: "L'Ombre Magazine",
@@ -268,7 +268,7 @@ export const siteConfig: SiteConfig = {
     {
       id: "3",
       quote:
-        "In the editing suite, Rahul is a rhythm virtuoso. He unlocked dynamics in our performance rushes that turned a standard music video into an award-winning visual masterpiece.",
+        "In the editing suite, Starloop is a rhythm virtuoso. They unlocked dynamics in our performance rushes that turned a standard music video into an award-winning visual masterpiece.",
       author: "Zack Vance",
       role: "Music Video Director",
       company: "Kavalier Records",
@@ -381,31 +381,31 @@ export const siteConfig: SiteConfig = {
   socials: [
     {
       platform: "Instagram",
-      label: "@rahulsingh.cinema",
+      label: "@starloop.entertainment",
       href: "https://instagram.com",
-      handle: "@rahulsingh.cinema",
+      handle: "@starloop.entertainment",
     },
     {
       platform: "Vimeo",
-      label: "vimeo.com/rahulsingh",
+      label: "vimeo.com/starloop",
       href: "https://vimeo.com",
-      handle: "rahulsingh",
+      handle: "starloop",
     },
     {
       platform: "YouTube",
-      label: "Rahul Singh Cinema",
+      label: "Starloop Entertainment",
       href: "https://youtube.com",
-      handle: "@rahulsinghfilm",
+      handle: "@starloopfilms",
     },
     {
       platform: "Behance",
-      label: "behance.net/rahulsingh",
+      label: "behance.net/starloop",
       href: "https://behance.net",
-      handle: "rahulsingh",
+      handle: "starloop",
     },
   ],
   contact: {
-    email: "contact@rahulsingh.studio",
+    email: "contact@starloop.entertainment",
     phone: "+91 98200 12345",
     location: "Studio 4B, Film City Enclave, Mumbai, India",
     timezone: "IST (UTC+5:30) / Global Mobility",
