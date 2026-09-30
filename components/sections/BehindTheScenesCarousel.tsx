@@ -46,7 +46,7 @@ const BTS_DATA: BTSCard[] = [
     role: "Precision Tracking Vehicle",
     gear: "Gyro-Stabilized Flight Head",
     specs: "140 KM/H // 3-Axis Active",
-    image: "https://images.unsplash.com/photo-1518173946687-a4c8a383392e?q=60&w=650&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=650&auto=format&fit=crop",
     tag: "TRACKING",
     scene: "EXT 07",
     timecode: "00:39:18:22",

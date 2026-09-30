@@ -29,17 +29,17 @@ export default function EditorialScrollGallery() {
   const trackScale = useTransform(scrollYProgress, [0, 0.3], [0.97, 1]);
 
   return (
-    <div className="relative bg-[#08080A] text-[#F5F5F5] select-none">
+    <div className="relative bg-[#000000] text-[#F5F5F5] select-none">
 
 
       {/* Pinned Horizontal Scroll Section */}
       <section
         id="collection"
         ref={containerRef}
-        className="relative h-[300vh] sm:h-[400vh] md:h-[480vh] bg-[#08080A]"
+        className="relative h-[300vh] sm:h-[400vh] md:h-[480vh] bg-[#000000]"
       >
         {/* Sticky Viewport Stage — perspective wrapper for 3D depth */}
-        <div className="sticky top-0 h-[100svh] w-full overflow-hidden bg-[#08080A] flex items-center border-t border-white/[0.06] [perspective:1200px] [perspective-origin:50%_55%]">
+        <div className="sticky top-0 h-[100svh] w-full overflow-hidden bg-[#000000] flex items-center border-t border-white/[0.06] [perspective:1200px] [perspective-origin:50%_55%]">
           {/* Background Watermark — hidden on mobile */}
           <div className="hidden sm:flex absolute inset-0 items-center justify-center pointer-events-none opacity-[0.025] select-none">
             <span className="font-orbitron text-[35vw] md:text-[45vw] text-white whitespace-nowrap leading-none font-black tracking-tighter">
@@ -208,7 +208,7 @@ export default function EditorialScrollGallery() {
                 {/* Frame Card 9: High-Speed Pursuit MotoCrane */}
                 <div className="relative w-[70vw] sm:w-[56vw] md:w-[40vw] h-full overflow-hidden rounded-sm bg-[#121214] border border-white/20 shadow-[0_45px_110px_rgba(0,0,0,1)] shrink-0 translate-y-8 md:translate-y-14 z-30 group">
                   <Image
-                    src="https://images.unsplash.com/photo-1518173946687-a4c8a383392e?q=60&w=700&auto=format&fit=crop"
+                    src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=700&auto=format&fit=crop"
                     alt="MotoCrane Pursuit Pass"
                     fill
                     sizes="(max-width: 768px) 70vw, 40vw"

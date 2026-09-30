@@ -11,7 +11,7 @@ import BehindTheScenesCarousel from "@/components/sections/BehindTheScenesCarous
 
 interface PackageCard {
   id: string;
-  category: "photography" | "film" | "edit";
+  category: "adfilms" | "documentary" | "bts" | "photography" | "film" | "edit";
   tier: string;
   title: string;
   description: string;
@@ -22,52 +22,52 @@ interface PackageCard {
 
 const PACKAGES: PackageCard[] = [
   {
-    id: "photography",
-    category: "photography",
+    id: "adfilms",
+    category: "adfilms",
     tier: "DISCIPLINE 01",
-    title: "Editorial & Stills",
+    title: "Ad Films & Commercials",
     description:
-      "Medium format digital & 35mm film still campaigns for luxury fashion, architectural monographs, and high-concept commercial product lookbooks.",
-    turnaround: "2 to 3 Weeks",
+      "High-impact commercial films, TVCs, and digital campaign spots built for brands that demand attention, emotional resonance, and platform recall.",
+    turnaround: "2 to 4 Weeks",
     deliverables: [
-      "100MP Hasselblad / GFX Masters",
-      "Bespoke Chiaroscuro Lighting Set",
-      "Fine-Art Retouching & Color Emulation",
-      "Full Commercial & Archival License",
-      "High-Res Contact Sheets & Raw Selects",
-    ],
-  },
-  {
-    id: "film",
-    category: "film",
-    tier: "DISCIPLINE 02",
-    title: "Full Film Production",
-    description:
-      "End-to-end directorial and DP services for commercial brand films, luxury weddings, and cinematic music videos with pursuit rigs and anamorphic glass.",
-    turnaround: "3 to 5 Weeks",
-    deliverables: [
-      "ARRI Alexa Mini LF 4.5K RAW Capture",
-      "Atlas Orion 2X Anamorphic Optics",
-      "On-Set DIT Color Monitoring & LUTs",
-      "Hero 60s Brand Film + 3x Social Cuts",
-      "Dolby Vision HDR & Cinema DCP Masters",
+      "ARRI Alexa Mini LF / RED 8K RAW Capture",
+      "Concept Development, Script & Storyboarding",
+      "Hero 60s/30s Brand Film + Social Cutdowns",
+      "ACES 1.3 Master Color Grade & HDR Deliverables",
+      "Broadcast & Worldwide Commercial License",
     ],
     featured: true,
   },
   {
-    id: "edit",
-    category: "edit",
-    tier: "DISCIPLINE 03",
-    title: "Edit & Color Finishing",
+    id: "documentary",
+    category: "documentary",
+    tier: "DISCIPLINE 02",
+    title: "Documentary Production",
     description:
-      "Dedicated offline narrative conform, kinetic commercial montages, ACES 1.3 master color grading, and multi-layered Foley sound design for pre-shot footage.",
+      "Compelling non-fiction stories, featurettes, brand impact films, and observational documentaries crafted with cinematic authenticity and precision.",
+    turnaround: "3 to 6 Weeks",
+    deliverables: [
+      "Multi-Location Cinema Crew & Field Audio",
+      "Intimate Interviews & Natural Light Direction",
+      "Long-Form & Festival Feature Cut",
+      "Full Foley, Original Score Sync & 5.1 Mix",
+      "4K DCP & Archival Master Packages",
+    ],
+  },
+  {
+    id: "bts",
+    category: "bts",
+    tier: "DISCIPLINE 03",
+    title: "Behind The Scenes",
+    description:
+      "Authentic, high-retention making-of footage captured simultaneously in horizontal (cinematic 16:9) and vertical (social-first 9:16) formats.",
     turnaround: "1 to 2 Weeks",
     deliverables: [
-      "Offline Narrative & Rhythm Assembly",
-      "DaVinci Resolve ACES Master Color Grade",
-      "Film Print Emulation (Kodak 2383)",
-      "Audio Foley, Sound FX & Mix Sync",
-      "Multi-Aspect Ratio Exports (16:9, 9:16, 4:5)",
+      "Dual-Format Delivery (16:9 Widescreen + 9:16 Reels)",
+      "On-Set Real-Time Coverage & Crew Vignettes",
+      "Kinetic Rhythm Edit & Viral Pacing",
+      "High-Res Stills & Contact Sheets",
+      "Direct-to-Social Master Exports",
     ],
   },
 ];

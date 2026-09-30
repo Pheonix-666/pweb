@@ -22,7 +22,7 @@ const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
   phone: z.string().min(6, "Please enter a valid phone or WhatsApp number"),
-  service: z.enum(["photography", "film", "edit", "full-package"], {
+  service: z.enum(["adfilms", "documentary", "bts", "full-package", "photography", "film", "edit"], {
     errorMap: () => ({ message: "Please select a production service" }),
   }),
   projectType: z.string().min(2, "Please select a project type"),
@@ -49,7 +49,7 @@ export default function ContactSection() {
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
-      service: "film",
+      service: "adfilms",
       projectType: "Brand Commercial",
       budgetRange: "$10k – $25k",
       honeypot: "",
@@ -63,12 +63,14 @@ export default function ContactSection() {
       const customEvent = e as CustomEvent<{ category: string }>;
       if (customEvent.detail?.category) {
         const cat = customEvent.detail.category;
-        const mappedService: "photography" | "film" | "edit" | "full-package" =
-          cat === "photography"
-            ? "photography"
-            : cat === "edit"
-            ? "edit"
-            : "film";
+        const mappedService: "adfilms" | "documentary" | "bts" | "full-package" =
+          cat === "adfilms" || cat === "film"
+            ? "adfilms"
+            : cat === "documentary" || cat === "photography"
+            ? "documentary"
+            : cat === "bts" || cat === "edit"
+            ? "bts"
+            : "full-package";
         setValue("service", mappedService);
       }
     };
@@ -237,16 +239,16 @@ export default function ContactSection() {
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                     {[
-                      { id: "film", label: "Film / DP" },
-                      { id: "photography", label: "Stills / Photo" },
-                      { id: "edit", label: "Edit & Color" },
+                      { id: "adfilms", label: "Ad Films" },
+                      { id: "documentary", label: "Documentary" },
+                      { id: "bts", label: "Behind Scenes" },
                       { id: "full-package", label: "Full Suite" },
                     ].map((srv) => (
                       <button
                         type="button"
                         key={srv.id}
                         onClick={() =>
-                          setValue("service", srv.id as "photography" | "film" | "edit" | "full-package")
+                          setValue("service", srv.id as "adfilms" | "documentary" | "bts" | "full-package")
                         }
                         className={`py-2 sm:py-2.5 px-3 border text-xs font-mono uppercase tracking-wider transition-all duration-300 rounded-sm ${
                           selectedService === srv.id

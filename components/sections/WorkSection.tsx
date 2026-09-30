@@ -72,12 +72,20 @@ function VideoHoverCard({ project }: VideoCardProps) {
         {/* Top Badges: Category & Year */}
         <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 flex items-center justify-between pointer-events-none z-10">
           <span className="timecode-badge text-[9px] sm:text-[10px]">
-            {project.category === "film" ? (
-              <Film className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-rec" />
+            {project.category === "adfilms" ? (
+              <Film className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#E8A33D]" />
+            ) : project.category === "documentary" ? (
+              <Camera className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#E5484D]" />
             ) : (
-              <Scissors className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-primary" />
+              <Scissors className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#30A46C]" />
             )}
-            <span className="uppercase">{project.category}</span>
+            <span className="uppercase">
+              {project.category === "adfilms"
+                ? "AD FILM"
+                : project.category === "documentary"
+                ? "DOCS"
+                : "BTS"}
+            </span>
           </span>
 
           <span className="font-mono text-[9px] sm:text-[10px] bg-[#0d0d11]/70 backdrop-blur-md px-2.5 py-1 border border-white/10 text-muted shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
@@ -136,8 +144,20 @@ function PhotoCard({ project }: { project: Project }) {
         {/* Top Badges */}
         <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 flex items-center justify-between pointer-events-none z-10">
           <span className="timecode-badge text-[9px] sm:text-[10px]">
-            <Camera className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-tungsten" />
-            <span className="uppercase">PHOTOGRAPHY</span>
+            {project.category === "adfilms" ? (
+              <Film className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#E8A33D]" />
+            ) : project.category === "documentary" ? (
+              <Camera className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#E5484D]" />
+            ) : (
+              <Scissors className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#30A46C]" />
+            )}
+            <span className="uppercase">
+              {project.category === "adfilms"
+                ? "AD FILM"
+                : project.category === "documentary"
+                ? "DOCS"
+                : "BTS"}
+            </span>
           </span>
 
           <span className="font-mono text-[9px] sm:text-[10px] bg-[#0d0d11]/70 backdrop-blur-md px-2.5 py-1 border border-white/10 text-muted shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
@@ -207,9 +227,9 @@ function WorkSectionContent() {
 
   const categories = [
     { id: "all", label: "All Selected", count: projects.length },
-    { id: "photography", label: "Photography", count: projects.filter((p) => p.category === "photography").length },
-    { id: "film", label: "Film & Cinema", count: projects.filter((p) => p.category === "film").length },
-    { id: "edit", label: "Editing & Grade", count: projects.filter((p) => p.category === "edit").length },
+    { id: "adfilms", label: "Ad Films", count: projects.filter((p) => p.category === "adfilms").length },
+    { id: "documentary", label: "Documentary", count: projects.filter((p) => p.category === "documentary").length },
+    { id: "bts", label: "Behind The Scenes", count: projects.filter((p) => p.category === "bts").length },
   ];
 
   const filteredProjects =

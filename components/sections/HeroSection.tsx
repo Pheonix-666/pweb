@@ -70,29 +70,30 @@ export default function HeroSection() {
       {/* Pinned 100svh Viewport Stage with 3D Perspective */}
       <div className="sticky top-0 h-[100svh] w-full overflow-hidden bg-[#000000] flex flex-col justify-between [perspective:1400px]">
         {/* 1. TOP HEADER & TELEMETRY NAV */}
-        <div className="relative z-50 w-full max-w-[1560px] mx-auto px-5 sm:px-8 md:px-12 pt-6 sm:pt-8 flex items-center justify-between pointer-events-auto">
+        <div className="relative z-50 w-full max-w-[1560px] mx-auto px-4 sm:px-8 md:px-12 pt-4 sm:pt-7 flex items-center justify-between pointer-events-auto">
           {/* Top Left: Logo mark */}
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center bg-white/[0.04] backdrop-blur-md">
-              <svg width="14" height="14" viewBox="0 0 24 24" className="fill-white">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/20 flex items-center justify-center bg-white/[0.04] backdrop-blur-md">
+              <svg width="12" height="12" viewBox="0 0 24 24" className="fill-white">
                 <polygon points="7,2 17,2 22,7 22,17 17,22 7,22 2,17 2,7" />
               </svg>
             </div>
+            <span className="font-orbitron font-bold text-xs sm:text-sm tracking-wider uppercase hidden xs:inline-block">STARLOOP</span>
           </div>
 
           {/* Top Center: Pill Toggle (CREATE / EXPLORE) */}
-          <div className="flex items-center bg-[#141416]/90 border border-white/15 p-1 rounded-full backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.8)]">
-            <button className="px-5 sm:px-6 py-1.5 rounded-full bg-white text-black font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-transform active:scale-95">
+          <div className="flex items-center bg-[#141416]/90 border border-white/15 p-0.5 sm:p-1 rounded-full backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.8)]">
+            <button className="px-3.5 sm:px-6 py-1 sm:py-1.5 rounded-full bg-white text-black font-mono text-[9px] sm:text-xs font-bold uppercase tracking-wider transition-transform active:scale-95">
               CREATE
             </button>
-            <button className="px-5 sm:px-6 py-1.5 rounded-full text-white/70 hover:text-white font-mono text-[10px] sm:text-xs uppercase tracking-wider transition-colors">
+            <button className="px-3.5 sm:px-6 py-1 sm:py-1.5 rounded-full text-white/70 hover:text-white font-mono text-[9px] sm:text-xs uppercase tracking-wider transition-colors">
               EXPLORE
             </button>
           </div>
 
           {/* Top Right: Telemetry label */}
-          <div className="font-mono text-[9px] sm:text-[11px] tracking-[0.2em] uppercase text-white/60">
-            SMART CINEMA SUITE
+          <div className="font-mono text-[8px] sm:text-[10px] md:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white/60">
+            <span className="hidden sm:inline">SMART </span>CINEMA SUITE
           </div>
         </div>
 
@@ -323,8 +324,8 @@ export default function HeroSection() {
           </div>
 
           {/* Right Text & CTA */}
-          <div className="absolute right-5 sm:right-8 md:right-12 top-[24%] z-30 flex flex-col items-start gap-3 pointer-events-auto">
-            <div className="font-mono text-[10px] sm:text-[11px] text-white/60 uppercase leading-tight">
+          <div className="absolute right-4 sm:right-8 md:right-12 top-[16%] sm:top-[24%] z-30 flex flex-col items-end sm:items-start gap-2 sm:gap-3 pointer-events-auto">
+            <div className="font-mono text-[9px] sm:text-[10px] md:text-[11px] text-white/60 uppercase leading-tight text-right sm:text-left">
               Brand &
               <br />
               Marketing
@@ -333,7 +334,7 @@ export default function HeroSection() {
             </div>
             <a
               href="#contact"
-              className="px-4 sm:px-5 py-2 rounded-full bg-white text-black font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5 hover:bg-neutral-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+              className="hidden sm:flex px-4 sm:px-5 py-2 rounded-full bg-white text-black font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider items-center gap-1.5 hover:bg-neutral-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)]"
             >
               <span>GET STARTED WITH STARLOOP</span>
               <ArrowUpRight className="w-3 h-3" />

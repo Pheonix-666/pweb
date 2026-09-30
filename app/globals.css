@@ -216,21 +216,28 @@ html.lenis body {
   animation: statusGlow 2s infinite;
 }
 
-/* ─── PERFORMANCE & CRISPNESS OPTIMIZATIONS ──────────────────────────── */
+/* ─── PERFORMANCE OPTIMIZATIONS ──────────────────────────── */
 
-/* Keep images and text crisp during GPU translations and scrolling */
-img {
-  image-rendering: -webkit-optimize-contrast;
-  backface-visibility: hidden;
-  transform: translateZ(0);
+/*
+  content-visibility: auto — tells the browser to skip rendering
+  off-screen sections entirely until they're near the viewport.
+  This is the single biggest perf win for long pages.
+  apply to every section below the fold.
+*/
+section[id="collection"],
+section[id="disciplines"],
+section[id="about"],
+section[id="work"],
+section[id="proof"],
+section[id="contact"] {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 800px;
 }
 
 /* GPU composite layer promotion for animated elements */
 .will-change-transform {
   will-change: transform;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 /* Reduce motion for users who prefer it — completely removes all scroll animations */
