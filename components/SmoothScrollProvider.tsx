@@ -11,25 +11,27 @@ export default function SmoothScrollProvider({
   children,
 }: SmoothScrollProviderProps) {
   useEffect(() => {
-    // Only initialize smooth scroll on non-reduced motion and desktop devices
+    // Only initialize smooth scroll on non-reduced motion
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
     if (prefersReducedMotion) return;
 
+    // Calibrated 30% slower scroll speed across all screens (desktop, tablet, mobile)
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 1.35,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 0.9,
-      touchMultiplier: 1.5,
+      syncTouch: true,
+      wheelMultiplier: 0.63, // 30% slower than 0.90
+      touchMultiplier: 1.05, // 30% slower than 1.50
       infinite: false,
     });
 
-    // Sync Lenis with standard scroll events
+    // Sync Lenis with standard animation frame
     let animationFrameId: number;
 
     function raf(time: number) {
