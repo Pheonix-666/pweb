@@ -15,57 +15,58 @@ export default function HeroSection() {
   });
 
   // ---------------------------------------------------------------
-  // All transforms use scrollYProgress directly — no spring.
-  // Springs on scroll progress cause vibration/oscillation.
+  // All transforms complete by ~0.60 scroll progress, holding steady
+  // from 0.60 to 1.0. This creates a dedicated 0.5s resting buffer
+  // at the end of the hero before the next section rises above it.
   // ---------------------------------------------------------------
 
   // SCREEN 1 (Left-Center): fly forward and exit left
-  const screen1Scale = useTransform(scrollYProgress, [0, 0.15, 0.38, 0.55], [0.88, 1.04, 1.7, 2.3]);
-  const screen1Opacity = useTransform(scrollYProgress, [0, 0.12, 0.32, 0.48], [0.9, 1, 0.6, 0]);
-  const screen1X = useTransform(scrollYProgress, [0, 0.15, 0.45], [0, -18, -130]);
-  const screen1Y = useTransform(scrollYProgress, [0, 0.15, 0.45], [0, -8, -70]);
+  const screen1Scale = useTransform(scrollYProgress, [0, 0.12, 0.28, 0.40], [0.88, 1.04, 1.7, 2.3]);
+  const screen1Opacity = useTransform(scrollYProgress, [0, 0.10, 0.24, 0.36], [0.9, 1, 0.6, 0]);
+  const screen1X = useTransform(scrollYProgress, [0, 0.12, 0.34], [0, -18, -130]);
+  const screen1Y = useTransform(scrollYProgress, [0, 0.12, 0.34], [0, -8, -70]);
 
   // SCREEN 2 (Right): emerge from deep background
-  const screen2Scale = useTransform(scrollYProgress, [0.15, 0.38, 0.58, 0.8, 0.92], [0.2, 0.62, 1.06, 1.75, 2.4]);
-  const screen2Opacity = useTransform(scrollYProgress, [0.15, 0.32, 0.55, 0.72, 0.88], [0, 0.65, 1, 0.7, 0]);
-  const screen2X = useTransform(scrollYProgress, [0.15, 0.38, 0.58, 0.86], [150, 75, 0, 85]);
-  const screen2Y = useTransform(scrollYProgress, [0.15, 0.38, 0.58, 0.86], [70, 35, 0, -55]);
+  const screen2Scale = useTransform(scrollYProgress, [0.10, 0.26, 0.42, 0.55, 0.62], [0.2, 0.62, 1.06, 1.75, 2.4]);
+  const screen2Opacity = useTransform(scrollYProgress, [0.10, 0.22, 0.38, 0.50, 0.58], [0, 0.65, 1, 0.7, 0]);
+  const screen2X = useTransform(scrollYProgress, [0.10, 0.26, 0.42, 0.58], [150, 75, 0, 85]);
+  const screen2Y = useTransform(scrollYProgress, [0.10, 0.26, 0.42, 0.58], [70, 35, 0, -55]);
 
-  // SCREEN 3 (Left/Bottom): surges to front
-  const screen3Scale = useTransform(scrollYProgress, [0.45, 0.65, 0.85, 1], [0.2, 0.62, 1.1, 1.4]);
-  const screen3Opacity = useTransform(scrollYProgress, [0.45, 0.62, 0.82, 1], [0, 0.7, 1, 1]);
-  const screen3X = useTransform(scrollYProgress, [0.45, 0.65, 0.85, 1], [-145, -72, 0, 18]);
-  const screen3Y = useTransform(scrollYProgress, [0.45, 0.65, 0.85, 1], [130, 65, 0, -18]);
+  // SCREEN 3 (Left/Bottom): surges to front and holds stationary from 0.60 to 1.0 (0.5s buffer)
+  const screen3Scale = useTransform(scrollYProgress, [0.30, 0.45, 0.60, 1], [0.2, 0.62, 1.1, 1.1]);
+  const screen3Opacity = useTransform(scrollYProgress, [0.30, 0.42, 0.56, 1], [0, 0.7, 1, 1]);
+  const screen3X = useTransform(scrollYProgress, [0.30, 0.45, 0.60, 1], [-145, -72, 0, 0]);
+  const screen3Y = useTransform(scrollYProgress, [0.30, 0.45, 0.60, 1], [130, 65, 0, 0]);
 
-  // Micro tiles — raw scroll, no physics
-  const tile1Opacity = useTransform(scrollYProgress, [0, 0.28, 0.6, 0.8], [0.3, 0.85, 0.4, 0]);
-  const tile1X = useTransform(scrollYProgress, [0, 1], [40, -110]);
-  const tile1Y = useTransform(scrollYProgress, [0, 1], [20, 75]);
-  const tile1Scale = useTransform(scrollYProgress, [0, 0.4, 0.8], [0.55, 1.05, 1.8]);
+  // Micro tiles — raw scroll, completed before hold
+  const tile1Opacity = useTransform(scrollYProgress, [0, 0.20, 0.42, 0.55], [0.3, 0.85, 0.4, 0]);
+  const tile1X = useTransform(scrollYProgress, [0, 0.60], [40, -110]);
+  const tile1Y = useTransform(scrollYProgress, [0, 0.60], [20, 75]);
+  const tile1Scale = useTransform(scrollYProgress, [0, 0.28, 0.55], [0.55, 1.05, 1.8]);
 
-  const tile2Opacity = useTransform(scrollYProgress, [0.2, 0.45, 0.75, 0.95], [0, 0.8, 0.55, 0]);
-  const tile2X = useTransform(scrollYProgress, [0, 1], [-28, 100]);
-  const tile2Y = useTransform(scrollYProgress, [0, 1], [38, -75]);
-  const tile2Scale = useTransform(scrollYProgress, [0.2, 0.6, 0.95], [0.32, 0.95, 1.6]);
+  const tile2Opacity = useTransform(scrollYProgress, [0.12, 0.30, 0.50, 0.62], [0, 0.8, 0.55, 0]);
+  const tile2X = useTransform(scrollYProgress, [0, 0.60], [-28, 100]);
+  const tile2Y = useTransform(scrollYProgress, [0, 0.60], [38, -75]);
+  const tile2Scale = useTransform(scrollYProgress, [0.12, 0.40, 0.60], [0.32, 0.95, 1.6]);
 
-  const tile3Opacity = useTransform(scrollYProgress, [0.35, 0.6, 0.9, 1], [0, 0.75, 0.65, 0.25]);
-  const tile3Y = useTransform(scrollYProgress, [0, 1], [95, -85]);
-  const tile3Scale = useTransform(scrollYProgress, [0.35, 0.75, 1], [0.28, 0.88, 1.35]);
+  const tile3Opacity = useTransform(scrollYProgress, [0.24, 0.42, 0.60, 1], [0, 0.75, 0.65, 0.65]);
+  const tile3Y = useTransform(scrollYProgress, [0, 0.60], [95, -85]);
+  const tile3Scale = useTransform(scrollYProgress, [0.24, 0.50, 0.60], [0.28, 0.88, 1.35]);
 
   // Background typography — raw scroll
-  const typoScale = useTransform(scrollYProgress, [0, 1], [0.96, 1.16]);
-  const typoOpacity = useTransform(scrollYProgress, [0, 0.8, 1], [0.9, 0.65, 0.45]);
-  const typoY = useTransform(scrollYProgress, [0, 1], [0, -28]);
+  const typoScale = useTransform(scrollYProgress, [0, 0.60], [0.96, 1.16]);
+  const typoOpacity = useTransform(scrollYProgress, [0, 0.50, 0.60, 1], [0.9, 0.65, 0.45, 0.45]);
+  const typoY = useTransform(scrollYProgress, [0, 0.60], [0, -28]);
 
-  // Phase label fades — safe to leave on raw scroll too
-  const phaseTextOpacity1 = useTransform(scrollYProgress, [0, 0.28, 0.42], [1, 1, 0]);
-  const phaseTextOpacity2 = useTransform(scrollYProgress, [0.35, 0.52, 0.72], [0, 1, 0]);
-  const phaseTextOpacity3 = useTransform(scrollYProgress, [0.68, 0.84, 1], [0, 1, 1]);
+  // Phase label fades
+  const phaseTextOpacity1 = useTransform(scrollYProgress, [0, 0.18, 0.28], [1, 1, 0]);
+  const phaseTextOpacity2 = useTransform(scrollYProgress, [0.24, 0.36, 0.48], [0, 1, 0]);
+  const phaseTextOpacity3 = useTransform(scrollYProgress, [0.46, 0.58, 1], [0, 1, 1]);
 
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[320vh] md:h-[360vh] bg-[#000000] text-[#FFFFFF] select-none"
+      className="relative z-10 w-full h-[380vh] md:h-[420vh] bg-[#000000] text-[#FFFFFF] select-none"
     >
       {/* Pinned 100svh Viewport Stage with 3D Perspective */}
       <div className="sticky top-0 h-[100svh] w-full overflow-hidden bg-[#000000] flex flex-col justify-between [perspective:1400px]">

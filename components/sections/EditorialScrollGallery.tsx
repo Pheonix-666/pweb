@@ -1,11 +1,33 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function EditorialScrollGallery() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [maxDistance, setMaxDistance] = useState(0);
+
+  useEffect(() => {
+    const updateDistance = () => {
+      if (trackRef.current) {
+        const trackWidth = trackRef.current.scrollWidth;
+        const windowWidth = window.innerWidth;
+        const distance = Math.max(0, trackWidth - windowWidth);
+        setMaxDistance(distance);
+      }
+    };
+
+    updateDistance();
+    // Run after images/layout settle
+    const timer = setTimeout(updateDistance, 300);
+    window.addEventListener("resize", updateDistance);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", updateDistance);
+    };
+  }, []);
 
   // Scroll progress for the pinned horizontal scroll track
   const { scrollYProgress } = useScroll({
@@ -13,33 +35,36 @@ export default function EditorialScrollGallery() {
     offset: ["start start", "end end"],
   });
 
-  // Use scrollYProgress directly — no spring.
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-62%"]);
+  // When maxDistance is measured, translate exactly to bring Section 4 dead-center at 0.85, then hold stationary till 1.0
+  const x = useTransform(
+    scrollYProgress,
+    [0, 0.85, 1],
+    [`0px`, `-${maxDistance || 2400}px`, `-${maxDistance || 2400}px`]
+  );
 
   // 3D perspective tilt — track starts slightly angled back, flattens as you scroll
-  // Gives a "corridor you're walking into" depth feel
-  const trackRotateX = useTransform(scrollYProgress, [0, 0.25, 1], [6, 2, 0]);
+  const trackRotateX = useTransform(scrollYProgress, [0, 0.35, 1], [5, 1.5, 0]);
 
-  // Row parallaxes — reduced range to prevent jitter
-  const row1Parallax = useTransform(scrollYProgress, [0, 1], ["-80px", "100px"]);
-  const row2Parallax = useTransform(scrollYProgress, [0, 1], ["100px", "-100px"]);
-  const row3Parallax = useTransform(scrollYProgress, [0, 1], ["-120px", "130px"]);
+  // Row parallaxes — gentle range for smooth velocity
+  const row1Parallax = useTransform(scrollYProgress, [0, 0.85, 1], ["-50px", "65px", "65px"]);
+  const row2Parallax = useTransform(scrollYProgress, [0, 0.85, 1], ["65px", "-65px", "-65px"]);
+  const row3Parallax = useTransform(scrollYProgress, [0, 0.85, 1], ["-75px", "85px", "85px"]);
 
   // Subtle scale-up from slightly small to fill — reinforces depth
-  const trackScale = useTransform(scrollYProgress, [0, 0.3], [0.97, 1]);
+  const trackScale = useTransform(scrollYProgress, [0, 0.25], [0.97, 1]);
 
   return (
-    <div className="relative bg-[#000000] text-[#F5F5F5] select-none">
+    <div className="relative z-20 bg-[#000000] text-[#F5F5F5] select-none shadow-[0_-60px_140px_rgba(0,0,0,1),0_-20px_50px_rgba(0,0,0,0.95)]">
 
 
       {/* Pinned Horizontal Scroll Section */}
       <section
         id="collection"
         ref={containerRef}
-        className="relative h-[300vh] sm:h-[400vh] md:h-[480vh] bg-[#000000]"
+        className="relative h-[480vh] sm:h-[620vh] md:h-[750vh] bg-[#000000]"
       >
         {/* Sticky Viewport Stage — perspective wrapper for 3D depth */}
-        <div className="sticky top-0 h-[100svh] w-full overflow-hidden bg-[#000000] flex items-center border-t border-white/[0.06] [perspective:1200px] [perspective-origin:50%_55%]">
+        <div className="sticky top-0 h-[100svh] w-full overflow-hidden bg-[#000000] flex items-center border-t border-white/[0.1] [perspective:1200px] [perspective-origin:50%_55%]">
           {/* Background Watermark — hidden on mobile */}
           <div className="hidden sm:flex absolute inset-0 items-center justify-center pointer-events-none opacity-[0.025] select-none">
             <span className="font-orbitron text-[35vw] md:text-[45vw] text-white whitespace-nowrap leading-none font-black tracking-tighter">
@@ -49,8 +74,9 @@ export default function EditorialScrollGallery() {
 
           {/* Horizontal Translating Track — 3D tilted */}
           <motion.div
+            ref={trackRef}
             style={{ x, rotateX: trackRotateX, scale: trackScale }}
-            className="flex h-full items-center w-max pl-6 sm:pl-12 md:pl-48 pr-0 gap-[12vw] sm:gap-[16vw] md:gap-[20vw] relative z-10 will-change-transform [transform-style:preserve-3d]"
+            className="flex h-full items-center w-max pl-6 sm:pl-12 md:pl-28 pr-0 gap-[10vw] sm:gap-[14vw] md:gap-[18vw] relative z-10 will-change-transform [transform-style:preserve-3d]"
           >
             {/* 1. ESSAY 01: THE ANATOMY OF SHADOW */}
             <div className="w-[85vw] sm:w-[60vw] md:w-[40vw] flex flex-col justify-center shrink-0">
@@ -396,8 +422,8 @@ export default function EditorialScrollGallery() {
             </div>
 
             {/* 4. THE OUTCOME: VISCERAL CINEMA MASTERPIECE */}
-            <div className="w-[90vw] sm:w-[95vw] md:w-[100vw] h-[100svh] flex items-center justify-center shrink-0 pl-4 sm:pl-8 md:pl-32 pr-4 md:pr-16">
-              <div className="relative w-full h-[65vh] sm:h-[75vh] md:h-[85vh] overflow-hidden rounded-sm group border border-white/10 shadow-[0_50px_150px_rgba(0,0,0,0.9)] bg-neutral-900">
+            <div className="w-[100vw] h-[100svh] flex items-center justify-center shrink-0 px-3 sm:px-8 md:px-16">
+              <div className="relative w-full max-w-[1300px] h-[68vh] sm:h-[75vh] md:h-[82vh] overflow-hidden rounded-sm group border border-white/10 shadow-[0_50px_150px_rgba(0,0,0,0.9)] bg-neutral-900">
                 <Image
                   src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=60&w=900&auto=format&fit=crop"
                   alt="Cinematic Masterpiece"
@@ -407,15 +433,15 @@ export default function EditorialScrollGallery() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#08080A] via-[#08080A]/50 to-transparent pointer-events-none" />
 
-                <div className="absolute bottom-8 sm:bottom-16 md:bottom-32 left-6 sm:left-12 md:left-32 max-w-3xl z-10">
-                  <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-8">
-                    <span className="w-8 md:w-12 h-[1px] bg-[#C89B53]" />
+                <div className="absolute bottom-6 sm:bottom-12 md:bottom-24 left-5 sm:left-10 md:left-20 max-w-3xl z-10">
+                  <div className="flex items-center gap-2.5 sm:gap-4 mb-3 sm:mb-6">
+                    <span className="w-6 sm:w-12 h-[1px] bg-[#C89B53]" />
                     <span className="font-orbitron text-[9px] sm:text-[10px] md:text-xs tracking-[0.3em] uppercase text-[#F5F5F5] font-bold">
                       The Culmination
                     </span>
                   </div>
 
-                  <h2 className="font-orbitron text-3xl sm:text-5xl md:text-[7vw] text-[#F5F5F5] leading-[0.95] mb-6 sm:mb-12 uppercase font-black tracking-tight">
+                  <h2 className="font-orbitron text-2xl sm:text-5xl md:text-[6vw] text-[#F5F5F5] leading-[0.95] mb-4 sm:mb-8 uppercase font-black tracking-tight">
                     VISCERAL
                     <br />
                     <span className="text-[#C89B53]">CINEMA.</span>
@@ -423,10 +449,10 @@ export default function EditorialScrollGallery() {
 
                   <a
                     href="#work"
-                    className="inline-block group/btn relative px-6 sm:px-12 py-3 sm:py-6 overflow-hidden border border-white/20 bg-black/40 backdrop-blur-md cursor-pointer"
+                    className="inline-block group/btn relative px-5 sm:px-10 py-2.5 sm:py-5 overflow-hidden border border-white/20 bg-black/40 backdrop-blur-md cursor-pointer"
                   >
                     <div className="absolute inset-0 bg-[#C89B53] transition-transform duration-700 ease-out -translate-x-full group-hover/btn:translate-x-0" />
-                    <span className="relative z-10 text-white font-orbitron uppercase tracking-[0.25em] text-[9px] sm:text-xs font-bold transition-colors duration-500">
+                    <span className="relative z-10 text-white font-orbitron uppercase tracking-[0.25em] text-[8px] sm:text-xs font-bold transition-colors duration-500">
                       Explore Selected Works
                     </span>
                   </a>
