@@ -66,34 +66,37 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative z-10 w-full h-[380vh] md:h-[420vh] bg-[#000000] text-[#FFFFFF] select-none"
+      className="relative z-10 w-full h-[380vh] md:h-[420vh] bg-background text-primary select-none"
     >
       {/* Pinned 100svh Viewport Stage with 3D Perspective */}
-      <div className="sticky top-0 h-[100svh] w-full overflow-hidden bg-[#000000] flex flex-col justify-between [perspective:1400px]">
+      <div className="sticky top-0 h-[100svh] w-full overflow-hidden bg-background flex flex-col justify-between [perspective:1400px]">
         {/* 1. TOP HEADER & TELEMETRY NAV */}
-        <div className="relative z-50 w-full max-w-[1560px] mx-auto px-4 sm:px-8 md:px-12 pt-4 sm:pt-7 flex items-center justify-between pointer-events-auto">
+        <div className="relative z-50 w-full max-w-[1560px] mx-auto px-4 sm:px-8 md:px-12 pt-4 sm:pt-8 flex items-center justify-between pointer-events-auto">
           {/* Top Left: Logo mark */}
           <div className="flex items-center gap-2 sm:gap-3">
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/20 flex items-center justify-center bg-white/[0.04] backdrop-blur-md">
-              <svg width="12" height="12" viewBox="0 0 24 24" className="fill-white">
+            <div className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center bg-white/[0.03] backdrop-blur-md shadow-[0_0_10px_rgba(212,175,55,0.2)]">
+              <svg width="13" height="13" viewBox="0 0 24 24" className="fill-[#D4AF37]">
                 <polygon points="7,2 17,2 22,7 22,17 17,22 7,22 2,17 2,7" />
               </svg>
             </div>
-            <span className="font-orbitron font-bold text-xs sm:text-sm tracking-wider uppercase hidden xs:inline-block">STARLOOP</span>
+            <div className="flex items-center gap-1 font-orbitron font-bold text-xs sm:text-sm tracking-wider uppercase hidden xs:inline-flex">
+              <span className="text-primary font-black">STARLOOP</span>
+              <span className="text-[#D4AF37] text-[9px] font-semibold tracking-widest hidden sm:inline">ENT.</span>
+            </div>
           </div>
 
           {/* Top Center: Pill Toggle (CREATE / EXPLORE) */}
-          <div className="flex items-center bg-[#141416]/90 border border-white/15 p-0.5 sm:p-1 rounded-full backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.8)]">
-            <button className="px-3.5 sm:px-6 py-1 sm:py-1.5 rounded-full bg-white text-black font-mono text-[9px] sm:text-xs font-bold uppercase tracking-wider transition-transform active:scale-95">
+          <div className="flex items-center bg-surface/90 border border-white/15 p-1 rounded-full backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
+            <button className="px-4 sm:px-6 py-1 sm:py-1.5 rounded-full bg-primary text-background font-mono text-[9px] sm:text-xs font-bold uppercase tracking-wider transition-transform active:scale-95">
               CREATE
             </button>
-            <button className="px-3.5 sm:px-6 py-1 sm:py-1.5 rounded-full text-white/70 hover:text-white font-mono text-[9px] sm:text-xs uppercase tracking-wider transition-colors">
+            <button className="px-4 sm:px-6 py-1 sm:py-1.5 rounded-full text-muted hover:text-primary font-mono text-[9px] sm:text-xs uppercase tracking-wider transition-colors">
               EXPLORE
             </button>
           </div>
 
           {/* Top Right: Telemetry label */}
-          <div className="font-mono text-[8px] sm:text-[10px] md:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white/60">
+          <div className="font-mono text-[8px] sm:text-[10px] md:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-muted">
             <span className="hidden sm:inline">SMART </span>CINEMA SUITE
           </div>
         </div>
@@ -105,30 +108,30 @@ export default function HeroSection() {
             style={{ scale: typoScale, opacity: typoOpacity, y: typoY }}
             className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden"
           >
-            <div className="relative flex items-center gap-2 sm:gap-6 md:gap-12">
+            <div className="relative flex items-center gap-4 sm:gap-8 md:gap-12">
               {/* Octagon Glyph 1 (O / Starloop Octagon) */}
               <svg
                 viewBox="0 0 260 260"
-                className="w-[28vw] sm:w-[24vw] md:w-[22vw] max-w-[340px] text-white fill-none stroke-white stroke-[20] sm:stroke-[26]"
+                className="w-[28vw] sm:w-[24vw] md:w-[22vw] max-w-[340px] text-primary fill-none stroke-primary stroke-[20] sm:stroke-[26] opacity-30"
               >
                 {/* Outer Chamfered Octagon */}
                 <polygon points="76,12 184,12 248,76 248,184 184,248 76,248 12,184 12,76" />
                 {/* Inner Cutout */}
                 <polygon
                   points="90,52 170,52 208,90 208,170 170,208 90,208 52,170 52,90"
-                  className="fill-[#000000] stroke-none"
+                  className="fill-background stroke-none"
                 />
               </svg>
 
               {/* Copyright circle badge */}
-              <div className="absolute left-[24vw] sm:left-[21vw] bottom-[18%] z-10 w-6 h-6 sm:w-8 sm:h-8 rounded-full border border-white/80 flex items-center justify-center font-mono text-[10px] sm:text-xs text-white">
+              <div className="absolute left-[24vw] sm:left-[21vw] bottom-[18%] z-10 w-6 h-6 sm:w-8 sm:h-8 rounded-full border border-primary/40 flex items-center justify-center font-mono text-[10px] sm:text-xs text-muted">
                 ©
               </div>
 
               {/* Octagon Glyph 2 (U / V ribbon) */}
               <svg
                 viewBox="0 0 260 260"
-                className="w-[28vw] sm:w-[24vw] md:w-[22vw] max-w-[340px] text-white fill-none stroke-white stroke-[20] sm:stroke-[26]"
+                className="w-[28vw] sm:w-[24vw] md:w-[22vw] max-w-[340px] text-primary fill-none stroke-primary stroke-[20] sm:stroke-[26] opacity-30"
               >
                 <path
                   d="M24,20 L24,180 L84,240 L176,240 L236,180 L236,20"
@@ -140,7 +143,7 @@ export default function HeroSection() {
               {/* Octagon Glyph 3 (A / Arch Ribbon) */}
               <svg
                 viewBox="0 0 260 260"
-                className="w-[28vw] sm:w-[24vw] md:w-[22vw] max-w-[340px] text-white fill-none stroke-white stroke-[20] sm:stroke-[26]"
+                className="w-[28vw] sm:w-[24vw] md:w-[22vw] max-w-[340px] text-primary fill-none stroke-primary stroke-[20] sm:stroke-[26] opacity-30"
               >
                 <path
                   d="M24,240 L24,100 L94,24 L166,24 L236,100 L236,240"
@@ -153,7 +156,7 @@ export default function HeroSection() {
 
           {/* (B) 3D FLYING WORK SCREENS (Emerging from Background, Growing in Opacity & Zooming Towards Camera) */}
           <div className="relative w-full h-[65vh] sm:h-[72vh] md:h-[78vh] flex items-center justify-center [transform-style:preserve-3d]">
-            {/* SCREEN 1: Left-Center Work Screen (Image 1 in reference) */}
+            {/* SCREEN 1: Left-Center Work Screen */}
             <motion.div
               style={{
                 scale: screen1Scale,
@@ -161,7 +164,7 @@ export default function HeroSection() {
                 y: screen1Y,
                 opacity: screen1Opacity,
               }}
-              className="absolute left-[4%] sm:left-[10%] md:left-[14%] top-[10%] sm:top-[14%] w-[58vw] sm:w-[38vw] md:w-[26vw] max-w-[390px] aspect-[4/5] rounded-[1.8rem] sm:rounded-[2.4rem] md:rounded-[3rem] overflow-hidden bg-[#111114] border border-white/25 shadow-[0_30px_90px_rgba(0,0,0,0.95)] z-20 will-change-transform"
+              className="absolute left-[4%] sm:left-[10%] md:left-[14%] top-[10%] sm:top-[14%] w-[58vw] sm:w-[38vw] md:w-[26vw] max-w-[390px] aspect-[4/5] rounded-[1.8rem] sm:rounded-[2.4rem] md:rounded-[3rem] overflow-hidden bg-surface border border-white/20 shadow-[0_30px_90px_rgba(0,0,0,0.8)] z-20 will-change-transform"
             >
               <div className="relative w-full h-full">
                 <Image
@@ -172,15 +175,15 @@ export default function HeroSection() {
                   sizes="(max-width: 768px) 58vw, 26vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/15 pointer-events-none" />
-                <div className="absolute bottom-4 left-5 right-5 flex items-center justify-between font-mono text-[9px] sm:text-[10px] tracking-widest text-white/80">
+                <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-transparent to-background/20 pointer-events-none" />
+                <div className="absolute bottom-4 left-6 right-6 flex items-center justify-between font-mono text-[9px] sm:text-[10px] tracking-widest text-primary/90">
                   <span>DISCIPLINE // 01</span>
-                  <span className="text-[#C89B53]">100MP STILL</span>
+                  <span className="text-[#A855F7] font-semibold">100MP STILL</span>
                 </div>
               </div>
             </motion.div>
 
-            {/* SCREEN 2: Right Work Screen (Emerges from deep background & flies forward - Image 2 in reference) */}
+            {/* SCREEN 2: Right Work Screen */}
             <motion.div
               style={{
                 scale: screen2Scale,
@@ -188,7 +191,7 @@ export default function HeroSection() {
                 y: screen2Y,
                 opacity: screen2Opacity,
               }}
-              className="absolute right-[4%] sm:right-[8%] md:right-[12%] top-[14%] sm:top-[18%] w-[62vw] sm:w-[42vw] md:w-[30vw] max-w-[440px] aspect-[4/5] rounded-[1.8rem] sm:rounded-[2.4rem] md:rounded-[3rem] overflow-hidden bg-[#111114] border border-white/30 shadow-[0_40px_120px_rgba(0,0,0,0.98)] z-30 will-change-transform"
+              className="absolute right-[4%] sm:right-[8%] md:right-[12%] top-[14%] sm:top-[18%] w-[62vw] sm:w-[42vw] md:w-[30vw] max-w-[440px] aspect-[4/5] rounded-[1.8rem] sm:rounded-[2.4rem] md:rounded-[3rem] overflow-hidden bg-surface border border-white/25 shadow-[0_40px_120px_rgba(0,0,0,0.85)] z-30 will-change-transform"
             >
               <div className="relative w-full h-full">
                 <Image
@@ -198,16 +201,16 @@ export default function HeroSection() {
                   sizes="(max-width: 768px) 62vw, 30vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/20 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-background/25 pointer-events-none" />
 
                 {/* Top overlay badge in card */}
-                <div className="absolute top-4 left-5 right-5 flex items-center justify-between">
-                  <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-white/90">
+                <div className="absolute top-4 left-6 right-6 flex items-center justify-between">
+                  <span className="px-3 py-1 rounded-full bg-surface/80 backdrop-blur-md border border-white/20 font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-primary font-medium">
                     Brand & Commercial
                   </span>
                   <a
                     href="#contact"
-                    className="px-3 py-1 rounded-full bg-white text-black font-mono text-[8px] sm:text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-[0_0_15px_rgba(255,255,255,0.4)]"
+                    className="px-3 py-1 rounded-full bg-primary text-background font-mono text-[8px] sm:text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-[0_0_15px_rgba(168,85,247,0.3)]"
                   >
                     <span>COMMISSION</span>
                     <ArrowUpRight className="w-2.5 h-2.5" />
@@ -215,18 +218,18 @@ export default function HeroSection() {
                 </div>
 
                 {/* Bottom Card Caption */}
-                <div className="absolute bottom-5 left-5 right-5">
-                  <div className="font-orbitron text-xs sm:text-sm text-white font-bold mb-1">
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="font-orbitron text-xs sm:text-sm text-primary font-bold mb-1">
                     VAUCANSON // HOROLOGY
                   </div>
-                  <div className="font-mono text-[9px] text-[#C89B53] tracking-widest">
+                  <div className="font-mono text-[9px] text-[#A855F7] tracking-widest font-semibold">
                     ARRI 4.5K OPEN GATE
                   </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* SCREEN 3: Center-Left Screen (Emerges from deep background & surges to front - Image 3 in reference) */}
+            {/* SCREEN 3: Center-Left Screen */}
             <motion.div
               style={{
                 scale: screen3Scale,
@@ -234,7 +237,7 @@ export default function HeroSection() {
                 y: screen3Y,
                 opacity: screen3Opacity,
               }}
-              className="absolute left-[14%] sm:left-[20%] md:left-[24%] bottom-[4%] sm:bottom-[8%] w-[60vw] sm:w-[40vw] md:w-[28vw] max-w-[420px] aspect-[4/5] rounded-[1.8rem] sm:rounded-[2.4rem] md:rounded-[3rem] overflow-hidden bg-[#111114] border border-white/35 shadow-[0_50px_140px_rgba(0,0,0,1)] z-40 will-change-transform"
+              className="absolute left-[14%] sm:left-[20%] md:left-[24%] bottom-[4%] sm:bottom-[8%] w-[60vw] sm:w-[40vw] md:w-[28vw] max-w-[420px] aspect-[4/5] rounded-[1.8rem] sm:rounded-[2.4rem] md:rounded-[3rem] overflow-hidden bg-surface border border-white/25 shadow-[0_50px_140px_rgba(0,0,0,0.9)] z-40 will-change-transform"
             >
               <div className="relative w-full h-full">
                 <Image
@@ -244,24 +247,24 @@ export default function HeroSection() {
                   sizes="(max-width: 768px) 60vw, 28vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-background/25 pointer-events-none" />
 
-                <div className="absolute bottom-5 left-5 right-5">
-                  <div className="font-orbitron text-xs sm:text-sm text-white font-bold mb-1">
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="font-orbitron text-xs sm:text-sm text-primary font-bold mb-1">
                     MAISON NOIR // ESSENCE
                   </div>
-                  <div className="font-mono text-[9px] text-[#C89B53] tracking-widest">
+                  <div className="font-mono text-[9px] text-[#A855F7] tracking-widest font-semibold">
                     HASSELBLAD 100MP MEDIUM FORMAT
                   </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* SECONDARY 3D FLOATING TILES (Emerging and flying forward through space) */}
+            {/* SECONDARY 3D FLOATING TILES */}
             {/* Tile 1: Amber Bottle */}
             <motion.div
               style={{ scale: tile1Scale, opacity: tile1Opacity, x: tile1X, y: tile1Y }}
-              className="absolute left-[36%] sm:left-[42%] top-[6%] sm:top-[10%] w-[20vw] sm:w-[14vw] md:w-[9vw] max-w-[130px] aspect-[4/5] rounded-xl sm:rounded-2xl overflow-hidden bg-[#151518] border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-10 pointer-events-none"
+              className="absolute left-[36%] sm:left-[42%] top-[6%] sm:top-[10%] w-[20vw] sm:w-[14vw] md:w-[9vw] max-w-[130px] aspect-[4/5] rounded-xl sm:rounded-2xl overflow-hidden bg-elevated border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.6)] z-10 pointer-events-none"
             >
               <Image
                 src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?q=80&w=600&auto=format&fit=crop"
@@ -275,7 +278,7 @@ export default function HeroSection() {
             {/* Tile 2: Hypercar Still */}
             <motion.div
               style={{ scale: tile2Scale, opacity: tile2Opacity, x: tile2X, y: tile2Y }}
-              className="absolute right-[20%] sm:right-[24%] top-[10%] sm:top-[14%] w-[22vw] sm:w-[16vw] md:w-[10vw] max-w-[150px] aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-[#151518] border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-10 pointer-events-none"
+              className="absolute right-[20%] sm:right-[24%] top-[10%] sm:top-[14%] w-[22vw] sm:w-[16vw] md:w-[10vw] max-w-[150px] aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden bg-elevated border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.6)] z-10 pointer-events-none"
             >
               <Image
                 src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=600&auto=format&fit=crop"
@@ -289,7 +292,7 @@ export default function HeroSection() {
             {/* Tile 3: Anamorphic Flare */}
             <motion.div
               style={{ scale: tile3Scale, opacity: tile3Opacity, y: tile3Y }}
-              className="absolute left-[22%] sm:left-[28%] bottom-[10%] sm:bottom-[14%] w-[22vw] sm:w-[15vw] md:w-[9vw] max-w-[140px] aspect-square rounded-xl sm:rounded-2xl overflow-hidden bg-[#151518] border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-10 pointer-events-none"
+              className="absolute left-[22%] sm:left-[28%] bottom-[10%] sm:bottom-[14%] w-[22vw] sm:w-[15vw] md:w-[9vw] max-w-[140px] aspect-square rounded-xl sm:rounded-2xl overflow-hidden bg-elevated border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.6)] z-10 pointer-events-none"
             >
               <Image
                 src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600&auto=format&fit=crop"
@@ -303,8 +306,8 @@ export default function HeroSection() {
 
           {/* (C) EDITORIAL LABELS */}
           {/* Left Text */}
-          <div className="absolute left-5 sm:left-8 md:left-12 top-[28%] z-20 pointer-events-none hidden md:block max-w-[130px]">
-            <div className="font-mono text-[10px] text-white/50 uppercase leading-snug">
+          <div className="absolute left-6 sm:left-8 md:left-12 top-[28%] z-20 pointer-events-none hidden md:block max-w-[130px]">
+            <div className="font-mono text-[10px] text-muted uppercase leading-snug">
               Instant
               <br />
               Image
@@ -315,7 +318,7 @@ export default function HeroSection() {
 
           {/* Center-Top Text */}
           <div className="absolute left-[46%] top-[24%] z-20 pointer-events-none hidden lg:block max-w-[120px]">
-            <div className="font-mono text-[10px] text-white/50 uppercase leading-snug">
+            <div className="font-mono text-[10px] text-muted uppercase leading-snug">
               Bring
               <br />
               product
@@ -325,8 +328,8 @@ export default function HeroSection() {
           </div>
 
           {/* Right Text & CTA */}
-          <div className="absolute right-4 sm:right-8 md:right-12 top-[16%] sm:top-[24%] z-30 flex flex-col items-end sm:items-start gap-2 sm:gap-3 pointer-events-auto">
-            <div className="font-mono text-[9px] sm:text-[10px] md:text-[11px] text-white/60 uppercase leading-tight text-right sm:text-left">
+          <div className="absolute right-4 sm:right-8 md:right-12 top-[16%] sm:top-[24%] z-30 flex flex-col items-end sm:items-start gap-2 sm:gap-4 pointer-events-auto">
+            <div className="font-mono text-[9px] sm:text-[10px] md:text-[11px] text-muted uppercase leading-tight text-right sm:text-left">
               Brand &
               <br />
               Marketing
@@ -335,7 +338,7 @@ export default function HeroSection() {
             </div>
             <a
               href="#contact"
-              className="hidden sm:flex px-4 sm:px-5 py-2 rounded-full bg-white text-black font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider items-center gap-1.5 hover:bg-neutral-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+              className="hidden sm:flex px-4 sm:px-6 py-2 rounded-full bg-primary text-background font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider items-center gap-2 hover:bg-slate-100 transition-all shadow-[0_0_15px_rgba(255,255,255,0.15)]"
             >
               <span>GET STARTED WITH STARLOOP</span>
               <ArrowUpRight className="w-3 h-3" />
@@ -344,67 +347,67 @@ export default function HeroSection() {
         </div>
 
         {/* 3. BOTTOM FOOTER BAR */}
-        <div className="relative z-50 w-full max-w-[1560px] mx-auto px-5 sm:px-8 md:px-12 pb-6 sm:pb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-5 pointer-events-auto">
+        <div className="relative z-50 w-full max-w-[1560px] mx-auto px-6 sm:px-8 md:px-12 pb-6 sm:pb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-6 pointer-events-auto">
           {/* Bottom Left: Tag Pills */}
           <div className="flex flex-wrap items-center gap-2">
-            <div className="px-3 py-1 rounded-full border border-white/20 bg-white/[0.04] backdrop-blur-md flex items-center gap-1.5 font-mono text-[9px] sm:text-[10px] text-white uppercase tracking-wider">
-              <span className="w-2 h-2 rounded-full bg-[#C89B53]" />
+            <div className="px-3 py-1 rounded-full border border-white/15 bg-surface/80 backdrop-blur-md flex items-center gap-2 font-mono text-[9px] sm:text-[10px] text-primary uppercase tracking-wider">
+              <span className="w-2 h-2 rounded-full bg-[#A855F7]" />
               <span>CREATIVITY</span>
             </div>
-            <div className="px-3 py-1 rounded-full border border-white/15 bg-black/40 backdrop-blur-md font-mono text-[8px] sm:text-[9px] text-white/70 uppercase tracking-wider">
+            <div className="px-3 py-1 rounded-full border border-white/10 bg-surface/60 backdrop-blur-md font-mono text-[8px] sm:text-[9px] text-muted uppercase tracking-wider">
               Large-Format Precision
             </div>
-            <div className="px-3 py-1 rounded-full border border-white/15 bg-black/40 backdrop-blur-md font-mono text-[8px] sm:text-[9px] text-white/70 uppercase tracking-wider hidden sm:inline-block">
+            <div className="px-3 py-1 rounded-full border border-white/10 bg-surface/60 backdrop-blur-md font-mono text-[8px] sm:text-[9px] text-muted uppercase tracking-wider hidden sm:inline-block">
               ACES 1.3
             </div>
-            <div className="px-3 py-1 rounded-full border border-white/15 bg-black/40 backdrop-blur-md font-mono text-[8px] sm:text-[9px] text-white/70 uppercase tracking-wider hidden md:inline-block">
+            <div className="px-3 py-1 rounded-full border border-white/10 bg-surface/60 backdrop-blur-md font-mono text-[8px] sm:text-[9px] text-muted uppercase tracking-wider hidden md:inline-block">
               Endless Customization
             </div>
           </div>
 
           {/* Bottom Right: Dynamic Scrolled Headline & Version Meta */}
-          <div className="text-left sm:text-right max-w-sm sm:max-w-md">
-            <div className="relative h-12 sm:h-14 overflow-hidden mb-1">
+          <div className="text-left sm:text-right max-w-[65ch]">
+            <div className="relative h-12 sm:h-14 overflow-hidden mb-2">
               <motion.h2
                 style={{ opacity: phaseTextOpacity1 }}
-                className="absolute inset-0 font-sans text-sm sm:text-lg md:text-xl font-normal text-white leading-snug"
+                className="absolute inset-0 font-sans text-sm sm:text-lg md:text-xl font-normal text-primary leading-snug"
               >
                 Instantly Elevate
                 <br />
-                <span className="font-semibold text-[#FFFFFF]">
+                <span className="font-semibold text-primary">
                   Stunning Cinematic Visuals
                 </span>
               </motion.h2>
 
               <motion.h2
                 style={{ opacity: phaseTextOpacity2 }}
-                className="absolute inset-0 font-sans text-sm sm:text-lg md:text-xl font-normal text-white leading-snug"
+                className="absolute inset-0 font-sans text-sm sm:text-lg md:text-xl font-normal text-primary leading-snug"
               >
                 Sculpted Atmosphere
                 <br />
-                <span className="font-semibold text-[#C89B53]">
+                <span className="font-semibold text-primary">
                   Precision Camera & Optics
                 </span>
               </motion.h2>
 
               <motion.h2
                 style={{ opacity: phaseTextOpacity3 }}
-                className="absolute inset-0 font-sans text-sm sm:text-lg md:text-xl font-normal text-white leading-snug"
+                className="absolute inset-0 font-sans text-sm sm:text-lg md:text-xl font-normal text-primary leading-snug"
               >
                 Visceral Final Masters
                 <br />
-                <span className="font-semibold text-[#FFFFFF]">
+                <span className="font-semibold text-primary">
                   For Global Screen Standards
                 </span>
               </motion.h2>
             </div>
 
-            <div className="flex items-center sm:justify-end gap-3 font-mono text-[8px] sm:text-[9px] text-white/40 uppercase tracking-widest">
+            <div className="flex items-center sm:justify-end gap-3 font-mono text-[8px] sm:text-[9px] text-muted uppercase tracking-widest">
               <span>/</span>
-              <span>STARLOOP</span>
+              <span className="text-[#D4AF37] font-semibold">STARLOOP</span>
               <span>The Future of Visual Craft</span>
-              <span className="text-white/20">|</span>
-              <span className="text-white/60">Scroll to explore</span>
+              <span className="text-muted/40">|</span>
+              <span className="text-primary font-medium">Scroll to explore</span>
             </div>
           </div>
         </div>

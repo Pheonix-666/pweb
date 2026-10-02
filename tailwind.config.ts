@@ -10,17 +10,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#070708",
-        surface: "#101013",
-        elevated: "#151519",
-        "border-hairline": "rgba(255, 255, 255, 0.08)",
-        "border-hairline-light": "rgba(255, 255, 255, 0.14)",
-        primary: "#F2F0EB",
-        muted: "#8A8A90",
+        background: "#000000",
+        surface: "#080610",
+        elevated: "#100C1A",
+        "border-hairline": "rgba(243, 232, 255, 0.06)",
+        "border-hairline-light": "rgba(168, 85, 247, 0.15)",
+        primary: "#F3E8FF",
+        muted: "#94A3B8",
         tungsten: {
-          DEFAULT: "#C89B53",
-          hover: "#D8AB63",
-          dark: "#A87B33",
+          DEFAULT: "#A855F7",
+          hover: "#C084FC",
+          dark: "#7C3AED",
+        },
+        accent: {
+          DEFAULT: "#A855F7",
+          hover: "#C084FC",
+          dark: "#7C3AED",
+        },
+        gold: {
+          DEFAULT: "#D4AF37",
+          light: "#F5D77F",
+          dark: "#AA7C11",
         },
         rec: "#E5484D",
         status: {

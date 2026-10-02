@@ -203,26 +203,26 @@ export default function BehindTheScenesCarousel() {
 
   return (
     <div
-      className="relative w-full py-10 sm:py-14 md:py-16 bg-[#070709] border-b border-white/[0.06] overflow-hidden select-none"
+      className="relative w-full py-12 sm:py-16 md:py-20 bg-background border-b border-hairline overflow-hidden select-none"
       tabIndex={0}
       onKeyDown={handleKeyDown}
     >
       {/* Subtle Ambient Vignettes */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[180px] bg-[#C89B53]/[0.03] rounded-full blur-[80px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[180px] bg-[#A855F7]/[0.03] rounded-full blur-[80px] pointer-events-none" />
 
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 md:px-10 relative z-10">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-8 md:px-12 relative z-10">
         {/* Compact Header Bar with Studio Telemetry */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8 border-b border-white/[0.06] pb-4">
-          <div>
-            <div className="flex items-center gap-2.5 mb-1.5">
-              <span className="w-5 h-[1px] bg-[#C89B53]" />
-              <span className="font-orbitron text-[8px] sm:text-[9px] tracking-[0.25em] uppercase text-[#C89B53] font-bold">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8 border-b border-hairline pb-4 sm:pb-6">
+          <div className="max-w-[65ch]">
+            <div className="flex items-center gap-2.5 mb-2">
+              <span className="w-6 h-[1px] bg-[#A855F7]" />
+              <span className="font-orbitron text-[8px] sm:text-[9px] tracking-[0.25em] uppercase text-[#A855F7] font-bold">
                 {"// PRODUCTION RUSHES // ON-LOCATION ARCHIVE"}
               </span>
             </div>
-            <h2 className="font-orbitron text-xl sm:text-2xl md:text-3xl text-white font-black tracking-tight uppercase">
+            <h2 className="font-orbitron text-xl sm:text-2xl md:text-3xl text-primary font-black tracking-tight uppercase">
               BEHIND THE{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-[#C89B53]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-200 to-[#A855F7]">
                 SCENES.
               </span>
             </h2>
@@ -230,15 +230,15 @@ export default function BehindTheScenesCarousel() {
 
           {/* Real-time Studio Timecode Telemetry Header */}
           <div className="flex items-center gap-4 sm:gap-6 font-mono text-[9px] sm:text-[10px]">
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-sm bg-black/60 border border-white/10 text-white/80">
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-sm bg-surface border border-white/10 text-primary">
               <Radio className="w-2.5 h-2.5 text-emerald-400 animate-pulse" />
-              <span className="text-[#C89B53]">REC</span>
-              <span className="text-white/40">|</span>
-              <span>24.00 FPS</span>
+              <span className="text-[#A855F7] font-semibold">REC</span>
+              <span className="text-muted/40">|</span>
+              <span className="font-medium">24.00 FPS</span>
             </div>
-            <div className="hidden md:flex items-center gap-2 text-white/50">
-              <span className="text-white/30">TC:</span>
-              <span className="text-white/90 font-bold">{activeCard.timecode}</span>
+            <div className="hidden md:flex items-center gap-2 text-muted">
+              <span className="text-muted/60">TC:</span>
+              <span className="text-primary font-bold">{activeCard.timecode}</span>
             </div>
           </div>
         </div>
@@ -257,7 +257,7 @@ export default function BehindTheScenesCarousel() {
             className="absolute bottom-2 w-[70%] max-w-[650px] h-[70px] rounded-full pointer-events-none opacity-30 blur-lg"
             style={{
               background:
-                "radial-gradient(ellipse at center, rgba(200, 155, 83, 0.2) 0%, rgba(200, 155, 83, 0) 70%)",
+                "radial-gradient(ellipse at center, rgba(168, 85, 247, 0.2) 0%, rgba(168, 85, 247, 0) 70%)",
             }}
           />
 
@@ -287,12 +287,12 @@ export default function BehindTheScenesCarousel() {
                   }}
                   className={`cursor-pointer transition-all duration-500 rounded-sm group ${
                     isCenter
-                      ? "z-30 scale-105 ring-1 ring-[#C89B53] shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(200,155,83,0.22)]"
-                      : "z-10 opacity-55 hover:opacity-90 hover:scale-100 shadow-[0_10px_30px_rgba(0,0,0,0.8)]"
+                      ? "z-30 scale-105 ring-1 ring-[#A855F7] shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_25px_rgba(168,85,247,0.22)]"
+                      : "z-10 opacity-60 hover:opacity-90 hover:scale-100 shadow-[0_10px_30px_rgba(0,0,0,0.6)]"
                   }`}
                 >
                   {/* Widescreen Cinema Card Frame */}
-                  <div className="relative w-full h-full overflow-hidden rounded-sm bg-[#0E0E12] border border-white/15 flex flex-col justify-between p-2.5 sm:p-3">
+                  <div className="relative w-full h-full overflow-hidden rounded-sm bg-surface border border-white/15 flex flex-col justify-between p-3">
                     {/* Background Still Image */}
                     <div className="absolute inset-0 z-0 overflow-hidden">
                       <Image
@@ -307,42 +307,42 @@ export default function BehindTheScenesCarousel() {
                         }`}
                       />
                       {/* Cinema Aspect Ratio & Dark Gradients */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#070709] via-[#070709]/30 to-black/20 pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-black/20 pointer-events-none" />
                       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent pointer-events-none" />
                     </div>
 
                     {/* Top Metadata Header */}
                     <div className="relative z-10 flex items-center justify-between">
-                      <div className="px-1.5 py-0.5 rounded-sm bg-[#08080A] border border-white/10 font-mono text-[7px] text-[#C89B53] uppercase tracking-widest font-bold flex items-center gap-1">
-                        <span className="w-1 h-1 rounded-full bg-[#C89B53]" />
+                      <div className="px-2 py-0.5 rounded-sm bg-surface/90 border border-white/10 font-mono text-[8px] text-[#A855F7] uppercase tracking-widest font-bold flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#A855F7]" />
                         {item.tag}
                       </div>
 
-                      <div className="font-mono text-[7px] text-white/80 tracking-widest bg-black/70 px-1.5 py-0.5 rounded-sm border border-white/5 font-semibold">
+                      <div className="font-mono text-[8px] text-primary tracking-widest bg-surface/90 px-2 py-0.5 rounded-sm border border-white/10 font-semibold">
                         {item.scene}
                       </div>
                     </div>
 
                     {/* Film Sprocket Perforation Dots */}
-                    <div className="relative z-10 flex items-center justify-between px-1 opacity-40">
-                      <div className="w-1 h-1 rounded-full bg-white/60" />
-                      <div className="w-1 h-1 rounded-full bg-white/60" />
+                    <div className="relative z-10 flex items-center justify-between px-1 opacity-50">
+                      <div className="w-1 h-1 rounded-full bg-slate-300" />
+                      <div className="w-1 h-1 rounded-full bg-slate-300" />
                     </div>
 
                     {/* Compact Bottom HUD Overlay */}
-                    <div className="relative z-10 pt-1.5 border-t border-white/10 bg-[#08080A] -mx-2.5 -mb-2.5 sm:-mx-3 sm:-mb-3 p-2 sm:p-2.5">
+                    <div className="relative z-10 pt-2 border-t border-white/10 bg-surface/90 -mx-3 -mb-3 p-3">
                       <div className="flex items-center justify-between gap-2">
-                        <div className="font-orbitron text-[10px] sm:text-xs text-white font-bold tracking-tight truncate group-hover:text-[#C89B53] transition-colors">
+                        <div className="font-orbitron text-[10px] sm:text-xs text-primary font-bold tracking-tight truncate group-hover:text-[#A855F7] transition-colors">
                           {item.title}
                         </div>
-                        <div className="font-mono text-[7px] text-[#C89B53] shrink-0 font-semibold">
+                        <div className="font-mono text-[8px] text-[#A855F7] shrink-0 font-semibold">
                           0{index + 1}
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between font-mono text-[7px] text-white/50 pt-0.5">
+                      <div className="flex items-center justify-between font-mono text-[8px] text-muted pt-1">
                         <span className="truncate max-w-[150px] sm:max-w-[190px]">{item.gear}</span>
-                        <span className="text-[#C89B53]/80">{item.specs.split("//")[0]}</span>
+                        <span className="text-[#A855F7] font-medium">{item.specs.split("//")[0]}</span>
                       </div>
                     </div>
                   </div>
@@ -353,19 +353,19 @@ export default function BehindTheScenesCarousel() {
         </div>
 
         {/* BESPOKE CINEMA CONTROLLER: JOG-DIAL SCRUBBER & OPTICAL SHUTTER BRACKETS */}
-        <div className="mt-4 sm:mt-6 max-w-3xl mx-auto flex flex-col items-center gap-3">
+        <div className="mt-4 sm:mt-6 max-w-3xl mx-auto flex flex-col items-center gap-4">
           {/* Cinema Timeline Scrubber Bar */}
-          <div className="w-full liquid-glass-card px-3 sm:px-6 py-2.5 rounded-sm border border-white/10 flex items-center justify-between gap-2 sm:gap-6">
+          <div className="w-full liquid-glass-card px-4 sm:px-6 py-3 rounded-sm border border-white/10 flex items-center justify-between gap-2 sm:gap-6">
             {/* Left Optical Shutter Bracket Button */}
             <button
               onClick={handlePrev}
               aria-label="Previous Cinematic Frame"
-              className="group/btn relative px-2.5 sm:px-4 py-1.5 overflow-hidden rounded-sm border border-white/15 bg-white/[0.03] hover:border-[#C89B53] hover:bg-[#C89B53]/10 transition-all duration-300 flex items-center gap-1.5 shrink-0"
+              className="group/btn relative px-3 sm:px-4 py-2 overflow-hidden rounded-sm border border-white/15 bg-white/[0.04] hover:border-[#A855F7] hover:bg-[#A855F7]/10 transition-all duration-300 flex items-center gap-1.5 shrink-0"
             >
-              <span className="font-mono text-[9px] sm:text-[10px] text-[#C89B53] font-bold group-hover/btn:text-white transition-colors">
+              <span className="font-mono text-[9px] sm:text-[10px] text-[#A855F7] font-bold group-hover/btn:text-primary transition-colors">
                 [ ◀ PREV
               </span>
-              <span className="hidden sm:inline font-mono text-[8px] text-white/40 group-hover/btn:text-[#C89B53]">
+              <span className="hidden sm:inline font-mono text-[8px] text-muted group-hover/btn:text-[#A855F7]">
                 RUSH ]
               </span>
             </button>
@@ -379,9 +379,9 @@ export default function BehindTheScenesCarousel() {
                     key={item.id}
                     onClick={() => rotateToCard(idx)}
                     aria-label={`Select frame ${idx + 1}: ${item.title}`}
-                    className={`relative flex flex-col items-center group/tab px-1.5 sm:px-2.5 py-1 rounded-sm transition-all duration-300 ${
+                    className={`relative flex flex-col items-center group/tab px-2 sm:px-3 py-1.5 rounded-sm transition-all duration-300 ${
                       isActive
-                        ? "bg-[#C89B53]/15 border border-[#C89B53]/60 shadow-[0_0_12px_rgba(200,155,83,0.3)]"
+                        ? "bg-[#A855F7]/15 border border-[#A855F7]/60 shadow-[0_0_12px_rgba(168,85,247,0.3)]"
                         : "hover:bg-white/[0.04] border border-transparent"
                     }`}
                   >
@@ -389,16 +389,16 @@ export default function BehindTheScenesCarousel() {
                     <span
                       className={`w-0.5 rounded-full transition-all duration-300 ${
                         isActive
-                          ? "h-2.5 bg-[#C89B53]"
-                          : "h-1 bg-white/25 group-hover/tab:bg-white/60 group-hover/tab:h-2"
+                          ? "h-2.5 bg-[#A855F7]"
+                          : "h-1 bg-white/30 group-hover/tab:bg-white/70 group-hover/tab:h-2"
                       }`}
                     />
                     {/* Frame Index */}
                     <span
                       className={`font-mono text-[8px] sm:text-[9px] tracking-wider mt-0.5 ${
                         isActive
-                          ? "text-[#C89B53] font-bold"
-                          : "text-white/40 group-hover/tab:text-white/80"
+                          ? "text-[#A855F7] font-bold"
+                          : "text-muted group-hover/tab:text-primary"
                       }`}
                     >
                       FR 0{idx + 1}
@@ -412,28 +412,28 @@ export default function BehindTheScenesCarousel() {
             <button
               onClick={handleNext}
               aria-label="Next Cinematic Frame"
-              className="group/btn relative px-2.5 sm:px-4 py-1.5 overflow-hidden rounded-sm border border-white/15 bg-white/[0.03] hover:border-[#C89B53] hover:bg-[#C89B53]/10 transition-all duration-300 flex items-center gap-1.5 shrink-0"
+              className="group/btn relative px-3 sm:px-4 py-2 overflow-hidden rounded-sm border border-white/15 bg-white/[0.04] hover:border-[#A855F7] hover:bg-[#A855F7]/10 transition-all duration-300 flex items-center gap-1.5 shrink-0"
             >
-              <span className="hidden sm:inline font-mono text-[8px] text-white/40 group-hover/btn:text-[#C89B53]">
+              <span className="hidden sm:inline font-mono text-[8px] text-muted group-hover/btn:text-[#A855F7]">
                 [ NEXT
               </span>
-              <span className="font-mono text-[9px] sm:text-[10px] text-[#C89B53] font-bold group-hover/btn:text-white transition-colors">
+              <span className="font-mono text-[9px] sm:text-[10px] text-[#A855F7] font-bold group-hover/btn:text-primary transition-colors">
                 RUSH ▶ ]
               </span>
             </button>
           </div>
 
           {/* Focal Active Metadata Strip */}
-          <div className="w-full flex items-center justify-between px-2 font-mono text-[8px] sm:text-[9px] text-white/50">
+          <div className="w-full flex items-center justify-between px-2 font-mono text-[8px] sm:text-[9px] text-muted">
             <div className="flex items-center gap-2">
-              <Disc3 className="w-3 h-3 text-[#C89B53] animate-[spin_8s_linear_infinite]" />
-              <span className="text-white/80 font-medium truncate max-w-[200px] sm:max-w-md">
+              <Disc3 className="w-3 h-3 text-[#A855F7] animate-[spin_8s_linear_infinite]" />
+              <span className="text-primary font-medium truncate max-w-[200px] sm:max-w-md">
                 {`ACTIVE: ${activeCard.title} // ${activeCard.role}`}
               </span>
             </div>
 
-            <div className="hidden sm:flex items-center gap-2 text-white/40">
-              <Sliders className="w-2.5 h-2.5 text-[#C89B53]" />
+            <div className="hidden sm:flex items-center gap-2 text-muted">
+              <Sliders className="w-2.5 h-2.5 text-[#A855F7]" />
               <span>{activeCard.specs}</span>
             </div>
           </div>

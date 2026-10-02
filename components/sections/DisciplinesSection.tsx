@@ -92,8 +92,8 @@ export default function DisciplinesSection() {
   return (
     <section id="disciplines" className="relative w-full border-b border-hairline bg-background select-none overflow-hidden">
       {/* Section Header Top Bar */}
-      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 md:px-10 py-8 sm:py-10 md:py-14 border-b border-hairline flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6">
-        <div>
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-8 md:px-12 py-8 sm:py-12 md:py-16 border-b border-hairline flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-8">
+        <div className="max-w-[65ch]">
           <div className="font-mono text-xs text-tungsten tracking-widest uppercase mb-2 flex items-center gap-2">
             <span className="w-6 h-[1px] bg-tungsten inline-block" />
             CORE CAPABILITIES
@@ -102,7 +102,7 @@ export default function DisciplinesSection() {
             Three Services. <span className="italic text-tungsten font-light">One Studio.</span>
           </h2>
         </div>
-        <p className="font-mono text-[11px] sm:text-xs text-muted max-w-md tracking-wider">
+        <p className="font-mono text-xs text-muted max-w-[65ch] tracking-wider">
           HOVER OR TAP A DISCIPLINE TO UNVEIL THE METHODOLOGY, HARDWARE & DELIVERABLES.
         </p>
       </div>
@@ -167,40 +167,40 @@ export default function DisciplinesSection() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.4 }}
-                      className="space-y-6 max-w-xl"
+                      className="space-y-6 max-w-[65ch]"
                     >
                       <div>
                         <h3 className="font-serif text-4xl xl:text-5xl text-primary mb-2">
                           {discipline.title}
                         </h3>
-                        <p className="font-mono text-xs text-tungsten tracking-wide">
+                        <p className="font-mono text-xs text-tungsten tracking-wide font-medium">
                           {discipline.subtitle}
                         </p>
                       </div>
 
-                      <p className="font-sans text-sm xl:text-base text-primary/80 font-light leading-relaxed">
+                      <p className="font-sans text-sm xl:text-base text-primary/90 font-light leading-relaxed max-w-[65ch]">
                         {discipline.description}
                       </p>
 
                       {/* BTS: Special Format Badges for Horizontal & Vertical */}
                       {discipline.id === "bts" && (
-                        <div className="flex gap-3 pt-1">
-                          <div className="flex-1 border border-[#30A46C]/40 bg-[#30A46C]/[0.06] p-3 rounded-sm">
-                            <div className="font-mono text-[9px] uppercase tracking-widest text-[#30A46C] mb-1.5">Format 01</div>
-                            <div className="font-serif text-base text-primary">Horizontal</div>
-                            <div className="font-mono text-[10px] text-muted mt-1">16:9 · Cinematic · 4K</div>
+                        <div className="flex gap-4 pt-2">
+                          <div className="flex-1 border border-[#A855F7]/40 bg-[#A855F7]/[0.08] p-4 rounded-sm">
+                            <div className="font-mono text-[9px] uppercase tracking-widest text-[#A855F7] mb-1 font-semibold">Format 01</div>
+                            <div className="font-serif text-base text-primary font-medium">Horizontal</div>
+                            <div className="font-mono text-xs text-muted mt-1">16:9 · Cinematic · 4K</div>
                           </div>
-                          <div className="flex-1 border border-[#30A46C]/40 bg-[#30A46C]/[0.06] p-3 rounded-sm">
-                            <div className="font-mono text-[9px] uppercase tracking-widest text-[#30A46C] mb-1.5">Format 02</div>
-                            <div className="font-serif text-base text-primary">Vertical</div>
-                            <div className="font-mono text-[10px] text-muted mt-1">9:16 · Reels · Stories</div>
+                          <div className="flex-1 border border-[#A855F7]/40 bg-[#A855F7]/[0.08] p-4 rounded-sm">
+                            <div className="font-mono text-[9px] uppercase tracking-widest text-[#A855F7] mb-1 font-semibold">Format 02</div>
+                            <div className="font-serif text-base text-primary font-medium">Vertical</div>
+                            <div className="font-mono text-xs text-muted mt-1">9:16 · Reels · Stories</div>
                           </div>
                         </div>
                       )}
 
                       {/* Included List */}
-                      <div className="space-y-2.5 pt-4 border-t border-hairline">
-                        <div className="font-mono text-[10px] uppercase tracking-widest text-tungsten">
+                      <div className="space-y-3 pt-4 border-t border-hairline">
+                        <div className="font-mono text-[10px] uppercase tracking-widest text-tungsten font-semibold">
                           WHAT IS INCLUDED:
                         </div>
                         <div className="grid grid-cols-1 xl:grid-cols-2 gap-2">
@@ -257,10 +257,10 @@ export default function DisciplinesSection() {
             <div
               key={discipline.id}
               onClick={() => setActiveId(isExpanded ? "" : discipline.id)}
-              className="relative overflow-hidden bg-surface p-5 sm:p-8 space-y-4 sm:space-y-6 cursor-pointer"
+              className="relative overflow-hidden bg-surface p-6 sm:p-8 space-y-4 sm:space-y-6 cursor-pointer"
             >
               <div className="relative z-10 flex items-center justify-between">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4">
                   <span className="font-mono text-sm text-tungsten font-semibold">
                     {discipline.number}
                   </span>
@@ -287,33 +287,33 @@ export default function DisciplinesSection() {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="space-y-4 pt-2"
+                  className="space-y-4 pt-2 max-w-[65ch]"
                 >
-                  <p className="text-xs sm:text-sm text-primary/80 leading-relaxed font-light">
+                  <p className="text-xs sm:text-sm text-primary/90 leading-relaxed font-light max-w-[65ch]">
                     {discipline.description}
                   </p>
 
                   {/* BTS: Format Badges for mobile */}
                   {discipline.id === "bts" && (
-                    <div className="flex gap-2">
-                      <div className="flex-1 border border-[#30A46C]/40 bg-[#30A46C]/[0.06] p-2.5 rounded-sm">
-                        <div className="font-mono text-[8px] uppercase tracking-widest text-[#30A46C]">Format 01</div>
+                    <div className="flex gap-3">
+                      <div className="flex-1 border border-[#A855F7]/40 bg-[#A855F7]/[0.08] p-3 rounded-sm">
+                        <div className="font-mono text-[8px] uppercase tracking-widest text-[#A855F7] font-semibold">Format 01</div>
                         <div className="font-sans text-sm text-primary font-medium mt-0.5">Horizontal</div>
                         <div className="font-mono text-[9px] text-muted">16:9 · Cinematic</div>
                       </div>
-                      <div className="flex-1 border border-[#30A46C]/40 bg-[#30A46C]/[0.06] p-2.5 rounded-sm">
-                        <div className="font-mono text-[8px] uppercase tracking-widest text-[#30A46C]">Format 02</div>
+                      <div className="flex-1 border border-[#A855F7]/40 bg-[#A855F7]/[0.08] p-3 rounded-sm">
+                        <div className="font-mono text-[8px] uppercase tracking-widest text-[#A855F7] font-semibold">Format 02</div>
                         <div className="font-sans text-sm text-primary font-medium mt-0.5">Vertical</div>
                         <div className="font-mono text-[9px] text-muted">9:16 · Reels</div>
                       </div>
                     </div>
                   )}
 
-                  <div className="space-y-2 pt-3 border-t border-hairline">
-                    <div className="font-mono text-[10px] uppercase tracking-widest text-tungsten">
+                  <div className="space-y-2 pt-4 border-t border-hairline">
+                    <div className="font-mono text-[10px] uppercase tracking-widest text-tungsten font-semibold">
                       WHAT IS INCLUDED:
                     </div>
-                    <ul className="space-y-1.5">
+                    <ul className="space-y-2">
                       {discipline.included.map((item, i) => (
                         <li key={i} className="text-xs text-muted flex items-center gap-2">
                           <span className="w-1 h-1 rounded-full bg-tungsten flex-shrink-0" />
@@ -328,7 +328,7 @@ export default function DisciplinesSection() {
                       e.stopPropagation();
                       handleSelectWork(discipline.id);
                     }}
-                    className="w-full flex items-center justify-center gap-2 py-3.5 bg-primary text-background font-mono text-xs uppercase tracking-wider font-semibold"
+                    className="w-full flex items-center justify-center gap-2 py-4 bg-primary text-background font-mono text-xs uppercase tracking-wider font-semibold"
                   >
                     <span>See {discipline.title} Work</span>
                     <ArrowUpRight className="w-4 h-4" />

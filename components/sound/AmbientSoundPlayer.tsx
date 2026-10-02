@@ -129,16 +129,16 @@ export default function AmbientSoundPlayer() {
       data-cursor="hover"
       className={`relative inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border text-[10px] font-mono tracking-widest uppercase transition-all duration-300 backdrop-blur-xl ${
         isPlaying
-          ? "border-[#B8860B] bg-[#B8860B]/15 text-[#B8860B] shadow-[0_0_15px_rgba(184,134,11,0.25)]"
-          : "border-white/10 bg-[#0A0A0C]/80 text-white/60 hover:text-white hover:border-white/30"
+          ? "border-[#A855F7] bg-[#A855F7]/15 text-[#A855F7] shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+          : "border-hairline bg-surface/80 text-muted hover:text-primary hover:border-hairline-light"
       }`}
       title={isPlaying ? "Mute Atmospheric Soundscape" : "Play Atmospheric Soundscape"}
       aria-label="Toggle cinematic soundscape"
     >
       {isPlaying ? (
-        <Volume2 className="w-3.5 h-3.5 text-[#B8860B] animate-pulse" />
+        <Volume2 className="w-3.5 h-3.5 text-[#A855F7] animate-pulse" />
       ) : (
-        <VolumeX className="w-3.5 h-3.5 text-white/40" />
+        <VolumeX className="w-3.5 h-3.5 text-muted" />
       )}
 
       {/* Animated Sound Wave Bars */}
@@ -148,7 +148,7 @@ export default function AmbientSoundPlayer() {
             key={bar}
             className={`w-[2px] rounded-full transition-all ${
               isPlaying
-                ? "bg-[#B8860B] animate-[pulse_0.8s_ease-in-out_infinite]"
+                ? "bg-[#A855F7] animate-[pulse_0.8s_ease-in-out_infinite]"
                 : "bg-white/20 h-1"
             }`}
             style={

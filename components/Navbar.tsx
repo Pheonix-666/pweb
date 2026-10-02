@@ -61,7 +61,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-3.5 sm:py-5 px-5 sm:px-8 md:px-14 lg:px-20 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-4 sm:py-6 px-6 sm:px-8 md:px-12 lg:px-16 ${
           isScrolled
             ? "liquid-glass-nav"
             : "bg-transparent"
@@ -71,13 +71,20 @@ export default function Navbar() {
           {/* Left: Starloop Octagonal Logo Wordmark */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 font-orbitron font-bold text-base sm:text-lg text-white tracking-wider uppercase hover:text-[#C89B53] transition-colors"
+            className="flex items-center gap-2.5 font-orbitron font-bold text-base sm:text-lg text-primary tracking-wider uppercase group transition-colors"
           >
-            {/* Octagonal Logo Badge */}
-            <svg width="18" height="18" viewBox="0 0 24 24" className="fill-[#C89B53] flex-shrink-0">
-              <polygon points="7,2 17,2 22,7 22,17 17,22 7,22 2,17 2,7" />
-            </svg>
-            <span>STARLOOP</span>
+            {/* Octagonal Logo Badge in Metallic Gold */}
+            <div className="relative flex items-center justify-center">
+              <svg width="19" height="19" viewBox="0 0 24 24" className="fill-[#D4AF37] drop-shadow-[0_0_8px_rgba(212,175,55,0.4)] flex-shrink-0 transition-transform group-hover:scale-105">
+                <polygon points="7,2 17,2 22,7 22,17 17,22 7,22 2,17 2,7" />
+              </svg>
+            </div>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-primary font-black tracking-widest">STARLOOP</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F5D77F] via-[#D4AF37] to-[#E5C178] text-[9px] sm:text-[10px] font-semibold tracking-[0.25em] hidden sm:inline-block">
+                ENTERTAINMENT
+              </span>
+            </div>
           </Link>
 
           {/* Centre: Nav links */}
@@ -87,7 +94,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => scrollToSection(e, link.href)}
-                className="text-xs lg:text-[13px] font-sans text-white/70 hover:text-white transition-colors tracking-wide"
+                className="text-xs lg:text-[13px] font-sans text-muted hover:text-primary transition-colors tracking-wide font-medium"
               >
                 {link.name}
               </a>
@@ -95,11 +102,11 @@ export default function Navbar() {
           </nav>
 
           {/* Right: Minimal Inquire Button */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-4">
             <a
               href="#contact"
               onClick={(e) => scrollToSection(e, "#contact")}
-              className="hidden sm:inline-flex items-center justify-center px-5 py-1.5 rounded-[4px] border border-white/25 hover:border-[#C89B53] text-white text-xs lg:text-[13px] font-orbitron uppercase font-medium tracking-wider transition-all duration-300 bg-white/[0.03] hover:bg-white/[0.08] backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]"
+              className="hidden sm:inline-flex items-center justify-center px-6 py-2 rounded-[4px] border border-white/15 hover:border-[#A855F7]/60 text-primary text-xs lg:text-[13px] font-orbitron uppercase font-medium tracking-wider transition-all duration-300 bg-white/[0.03] hover:bg-white/[0.07] backdrop-blur-md"
             >
               Inquire
             </a>
@@ -107,7 +114,7 @@ export default function Navbar() {
             {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden flex items-center justify-center w-9 h-9 rounded-[4px] border border-white/20 text-white hover:border-white transition-colors bg-white/[0.03] backdrop-blur-md"
+              className="md:hidden flex items-center justify-center w-10 h-10 rounded-[4px] border border-white/20 text-primary hover:border-white transition-colors bg-white/[0.04] backdrop-blur-md"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -120,31 +127,31 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -15 }}
+            initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
+            exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 bg-[#070708]/95 backdrop-blur-2xl flex flex-col justify-between p-8 pt-28 md:hidden"
+            className="fixed inset-0 z-40 bg-background/95 backdrop-blur-2xl flex flex-col justify-between p-8 pt-28 md:hidden"
           >
             <div className="flex flex-col space-y-6 my-auto">
               {NAV_LINKS.map((link, idx) => (
                 <motion.div
                   key={link.name}
-                  initial={{ opacity: 0, x: -15 }}
+                  initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05 * idx, duration: 0.25 }}
                 >
                   <a
                     href={link.href}
                     onClick={(e) => scrollToSection(e, link.href)}
-                    className="text-2xl font-orbitron uppercase text-white hover:text-[#C89B53] transition-colors"
+                    className="text-2xl font-orbitron uppercase text-primary hover:text-[#A855F7] transition-colors"
                   >
                     {link.name}
                   </a>
                 </motion.div>
               ))}
               <motion.div
-                initial={{ opacity: 0, x: -15 }}
+                initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2, duration: 0.25 }}
                 className="pt-4"
@@ -152,14 +159,14 @@ export default function Navbar() {
                 <a
                   href="#contact"
                   onClick={(e) => scrollToSection(e, "#contact")}
-                  className="inline-block px-6 py-2.5 rounded-[4px] border border-white/30 text-white text-xs font-orbitron uppercase tracking-wider bg-white/[0.04] backdrop-blur-md"
+                  className="inline-block px-6 py-3 rounded-[4px] border border-white/25 text-primary text-xs font-orbitron uppercase tracking-wider bg-white/[0.06] backdrop-blur-md"
                 >
                   Inquire
                 </a>
               </motion.div>
             </div>
 
-            <div className="text-xs font-sans text-white/50 border-t border-white/10 pt-4 flex justify-between">
+            <div className="text-xs font-sans text-muted border-t border-hairline pt-4 flex justify-between">
               <span>{siteConfig.location}</span>
               <span>{siteConfig.contact.email}</span>
             </div>

@@ -67,27 +67,27 @@ export default function AboutSection() {
       className="py-16 sm:py-24 md:py-36 border-b border-hairline bg-background select-none relative overflow-hidden"
     >
       {/* Ambient Glow */}
-      <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-[#C89B53]/[0.02] rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-[#A855F7]/[0.015] rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 md:px-10 relative z-10">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-8 md:px-12 relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 pb-8 sm:pb-10 border-b border-hairline">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 pb-8 sm:pb-12 border-b border-hairline">
           <div>
-            <div className="font-mono text-xs text-[#C89B53] tracking-widest uppercase mb-2 sm:mb-3 flex items-center gap-2">
-              <span className="w-6 h-[1px] bg-[#C89B53] inline-block" />
+            <div className="font-mono text-xs text-[#A855F7] tracking-widest uppercase mb-2 sm:mb-4 flex items-center gap-2">
+              <span className="w-6 h-[1px] bg-[#A855F7] inline-block" />
               STUDIO MANIFESTO & PROFILE
             </div>
             <h2 className="font-serif heading-display-lg text-primary">
-              Behind the <span className="italic text-[#C89B53] font-light">Vision.</span>
+              Behind the <span className="italic text-[#A855F7] font-light">Vision.</span>
             </h2>
           </div>
-          <div className="font-mono text-[11px] sm:text-xs text-muted">
+          <div className="font-mono text-xs text-muted tracking-wider">
             FOUNDED 2016 · MUMBAI / WORLDWIDE MOBILITY
           </div>
         </div>
 
         {/* Split Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 xl:gap-20 mt-10 sm:mt-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 xl:gap-20 mt-8 sm:mt-16 items-start">
           {/* Left Column: Portrait */}
           <div className="lg:col-span-5 relative aspect-[4/5] max-w-md mx-auto lg:max-w-none w-full border border-hairline bg-surface overflow-hidden group rounded-sm shadow-2xl">
             <motion.div style={{ y: portraitY }} className="relative w-full h-[115%] -top-[7%]">
@@ -103,76 +103,76 @@ export default function AboutSection() {
             <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-transparent to-transparent opacity-90 pointer-events-none" />
 
             {/* Bottom Liquid Glass Name Card */}
-            <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 p-4 sm:p-5 liquid-glass rounded-sm">
-              <div className="flex items-center justify-between font-mono text-[9px] sm:text-[10px] text-[#C89B53] uppercase tracking-widest mb-1">
+            <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 p-4 sm:p-6 liquid-glass rounded-sm">
+              <div className="flex items-center justify-between font-mono text-[9px] sm:text-[10px] text-[#A855F7] uppercase tracking-widest mb-1">
                 <span>PRINCIPAL ARTIST</span>
                 <span className="timecode-badge text-[8px] sm:text-[9px]">DP / EDITOR</span>
               </div>
               <div className="font-serif text-xl sm:text-2xl text-primary">{siteConfig.name}</div>
-              <div className="font-mono text-[11px] sm:text-xs text-muted mt-0.5">{siteConfig.title}</div>
+              <div className="font-mono text-xs text-muted mt-1">{siteConfig.title}</div>
             </div>
           </div>
 
           {/* Right Column: Bio, Currently, Mini Timeline, Socials */}
           <div className="lg:col-span-7 space-y-8 sm:space-y-12">
             {/* First-person Bio */}
-            <div className="space-y-4 sm:space-y-6">
+            <div className="space-y-4 sm:space-y-6 max-w-[65ch]">
               <p className="font-serif text-xl sm:text-2xl md:text-3xl text-primary font-normal leading-snug">
                 “I believe cinematic imagery shouldn&apos;t just document a moment; it must sculpt an emotional atmosphere through deliberate shadow and psychological rhythm.”
               </p>
-              <p className="text-xs sm:text-sm md:text-base text-primary/80 font-light leading-relaxed">
+              <p className="text-sm md:text-base text-primary/90 font-light leading-relaxed max-w-[65ch]">
                 As a director, cinematographer, and finishing colorist, I operate as an all-inclusive creative studio. By bridging the gap between on-set camera direction and surgical post-production rhythm, every production maintains unbroken artistic integrity from the initial treatment to the final ProRes 4444 XQ master.
               </p>
             </div>
 
             {/* "Currently" Liquid Glass Telemetry Block */}
-            <div className="p-5 sm:p-6 md:p-8 liquid-glass space-y-4 rounded-sm">
-              <div className="font-mono text-[11px] sm:text-xs text-[#C89B53] tracking-widest uppercase flex items-center gap-2">
+            <div className="p-6 sm:p-8 liquid-glass space-y-4 rounded-sm max-w-[65ch]">
+              <div className="font-mono text-xs text-[#A855F7] tracking-widest uppercase flex items-center gap-2">
                 <Sparkles className="w-3.5 h-3.5" />
                 {"// CURRENT PRODUCTION STATUS"}
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 pt-1 sm:pt-2 font-mono text-xs">
-                <div className="space-y-1 p-3 bg-[#131318]/70 border border-white/[0.08] backdrop-blur-md rounded-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
-                  <span className="text-[9px] sm:text-[10px] text-muted uppercase flex items-center gap-1.5">
-                    <MapPin className="w-3 h-3 text-[#C89B53]" /> BASED IN:
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 font-mono text-xs">
+                <div className="space-y-1 p-4 bg-surface/80 border border-hairline backdrop-blur-md rounded-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+                  <span className="text-[10px] text-muted uppercase flex items-center gap-1.5 font-medium">
+                    <MapPin className="w-3 h-3 text-[#A855F7]" /> BASED IN:
                   </span>
-                  <span className="text-primary font-medium block text-xs">{siteConfig.location}</span>
+                  <span className="text-primary font-semibold block text-xs">{siteConfig.location}</span>
                 </div>
 
-                <div className="space-y-1 p-3 bg-[#131318]/70 border border-white/[0.08] backdrop-blur-md rounded-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
-                  <span className="text-[9px] sm:text-[10px] text-muted uppercase flex items-center gap-1.5">
+                <div className="space-y-1 p-4 bg-surface/80 border border-hairline backdrop-blur-md rounded-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+                  <span className="text-[10px] text-muted uppercase flex items-center gap-1.5 font-medium">
                     <Calendar className="w-3 h-3 text-[#30A46C]" /> AVAILABLE FROM:
                   </span>
-                  <span className="text-[#30A46C] font-medium block text-xs">Select Q3/Q4 Dates</span>
+                  <span className="text-[#30A46C] font-semibold block text-xs">Select Q3/Q4 Dates</span>
                 </div>
 
-                <div className="space-y-1 p-3 bg-[#131318]/70 border border-white/[0.08] backdrop-blur-md rounded-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
-                  <span className="text-[9px] sm:text-[10px] text-muted uppercase flex items-center gap-1.5">
+                <div className="space-y-1 p-4 bg-surface/80 border border-hairline backdrop-blur-md rounded-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+                  <span className="text-[10px] text-muted uppercase flex items-center gap-1.5 font-medium">
                     <Film className="w-3 h-3 text-rec" /> CURRENT SHOOT:
                   </span>
-                  <span className="text-primary font-medium block truncate text-xs">Luxury Horology Film</span>
+                  <span className="text-primary font-semibold block truncate text-xs">Luxury Horology Film</span>
                 </div>
               </div>
             </div>
 
             {/* Mini Career Timeline */}
-            <div className="space-y-4 sm:space-y-6 pt-2 sm:pt-4">
-              <div className="font-mono text-[11px] sm:text-xs text-[#C89B53] tracking-widest uppercase flex items-center gap-2">
+            <div className="space-y-4 sm:space-y-6 pt-2 sm:pt-4 max-w-[65ch]">
+              <div className="font-mono text-xs text-[#A855F7] tracking-widest uppercase flex items-center gap-2">
                 <Award className="w-3.5 h-3.5" />
                 {"// CAREER TIMELINE & EVOLUTION"}
               </div>
 
-              <div className="relative border-l border-white/10 ml-3 space-y-6 sm:space-y-8 pl-5 sm:pl-6">
+              <div className="relative border-l border-hairline ml-3 space-y-6 sm:space-y-8 pl-6">
                 {CAREER_TIMELINE.map((item) => (
-                  <div key={item.year} className="relative space-y-1">
-                    <div className="absolute -left-[27px] sm:-left-[31px] top-1 w-2.5 h-2.5 rounded-full bg-[#C89B53] border-2 border-background shadow-[0_0_8px_rgba(200,155,83,0.5)]" />
-                    <div className="flex items-center gap-2.5 sm:gap-3 font-mono text-xs">
-                      <span className="text-[#C89B53] font-semibold">{item.year}</span>
-                      <span className="text-white/20">|</span>
+                  <div key={item.year} className="relative space-y-1 max-w-[65ch]">
+                    <div className="absolute -left-[31px] top-1 w-2.5 h-2.5 rounded-full bg-[#A855F7] border-2 border-background shadow-[0_0_8px_rgba(168,85,247,0.5)]" />
+                    <div className="flex items-center gap-3 font-mono text-xs">
+                      <span className="text-[#A855F7] font-semibold">{item.year}</span>
+                      <span className="text-muted/40">|</span>
                       <span className="text-primary font-medium">{item.milestone}</span>
                     </div>
-                    <p className="text-xs text-muted font-light leading-relaxed">
+                    <p className="text-xs text-muted font-light leading-relaxed max-w-[65ch]">
                       {item.detail}
                     </p>
                   </div>
@@ -181,11 +181,11 @@ export default function AboutSection() {
             </div>
 
             {/* Social Ecosystem Links with Liquid Glass */}
-            <div className="space-y-3 sm:space-y-4 pt-4 sm:pt-6 border-t border-hairline">
-              <div className="font-mono text-[10px] sm:text-xs text-muted tracking-widest uppercase">
+            <div className="space-y-4 pt-6 border-t border-hairline max-w-[65ch]">
+              <div className="font-mono text-xs text-muted tracking-widest uppercase">
                 {"// SOCIAL ECOSYSTEM & ARCHIVES"}
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {SOCIAL_LINKS.map((social) => (
                   <a
                     key={social.platform}
@@ -193,17 +193,17 @@ export default function AboutSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     data-cursor="hover"
-                    className="p-3 sm:p-3.5 liquid-glass-card flex items-center justify-between group rounded-sm"
+                    className="p-4 liquid-glass-card flex items-center justify-between group rounded-sm"
                   >
                     <div>
-                      <div className="font-mono text-xs text-primary group-hover:text-[#C89B53] transition-colors font-medium">
+                      <div className="font-mono text-xs text-primary group-hover:text-[#A855F7] transition-colors font-medium">
                         {social.platform}
                       </div>
                       <div className="font-mono text-[9px] text-muted truncate max-w-[120px]">
                         {social.handle}
                       </div>
                     </div>
-                    <ArrowUpRight className="w-3.5 h-3.5 text-muted group-hover:text-[#C89B53] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform flex-shrink-0" />
+                    <ArrowUpRight className="w-4 h-4 text-muted group-hover:text-[#A855F7] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform flex-shrink-0" />
                   </a>
                 ))}
               </div>

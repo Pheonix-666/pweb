@@ -25,14 +25,14 @@ export default function NotFound() {
           404 <span className="italic text-tungsten font-light">Missing.</span>
         </h1>
 
-        <p className="font-sans text-sm md:text-base text-muted max-w-md mx-auto leading-relaxed">
+        <p className="font-sans text-sm md:text-base text-muted max-w-[65ch] mx-auto leading-relaxed">
           The sequence frame or reel requested does not exist on the current master timeline. Please return to the primary directory.
         </p>
 
         <div className="pt-4">
           <Link
             href="/"
-            className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-primary hover:bg-tungsten text-background text-xs uppercase tracking-widest font-semibold transition-colors duration-200"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-tungsten text-background text-xs uppercase tracking-widest font-semibold transition-colors duration-200"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Return to Master Timeline</span>

@@ -9,33 +9,33 @@ export default function CraftSection() {
   const [activeGearTab, setActiveGearTab] = useState(0);
 
   return (
-    <section id="craft" className="py-24 md:py-36 border-b border-hairline relative">
-      <div className="max-w-[1440px] mx-auto px-5 md:px-10">
+    <section id="craft" className="py-16 sm:py-24 md:py-36 border-b border-hairline bg-background relative select-none">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-8 md:px-12">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-10 border-b border-hairline">
-          <div>
-            <div className="font-mono text-xs text-tungsten tracking-widest uppercase mb-3 flex items-center gap-2">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 pb-8 sm:pb-12 border-b border-hairline">
+          <div className="max-w-[65ch]">
+            <div className="font-mono text-xs text-tungsten tracking-widest uppercase mb-2 sm:mb-4 flex items-center gap-2">
               <span className="text-muted">[ 02 ]</span> STUDIO CAPABILITIES & DISCIPLINE
             </div>
             <h2 className="font-serif heading-display-lg text-primary">
               Crafted with <span className="italic text-tungsten font-light">Precision</span> & Artistry.
             </h2>
           </div>
-          <p className="text-sm text-muted max-w-md font-light">
+          <p className="text-xs sm:text-sm text-muted max-w-[65ch] font-light leading-relaxed">
             Every production is engineered with Hollywood-standard capture protocols, calibrated color management, and pristine optical glass.
           </p>
         </div>
 
         {/* 3 Core Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-14">
-          {siteConfig.services.map((service, idx) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-8 sm:mt-16">
+          {siteConfig.services.map((service) => (
             <div
               key={service.id}
-              className="border border-hairline bg-surface p-7 md:p-8 flex flex-col justify-between hover:border-tungsten transition-colors group relative"
+              className="border border-hairline bg-surface p-6 md:p-8 flex flex-col justify-between hover:border-tungsten transition-colors group relative rounded-sm shadow-xl"
             >
               <div className="space-y-6">
                 <div className="flex items-center justify-between border-b border-hairline pb-4">
-                  <span className="font-mono text-sm text-tungsten">{service.number}</span>
+                  <span className="font-mono text-sm text-tungsten font-semibold">{service.number}</span>
                   <span className="timecode-badge text-[10px] uppercase">DISCIPLINE</span>
                 </div>
 
@@ -43,18 +43,18 @@ export default function CraftSection() {
                   {service.title}
                 </h3>
 
-                <p className="text-xs text-muted leading-relaxed">
+                <p className="text-xs sm:text-sm text-muted leading-relaxed font-light max-w-[65ch]">
                   {service.description}
                 </p>
 
                 {/* Capabilities list */}
-                <div className="space-y-2 pt-4 border-t border-hairline">
-                  <div className="font-mono text-[10px] uppercase tracking-widest text-muted">
+                <div className="space-y-3 pt-4 border-t border-hairline">
+                  <div className="font-mono text-[10px] uppercase tracking-widest text-tungsten font-semibold">
                     TECHNICAL CAPABILITIES
                   </div>
-                  <ul className="space-y-1.5">
+                  <ul className="space-y-2">
                     {service.capabilities.map((cap, i) => (
-                      <li key={i} className="text-xs text-primary/80 flex items-start gap-2">
+                      <li key={i} className="text-xs text-primary/90 flex items-start gap-2">
                         <span className="text-tungsten font-mono text-[11px]">›</span>
                         <span>{cap}</span>
                       </li>
@@ -64,11 +64,11 @@ export default function CraftSection() {
               </div>
 
               {/* Deliverables summary */}
-              <div className="mt-8 pt-4 border-t border-hairline bg-elevated/50 -mx-7 -mb-7 md:-mx-8 md:-mb-8 p-5">
-                <div className="font-mono text-[10px] text-tungsten uppercase tracking-widest mb-1.5">
+              <div className="mt-8 pt-4 border-t border-hairline bg-elevated/60 -mx-6 -mb-6 md:-mx-8 md:-mb-8 p-6 rounded-b-sm">
+                <div className="font-mono text-[10px] text-tungsten uppercase tracking-widest mb-1 font-semibold">
                   DELIVERY STANDARDS
                 </div>
-                <div className="text-[11px] font-mono text-muted">
+                <div className="text-xs font-mono text-muted">
                   {service.deliverables.join(" · ")}
                 </div>
               </div>
@@ -77,60 +77,60 @@ export default function CraftSection() {
         </div>
 
         {/* Production Packages */}
-        <div className="mt-24 pt-16 border-t border-hairline">
-          <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
+        <div className="mt-16 sm:mt-24 pt-12 sm:pt-16 border-t border-hairline">
+          <div className="text-center max-w-[65ch] mx-auto mb-10 sm:mb-16 space-y-4">
             <div className="font-mono text-xs text-tungsten tracking-widest uppercase">
               {"// PRODUCTION PACKAGES"}
             </div>
             <h3 className="font-serif text-3xl md:text-4xl text-primary">
               Standardized <span className="italic text-tungsten font-light">Commission</span> Tiers.
             </h3>
-            <p className="text-xs text-muted font-light">
+            <p className="text-xs sm:text-sm text-muted font-light leading-relaxed max-w-[65ch] mx-auto">
               Transparent workflows tailored for commercial campaigns, luxury weddings, and post finishing.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {siteConfig.packages.map((pkg) => (
               <div
                 key={pkg.id}
-                className={`p-7 md:p-8 flex flex-col justify-between border ${
+                className={`p-6 md:p-8 flex flex-col justify-between border rounded-sm ${
                   pkg.featured
-                    ? "bg-elevated border-tungsten relative shadow-2xl"
+                    ? "bg-elevated border-tungsten/80 relative shadow-2xl"
                     : "bg-surface border-hairline"
                 }`}
               >
                 {pkg.featured && (
-                  <div className="absolute -top-3 right-6 bg-tungsten text-background font-mono text-[10px] uppercase tracking-widest px-3 py-0.5 font-semibold">
+                  <div className="absolute -top-3 right-6 bg-tungsten text-background font-mono text-[10px] uppercase tracking-widest px-3 py-0.5 font-bold rounded-sm shadow-md">
                     MOST POPULAR
                   </div>
                 )}
 
-                <div className="space-y-5">
-                  <div className="flex items-center justify-between font-mono text-xs text-muted">
-                    <span>{pkg.tier}</span>
-                    <span className="text-tungsten">{pkg.timeline}</span>
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between font-mono text-xs text-muted border-b border-hairline pb-4">
+                    <span className="font-semibold text-primary">{pkg.tier}</span>
+                    <span className="text-tungsten font-medium">{pkg.timeline}</span>
                   </div>
 
                   <div>
                     <h4 className="font-serif text-2xl text-primary mb-2">{pkg.name}</h4>
-                    <p className="text-xs text-muted leading-relaxed">{pkg.description}</p>
+                    <p className="text-xs text-muted leading-relaxed font-light max-w-[65ch]">{pkg.description}</p>
                   </div>
 
-                  <div className="font-mono text-[11px] text-primary/80 bg-background/80 p-3 border border-hairline">
-                    <span className="text-muted block text-[9px] uppercase tracking-wider mb-0.5">TARGET PRODUCTION:</span>
+                  <div className="font-mono text-xs text-primary/90 bg-background/80 p-4 border border-hairline rounded-sm">
+                    <span className="text-muted block text-[10px] uppercase tracking-wider mb-1 font-semibold">TARGET PRODUCTION:</span>
                     {pkg.idealFor}
                   </div>
 
                   {/* Included items */}
-                  <div className="space-y-2 pt-2">
-                    <div className="font-mono text-[10px] text-muted uppercase tracking-widest">
+                  <div className="space-y-3 pt-2">
+                    <div className="font-mono text-[10px] text-tungsten uppercase tracking-widest font-semibold">
                       INCLUDED DELIVERABLES:
                     </div>
                     <ul className="space-y-2">
                       {pkg.deliverables.map((item, i) => (
                         <li key={i} className="text-xs text-primary/90 flex items-start gap-2.5">
-                          <Check className="w-3.5 h-3.5 text-tungsten flex-shrink-0 mt-0.5" />
+                          <Check className="w-4 h-4 text-tungsten flex-shrink-0 mt-0.5" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -140,15 +140,15 @@ export default function CraftSection() {
 
                 <a
                   href="#contact"
-                  className={`mt-8 w-full flex items-center justify-center gap-2 py-3 text-xs font-mono uppercase tracking-wider transition-colors ${
+                  className={`mt-8 w-full flex items-center justify-center gap-2 py-4 text-xs font-mono uppercase tracking-wider transition-colors rounded-sm ${
                     pkg.featured
-                      ? "bg-tungsten hover:bg-tungsten-hover text-background font-semibold"
-                      : "bg-elevated hover:bg-primary hover:text-background text-primary border border-hairline"
+                      ? "bg-tungsten hover:bg-tungsten-hover text-background font-bold shadow-lg"
+                      : "bg-elevated hover:bg-primary hover:text-background text-primary border border-hairline font-semibold"
                   }`}
                   data-cursor="hover"
                 >
                   <span>Book This Tier</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
+                  <ArrowUpRight className="w-4 h-4" />
                 </a>
               </div>
             ))}
@@ -156,9 +156,9 @@ export default function CraftSection() {
         </div>
 
         {/* Gear Kit / Technical Arsenal */}
-        <div className="mt-24 pt-16 border-t border-hairline">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-            <div>
+        <div className="mt-16 sm:mt-24 pt-12 sm:pt-16 border-t border-hairline">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-12">
+            <div className="max-w-[65ch]">
               <div className="font-mono text-xs text-tungsten tracking-widest uppercase mb-2">
                 {"// STUDIO ARSENAL"}
               </div>
@@ -173,9 +173,9 @@ export default function CraftSection() {
                 <button
                   key={gear.category}
                   onClick={() => setActiveGearTab(idx)}
-                  className={`px-3 py-1.5 text-xs font-mono tracking-wider uppercase border transition-colors ${
+                  className={`px-4 py-2 text-xs font-mono tracking-wider uppercase border transition-colors rounded-sm ${
                     activeGearTab === idx
-                      ? "bg-tungsten text-background border-tungsten font-medium"
+                      ? "bg-tungsten text-background border-tungsten font-bold"
                       : "bg-surface text-muted border-hairline hover:border-tungsten hover:text-primary"
                   }`}
                   data-cursor="hover"
@@ -187,19 +187,19 @@ export default function CraftSection() {
           </div>
 
           {/* Active Gear Items Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {siteConfig.gearKit[activeGearTab].items.map((item, idx) => (
               <div
                 key={idx}
-                className="p-5 border border-hairline bg-surface space-y-2 hover:border-hairline-light transition-colors"
+                className="p-6 border border-hairline bg-surface space-y-2 hover:border-hairline-light transition-colors rounded-sm"
               >
-                <div className="font-mono text-[10px] text-tungsten uppercase tracking-wider">
+                <div className="font-mono text-[10px] text-tungsten uppercase tracking-wider font-semibold">
                   {item.role}
                 </div>
                 <div className="font-sans font-medium text-sm text-primary">
                   {item.name}
                 </div>
-                <div className="font-mono text-[11px] text-muted leading-relaxed">
+                <div className="font-mono text-xs text-muted leading-relaxed">
                   {item.specs}
                 </div>
               </div>

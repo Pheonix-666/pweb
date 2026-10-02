@@ -106,7 +106,7 @@ export default function BeforeAfterSlider({
           style={{ left: `${sliderPosition}%` }}
         >
           {/* Circular Handle */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background border-2 border-tungsten shadow-[0_0_15px_rgba(232,163,61,0.5)] flex items-center justify-center text-tungsten">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background border-2 border-tungsten shadow-[0_0_15px_rgba(168,85,247,0.5)] flex items-center justify-center text-tungsten">
             <SlidersHorizontal className="w-4 h-4" />
           </div>
         </div>

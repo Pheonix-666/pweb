@@ -90,22 +90,22 @@ export default function ProofSection() {
     <section id="proof" className="relative bg-background border-b border-hairline select-none">
       {/* 1. CLIENT LOGO STRIP */}
       <div className="border-b border-hairline py-8 sm:py-12 bg-surface/80 backdrop-blur-md">
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-8 md:px-10 space-y-4 sm:space-y-6">
-          <div className="font-mono text-[9px] sm:text-[10px] text-[#C89B53] tracking-widest uppercase flex items-center gap-2">
-            <span className="w-4 h-[1px] bg-[#C89B53] inline-block" />
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-8 space-y-4 sm:space-y-6">
+          <div className="font-mono text-[9px] sm:text-[10px] text-[#A855F7] tracking-widest uppercase flex items-center gap-2">
+            <span className="w-4 h-[1px] bg-[#A855F7] inline-block" />
             TRUSTED BY DIRECTORS, FASHION HOUSES & COMMISSIONS
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5 sm:gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 sm:gap-4">
             {siteConfig.clients.map((client, i) => (
               <div
                 key={i}
                 className="p-3 sm:p-4 liquid-glass-card flex flex-col justify-center text-center group cursor-default rounded-sm"
               >
-                <span className="font-sans font-medium text-xs text-primary/80 group-hover:text-primary transition-colors">
+                <span className="font-sans font-medium text-xs text-primary group-hover:text-white transition-colors">
                   {client.name}
                 </span>
-                <span className="font-mono text-[8px] sm:text-[9px] text-muted group-hover:text-[#C89B53] transition-colors mt-0.5">
+                <span className="font-mono text-[9px] text-muted group-hover:text-[#A855F7] transition-colors mt-1">
                   {client.category}
                 </span>
               </div>
@@ -115,16 +115,16 @@ export default function ProofSection() {
       </div>
 
       {/* 2. SERVICES & PACKAGES */}
-      <div className="max-w-[1440px] mx-auto px-5 sm:px-8 md:px-10 py-16 sm:py-24 md:py-36 border-b border-hairline">
-        <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4 mb-10 sm:mb-16">
-          <div className="font-mono text-xs text-[#C89B53] tracking-widest uppercase flex items-center justify-center gap-2">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-8 py-16 sm:py-24 md:py-32 border-b border-hairline">
+        <div className="text-center max-w-[65ch] mx-auto space-y-4 mb-12 sm:mb-16">
+          <div className="font-mono text-xs text-[#A855F7] tracking-widest uppercase flex items-center justify-center gap-2">
             <Sparkles className="w-3.5 h-3.5" />
             COMMISSION PACKAGES & RATES
           </div>
           <h2 className="font-serif heading-display-lg text-primary">
-            Clear Scope. <span className="italic text-[#C89B53] font-light">Turnaround Precision.</span>
+            Clear Scope. <span className="italic text-[#A855F7] font-light">Turnaround Precision.</span>
           </h2>
-          <p className="text-fluid-body text-muted font-light max-w-2xl mx-auto text-xs sm:text-sm md:text-base">
+          <p className="text-fluid-body text-muted font-light max-w-[65ch] mx-auto text-xs sm:text-sm md:text-base">
             Choose a standardized production package or commission a custom multi-camera campaign.
           </p>
         </div>
@@ -136,36 +136,36 @@ export default function ProofSection() {
               key={pkg.id}
               className={`p-6 sm:p-8 flex flex-col justify-between space-y-6 sm:space-y-8 relative rounded-sm ${
                 pkg.featured
-                  ? "liquid-glass-card !border-[#C89B53]/50 shadow-[0_0_35px_rgba(200,155,83,0.15)]"
+                  ? "liquid-glass-card !border-[#A855F7]/50 shadow-[0_0_35px_rgba(168,85,247,0.2)]"
                   : "liquid-glass-card"
               }`}
             >
               {pkg.featured && (
-                <div className="absolute -top-3 right-6 bg-[#C89B53] text-[#0A0A0C] font-mono text-[9px] sm:text-[10px] uppercase tracking-widest px-2.5 sm:px-3 py-0.5 font-bold shadow-[0_0_12px_rgba(200,155,83,0.4)] rounded-sm">
+                <div className="absolute -top-3 right-6 bg-[#A855F7] text-[#0D0B14] font-mono text-[9px] sm:text-[10px] uppercase tracking-widest px-3 py-1 font-bold shadow-[0_0_12px_rgba(168,85,247,0.4)] rounded-sm">
                   FLAGSHIP CAMPAIGN
                 </div>
               )}
 
-              <div className="space-y-5 sm:space-y-6">
-                <div className="flex items-center justify-between font-mono text-xs text-muted border-b border-white/[0.08] pb-3 sm:pb-4">
-                  <span className="text-[#C89B53] font-semibold">{pkg.tier}</span>
-                  <span className="text-[11px] sm:text-xs">TURNAROUND: {pkg.turnaround}</span>
+              <div className="space-y-4 sm:space-y-6">
+                <div className="flex items-center justify-between font-mono text-xs text-muted border-b border-white/[0.08] pb-4">
+                  <span className="text-[#A855F7] font-semibold">{pkg.tier}</span>
+                  <span className="text-xs">TURNAROUND: {pkg.turnaround}</span>
                 </div>
 
                 <div>
                   <h3 className="font-serif text-2xl sm:text-3xl text-primary mb-2">{pkg.title}</h3>
-                  <p className="text-xs text-muted font-light leading-relaxed">{pkg.description}</p>
+                  <p className="text-xs text-muted font-light leading-relaxed max-w-[65ch]">{pkg.description}</p>
                 </div>
 
                 {/* Deliverables */}
-                <div className="space-y-2.5 pt-4 border-t border-white/[0.08]">
-                  <div className="font-mono text-[9px] sm:text-[10px] text-[#C89B53] uppercase tracking-widest">
+                <div className="space-y-2 pt-4 border-t border-white/[0.08]">
+                  <div className="font-mono text-[9px] sm:text-[10px] text-[#A855F7] uppercase tracking-widest">
                     INCLUDED DELIVERABLES:
                   </div>
                   <ul className="space-y-2">
                     {pkg.deliverables.map((item, i) => (
-                      <li key={i} className="text-xs text-primary/90 flex items-start gap-2.5 font-sans">
-                        <Check className="w-3.5 h-3.5 text-[#C89B53] flex-shrink-0 mt-0.5" />
+                      <li key={i} className="text-xs text-primary flex items-start gap-2 font-sans">
+                        <Check className="w-3.5 h-3.5 text-[#A855F7] flex-shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -177,9 +177,9 @@ export default function ProofSection() {
               <button
                 onClick={() => handleGetQuote(pkg.category)}
                 data-cursor="hover"
-                className={`w-full py-3.5 sm:py-4 text-xs font-mono uppercase tracking-widest font-semibold flex items-center justify-center gap-2 transition-all duration-300 rounded-sm ${
+                className={`w-full py-4 text-xs font-mono uppercase tracking-widest font-semibold flex items-center justify-center gap-2 transition-all duration-300 rounded-sm ${
                   pkg.featured
-                    ? "bg-[#C89B53] hover:bg-[#d8ab63] text-[#0A0A0C] font-bold shadow-[0_0_20px_rgba(200,155,83,0.3)]"
+                    ? "bg-[#A855F7] hover:bg-[#c084fc] text-[#0D0B14] font-bold shadow-[0_0_20px_rgba(168,85,247,0.3)]"
                     : "liquid-glass hover:bg-white/[0.08] text-primary border border-white/10"
                 }`}
               >
